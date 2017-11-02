@@ -1,0 +1,22 @@
+Title: JavaScript syntax
+
+----
+Text:
+
+*   Soft tabs, 4 spaces
+*   Semicolon at the end of statement
+*   Use `camelCase` for variables and functions,
+*   `UPPERCASE_WITH_UNDERSCORES` for constants
+*   (and `TitleCase` for constructor functions or ES6 classes)
+
+----
+Example:
+
+```js
+var MAX_ITEMS = 10;
+var data = getInitialData();
+
+function updateData(element, options) {
+    …
+}
+```

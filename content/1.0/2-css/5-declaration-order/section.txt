@@ -1,0 +1,72 @@
+Title: Declaration order
+
+----
+Text:
+
+Group related declarations together, following this order:
+
+1.  Positioning
+2.  (Display &) Box Model
+3.  Text
+4.  Colors, Backgrounds & Effects
+5.  Other
+
+Main idea: go from the general to the particular, from properties that have the biggest effect to properties that affect smaller details.
+
+You don’t have to apply the exact same order for each property inside a group. Try to follow this guideline but don’t waste time trying to achieve *perfect* order.
+
+----
+Example:
+
+```css
+.declaration-order {
+    /* Positioning */
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    float: none;
+    vertical-align: middle;
+    transform: translateX(100%);
+
+    /* (Display &) Box Model */
+    content: "";
+    display: inline-block;
+    visibility: visible;
+    opacity: .8;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    border: 10px solid #333;
+    padding: 10px;
+
+    /* Text */
+    white-space: nowrap;
+    text-align: right;
+    text-indent: 2em;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+    text-shadow: …;
+    font-weight: bold;
+    font-style: italic;
+
+    /* Colors, Backgrounds & Effects */
+    color: #fff;
+    background-color: #000;
+    background-image: url("…");
+    box-shadow: …;
+    filter: …;
+    mask: …;
+
+    /* Other */
+    transition: all .5s;
+    cursor: pointer;
+    will-change: transform;
+    -webkit-backface-visibility: …;
+}
+```

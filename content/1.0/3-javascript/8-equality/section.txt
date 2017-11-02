@@ -1,0 +1,56 @@
+Title: Prefer strict equality
+----
+Text:
+
+*   Prefer the _strict equals operator_ (`===`)
+*   Avoid the _equals operator_ (`==`)
+*   Be careful when using `if (x)`, `if (!x)`, `&&` or `||`
+
+### Why prefer strict equals?
+
+*   `x === y` means “are `x` and `y` exactly the same?”
+*   `x == y` means “compare `x` to `y`… are they equal after perhaps converting one or both of them to a different type according to very specific rules which few JavaScript developers know by heart?”
+
+Using `==` works alright when both terms of the comparison have the same type (two strings, two numbers, etc.). But if the types are different, JavaScript will do [some funky conversions](http://webreflection.blogspot.fr/2010/10/javascript-coercion-demystified.html) that can be hard to predict if you don’t know all the rules.
+
+### Same thing for difference
+
+Use `x !== y`, and avoid `x != y`.
+
+### Conversion to boolean
+
+JavaScript will convert a value to a boolean type (same as using `Boolean(x)`) when you use `if (x)`, `if (!x)`, `x && …`, `x || …`, or `x ? …`. Here’s how conversion to boolean works:
+
+*   Only a few values will convert to `false`: the number `0`, the empty string `''`, `false`, `undefined` and `null`.
+*   Everything else will convert to `true`. This includes negative numbers, empty objects and empty arrays.
+
+----
+Example:
+
+```js
+// Working with an element like this:
+// <div aria-hidden="false"></div>
+var isHidden = div.getAttribute('aria-hidden');
+
+console.log(isHidden); // 'false'
+console.log(Boolean(isHidden)); // true
+
+// Now, guess which is better?
+if (isHidden) { … }
+if (isHidden === 'true') { … }
+```
+
+```js
+// Broken check for default values!
+function doSomething(limit, recursive) {
+    limit = limit || 10; // Can’t do limit=0
+    recursive = recursive || true; // BROKEN
+    …
+}
+// Fixed!
+function doSomething(limit, recursive) {
+    if (typeof limit !== 'number') { limit = 10 }
+    if (typeof recursive !== 'boolean') { recursive = true }
+    …
+}
+```

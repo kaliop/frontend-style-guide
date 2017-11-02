@@ -1,0 +1,55 @@
+Title: Avoid the `this` keyword if possible
+----
+Text:
+
+The `this` keyword can be [different things, depending on context](http://unschooled.org/2012/03/understanding-javascript-this/). Knowing what `this` refers to in different contexts is not so hard, but it can confuse beginners.
+
+*   Don’t use `this` if you can use something else.
+*   Use `event.target` and `event.currentTarget` in event handlers.
+*   If you need to use `this` and are not sure what it refers to in the context where you’re writing your code, use `console.log(this)` to get a better idea. (Or add a breakpoint in the JS debugger.)
+
+### jQuery
+
+Some jQuery methods, such as `$(x).each()`, change the value of `this` in the callback function to the current HTML element in the loop. 
+
+```js
+$('p').each(function() {
+    // this is a DOM element (a paragraph)
+    this.setAttribute('title', 'Hello!');
+    // And $(this) creates a jQuery object
+    // wrapping the paragraph
+    $(this).attr('title', 'Hello!');
+});
+```
+
+You could rely on this, but if you want your code to be more explicit (and more JavaScript-like, rather than jQuery-like), use named arguments and don’t use `this`.
+
+```js
+$('p').each(function(index, element) {
+    $(element).attr('title', 'Hello!');
+});
+```
+
+----
+Example:
+
+```js
+// Event handler: use `event.currentTarget`
+$('button').on('click', function(event) {
+    console.log(event.currentTarget === this); // true
+    // You could write:
+    $(this).addClass('clicked');
+    // But please be explicit instead:
+    $(event.currentTarget).addClass('clicked');
+});
+```
+
+```js
+// Use explicit arguments with jQuery.each (and other methods)
+someElements.each(function(index, element) {
+    // Let’s look at what we’re working with
+    console.log(index, element);
+    // Do something now with element or $(element)
+    …
+});
+```

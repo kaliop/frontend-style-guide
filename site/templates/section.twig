@@ -1,0 +1,12 @@
+{% extends '@snippets/layout.twig' %}
+{% set bodyClasses = ['isSection'] %}
+
+{% block content %}
+
+<main>
+  {% include '@snippets/section.twig' with {section: page, title: page.title} %}
+</main>
+
+<script src="/assets/highlight.pack.js" onload="hljs.initHighlightingOnLoad()"></script>
+
+{% endblock %}

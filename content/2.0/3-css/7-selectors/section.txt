@@ -1,0 +1,31 @@
+Title: Selectors
+
+----
+Text:
+
+We use classes for selectors. We try to keep selectors short (ideally, just one class).
+
+**Do not** use the `#some-id` selector ([because of high specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity)). If you really need to target an id, and cannot add a class, use the attribute selector: `[id="some-id"]`.
+
+In addition to classes, you can use:
+
+- Element selectors (`h2`, `.MainNav-item a`, etc.). But keep in mind that sometimes the element can change, for example a `<h2>` can be changed to a `<h3>`, a `<a>` to a `<button>`, etc.
+- Attribute selectors, especially for dynamic states (`.MainNav a[disabled]`).
+- Pseudo-classes (`:empty`, `:invalid`, …)
+
+----
+Example:
+
+```scss
+// Bad selector: too specific!
+#stream .tweet_header .author {[…]}
+```
+
+```scss
+// Better selectors
+.Tweet {[…]}
+.Tweet-author {[…]}
+.Tweet-author a {[…]}
+.Tweet-retweetBtn {[…]}
+.Tweet-retweetBtn[disabled] {[…]}
+```

@@ -1,0 +1,24 @@
+Title: The <code>this</code> keyword
+----
+Text:
+
+In a function, the `this` keyword [can refer to different things depending on how the function is called](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this). This can be confusing for beginners, and it’s often preferable to explicitly pass parameters to a function.
+
+- When working with classes (for example with libraries that make heavy use of classes and `this` such as React or Vue.js), do use the `this` keyword.
+- Otherwise, try to avoid it.
+
+### With jQuery
+
+Some jQuery methods, such as `$(x).each([…])` and `$(x).on([…])`, change the value of `this` in the callback function to the current HTML element in the loop. Try to use the function’s arguments instead.
+
+```js
+$('p').each(function(index, element) {
+  // avoid 'this', prefer the 'element' argument
+  console.log(this === element);
+});
+
+$('a').on('click', function(event) {
+  // avoid 'this', prefer 'event.currentTarget'
+  console.log(this === event.currentTarget);
+});
+```

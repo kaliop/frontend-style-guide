@@ -1,0 +1,19 @@
+Title: Avoid <code>!important</code>
+
+----
+Text:
+
+Adding `!important` to your declarations helps fixing [specificity issues](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity), but only in the very short term! Avoid it.
+
+If you do use `!important` in your code, always write a comment explaining why.
+
+----
+Example:
+
+```scss
+.MyComponent-inner {
+  // The JS library we use forces a width in JavaScript,
+  // but we really need a fluid width here!
+  width: auto !important;
+}
+```

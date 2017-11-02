@@ -1,0 +1,13 @@
+{% extends '@snippets/layout.twig' %}
+{% set bodyClasses = ['isError'] %}
+
+{% block content %}
+
+<div class="Header Header--error">
+  <div class="Header-inner">
+    <h1>{{ page.title }}</h1>
+    {{ page.text.markdown | raw }}
+  </div>
+</div>
+
+{% endblock %}

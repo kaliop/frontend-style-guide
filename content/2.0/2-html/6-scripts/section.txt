@@ -1,0 +1,49 @@
+Title: Adding scripts
+
+----
+Text:
+
+Like CSS, JS code can live in separate files or in the HTML document. For most uses, we recommend using an external JS file.
+
+### Request an external script
+
+Use `<script src="/url/to/script.js"></script>` *after the page’s content*. Generally, that means putting this script tag just before the end of the body (`</body>` tag).
+
+### Inline scripts
+
+The syntax for inline scripts is similar:
+`<script>/* JS code */</script>`
+
+This can be useful for some critical — and short! — JS code that we want to execute as soon as possible, without making a HTTP request.
+
+### Performance guidelines
+
+1. Load as few scripts as possible; concatenate code to make 1 (or 2–3 max) HTTP requests.
+2. Script tags block rendering. Add the `async` attribute or call them just before `</body>`.
+4. Third party scripts are often huge; load on pages that need them only.
+
+----
+
+Example:
+
+```twig
+<head>
+  […]
+  {# In HEAD: only short scripts that declare variables! #}
+  <script>
+    window.modules = {};
+    window._gaq = [];
+  </script>
+</head>
+<body>
+  […]
+  {# ALL SCRIPTS AFTER PAGE CONTENT #}
+  {# Short inline scripts (executed earlier) #}
+  <script>!function(){[…]}();</script>
+  {# Call the main scripts after the page’s content #}
+  <script src="/dist/vendor.js"></script>
+  <script src="/dist/main.js"></script>
+  {# Scripts that don’t depend on vendor/libs can use the async attribute #}
+  <script async src="/dist/something.js"></script>
+</body>
+```

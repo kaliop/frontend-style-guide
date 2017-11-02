@@ -1,0 +1,45 @@
+Title: Global variables
+
+----
+Text:
+
+Global variables from a script can clash with other scripts in the page, creating subtle bugs.
+
+- Avoid creating global variables; use [the IIFE pattern or ES6 modules](#modules) to isolate variables
+- If you need to set a parameter for a script in your HTML code, use data attributes
+
+### Variables and the `window` object
+
+In web pages, global variables are “hosted” by the `window` object. This means that a global variable `myVar` can also be accessed at `window.myVar`.
+
+Variables become global when:
+
+1. Assigning explicitely: `window.myVar = "hello";`
+2. Declaring a variable at the top level of a script
+3. Forgetting the `var` / `const` / `let` keyword
+
+----
+Example:
+
+```js
+// top level variables are global
+<mark>var count = 50</mark>;
+console.log(count); // 50
+console.log(window.count); // 50
+
+// variables in functions are not,
+// UNLESS you forget the var keyword
+function showCookieBanner() {
+  var banner = document.querySelector([…]);
+  <mark>visible</mark> = !banner.hidden;
+}
+```
+
+```html
+<!-- using data attributes for settings -->
+<del><script>var sliderItems = 2;</script></del>
+<div class="Slider" data-items="2">
+  […]
+</div>
+```
+

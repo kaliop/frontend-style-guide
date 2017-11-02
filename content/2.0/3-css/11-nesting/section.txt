@@ -1,0 +1,59 @@
+Title: Sass Selector Nesting
+
+----
+Text:
+
+Selector nesting makes your code more difficult to read. Avoid unnecessary nesting.
+
+- Nest once if helpful, and twice at most.
+- Keep the resulting CSS selectors as short as possible.
+- Do not overuse the `&` symbol.
+
+### Avoid composing class names
+
+Do not use the `&` symbol to create a class name that extends the parent class:
+
+```scss
+.Header {
+  […]
+  &--dark {[…]}
+  &-logo {[…]}
+}
+```
+
+In this example, if a developer looks at the HTML code and wants to find the CSS code for the `Header--dark` or `Header-logo` classes, they won’t be able to find it in the codebase!
+
+----
+Example:
+
+```scss
+// BAD: unnecessary nesting
+.Header {
+  .Header-top {
+    .Header-logo {[…]}
+  }
+}
+.Nav {
+  ul {
+    li {
+      a {[…]}
+    }
+  }
+}
+```
+
+```scss
+// GOOD: limit nesting
+.Header {
+  […]
+}
+.Header-top {
+  […]
+}
+.Header-logo {
+  […]
+}
+.Nav a {
+  […]
+}
+```

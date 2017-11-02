@@ -1,0 +1,13 @@
+Title: Frontend Style Guide by Kaliop
+
+----
+
+TitleSuffix: Frontend Style Guide by Kaliop
+
+----
+
+Lang: en
+
+----
+
+CurrentVersion: 2.0

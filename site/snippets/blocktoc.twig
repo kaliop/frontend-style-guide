@@ -1,0 +1,11 @@
+{% set list = source.children.visible %}
+{% if list.count > 0 %}
+  <div class="BlockToc">
+    <h2><a href="{{ chapter.url }}/">{{ chapter.title }}</a></h2>
+    <ul class="BlockToc-list">
+      {% for item in list %}
+        <li><a href="{{ source.url }}/#{{ item.uid }}">{{ item.title | raw }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}

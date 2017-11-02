@@ -1,0 +1,46 @@
+Title: JavaScript hooks and states
+
+----
+Text:
+
+Use a component’s existing classes for selecting elements with JavaScript. If you can’t use an existing component class, it might be a good idea to target an `id`, or a data-attribute.
+
+Avoid writing styles with JavaScript. Instead, change a class name or an attribute:
+
+-   Use native attributes, and selectors such as `:selected`, when possible.
+-   If you want to hide an element so that it can’t be interacted with or read (until the user clicks a button, for instance), use `aria-hidden="true"`. Then show elements with `aria-hidden="false"`. You will need to write your own CSS.
+-   If using `aria-hidden` doesn’t make sense, consider using a data-attribute, or add a simple class to the element.
+
+----
+Example:
+
+```js
+// Selecting elements using existing component classes
+var container = document.querySelector('.MyComponent');
+var button = container.querySelector('.MyComponent-toggle');
+var dropdown = container.querySelector('.MyComponent-details');
+
+// Set a state using attributes
+container.setAttribute('data-state', 'something');
+dropdown.setAttribute('aria-hidden', 'true');
+
+// Set a state by adding a class
+button.classList.add('selected');
+```
+
+```css
+/* Styling different states with CSS */
+.MyComponent-item[aria-hidden="true"] {
+    display: none;
+}
+
+/* Or with a simple class */
+.MyComponent-item.hidden {
+    display: none;
+}
+
+/* Custom attribute/values can be useful */
+.Header[data-state="sticky"] {
+    …
+}
+```

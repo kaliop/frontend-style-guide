@@ -1,0 +1,32 @@
+Title: Attribute order
+
+----
+Text:
+
+HTML attributes should come in this particular order for easier reading of code.
+
+1.  `class`
+2.  `id`, `name`
+3.  `data-*`
+4.  `src`, `for`, `type`, `href`, `value`
+5.  `title`, `alt`
+6.  `aria-*`, `role`
+
+Classes make for great reusable components, so they come first. Ids are more specific and should be used sparingly (e.g., for in-page bookmarks), so they come second.
+
+----
+Example:
+
+```html
+<a class="ModalLink" data-modal-type="info" href="/help/item/276b6de1">
+    More information
+</a>
+
+<input class="form-control" id="some-thing" name="something" type="text">
+
+<!--
+    Reminder: alt attribute is mandatory,
+    should be empty for purely decorative images
+-->
+<img src="icon-contact.svg" alt="Contact us">
+```

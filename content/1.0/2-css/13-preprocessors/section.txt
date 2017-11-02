@@ -1,0 +1,45 @@
+Title: Preprocessors
+
+----
+Text:
+
+Use the [Sass preprocessor](http://sass-lang.com/), with the SCSS syntax. (Previous Kaliop projects used [LESS](http://lesscss.org/).)
+
+Sass files should have a `.scss` extension, and “partials” (files that you import in another file) should start with an underscore, e.g. `_reset.scss`.
+
+Sass and LESS source files can be compiled to CSS:
+
+1.  with a desktop client ([Koala is alright](http://koala-app.com/));
+2.  with a node-based frontend build system (e.g. Brunch, Gulp);
+3.  with a build process integrated in the framework (e.g. with Assetic filters).
+
+### Variables and mixins
+
+Use lowercase names, and follow an general-to-particular progression:
+
+-   Global variables and mixins: `$type-name`, `@mixin some-name`
+-   If specific to a component: `$component-type-name`, `@mixin component-some-name`
+
+----
+Example:
+
+```scss
+// base/_variables.scss
+$color-brand:       #e95d1e;
+$color-link:        #08c;
+$breakpoint-small:  500px;
+$breakpoint-medium: 860px;
+```
+
+```scss
+// base/_grid.scss
+@mixin grid-container(…) { … }
+@mixin grid-item(…) { … }
+```
+
+```scss
+// component/_header.scss
+$header-color-bg: #555 !default;
+$header-color-link-main: #fff !default;
+$header-color-link-active: #faa !default;
+```

@@ -1,0 +1,36 @@
+Title: Formatting
+
+----
+Text:
+
+Follow the formatting style used by [Prettier](https://prettier.io/) (with default settings).
+
+1. Indent with 2 spaces
+2. One selector per line
+3. One line per declaration (`property: value;`)
+4. Always use `;` at the end of a declaration
+5. Prefer double quotes (`"hello"`), and quote attribute values (`input[type="text"]`)
+
+Recommended: install Prettier (`npm i -g prettier` or [install for your editor](https://prettier.io/docs/en/editors.html)) and use it to automatically reformat your CSS or Sass code.
+
+----
+Example:
+
+```css
+body {
+  font-size: 0.8rem;
+}
+
+.selector,
+.other[type="text"] {
+  font-weight: bold;
+  color: black;
+}
+
+@media (min-width: 768px) {
+  .something {
+    display: block;
+    background-image: url("/assets/img/pattern.png");
+  }
+}
+```

@@ -1,0 +1,35 @@
+Title: Document structure
+
+----
+Text:
+
+The basic structure of a HTML page should have:
+
+- The HTML5 doctype: `<!DOCTYPE html>`
+- A single root element: `<html>`
+- With two child elements: `<head>` and `<body>`
+
+### Declaring languages
+
+Always provide a `lang` attribute on the root element; make sure it shows the correct language for each page, especially on multilingual sites! For more information, see this [W3C tutorial](https://www.w3.org/International/questions/qa-html-language-declarations).
+
+### Essential metadata
+
+- Add a `<meta charset="UTF-8">` encoding declaration, in case it’s not already declared in the HTTP `Content-Type` header.
+- Always have a `<title>` element, *with a specific content for each page*.
+
+----
+Example:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Page title</title>
+</head>
+<body>
+  <!-- Visible content -->
+</body>
+</html>
+```

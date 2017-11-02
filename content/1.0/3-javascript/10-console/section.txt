@@ -1,0 +1,6 @@
+Title: Beyond console.log()
+----
+Text:
+
+*   Make sure to remove all `console.log()` calls from your code before committing.
+*   Browsers have more advanced JS debugging tools for inspecting and debugging JS code (e.g. “Sources” tab in Chrome Devtools, “Debugger” in Firefox Devtools). They’re really cool, so you should learn to use them.

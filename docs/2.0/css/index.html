@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width">
+  <title>CSS &amp; Sass - Frontend Style Guide by Kaliop</title>
+  <link rel="stylesheet" href="https://kaliop.github.io/frontend-style-guide/assets/styleguide.css">
+  <style>a[href^="http"]:not([href^="https://kaliop.github.io/frontend-style-guide/"])::after{content:" [➚]"}</style>
+  <link rel="icon" type="image/x-icon" href="https://kaliop.github.io/frontend-style-guide/assets/favicon.ico">
+</head>
+<body class="isChapter hasSidebar">
+
+  <header class="Header">
+    <div class="Header-inner">
+      <p class="Header-back"><a href="https://kaliop.github.io/frontend-style-guide/2.0/">Frontend Style Guide by Kaliop</a></p>
+      <h1>CSS &amp; Sass</h1>
+      <p></p>    </div>
+  </header>
+
+  <main>
+    <nav class="SideToc">
+    <div class="SideToc-inner">
+    <p class="SideToc-back">
+      <a href="https://kaliop.github.io/frontend-style-guide/2.0/">◀ Style Guide 2.0</a>
+    </p>
+    <h2 class="SideToc-head" data-chapter="CSS &amp; Sass">
+      <span>Table of contents</span>
+    </h2>
+    <ul class="SideToc-list">
+              <li><a href="#formatting">Formatting</a></li>
+              <li><a href="#comments">Comments</a></li>
+              <li><a href="#units">Units: pixels, ems, etc.</a></li>
+              <li><a href="#important">Avoid <code>!important</code></a></li>
+              <li><a href="#order">Property order</a></li>
+              <li><a href="#fonts">(Web) Fonts</a></li>
+              <li><a href="#selectors">Selectors</a></li>
+              <li><a href="#utilities">Utility classes</a></li>
+              <li><a href="#components">Components</a></li>
+              <li><a href="#responsive">Responsive styles</a></li>
+              <li><a href="#nesting">Sass Selector Nesting</a></li>
+              <li><a href="#variables">Sass Variables</a></li>
+          </ul>
+  </div>
+</nav>    
+          <div class="Section" id="formatting">
+  <div class="Section-col">
+    <h2>Formatting</h2>    <p>Follow the formatting style used by <a href="https://prettier.io/">Prettier</a> (with default settings).</p>
+<ol>
+<li>Indent with 2 spaces</li>
+<li>One selector per line</li>
+<li>One line per declaration (<code>property: value;</code>)</li>
+<li>Always use <code>;</code> at the end of a declaration</li>
+<li>Prefer double quotes (<code>"hello"</code>), and quote attribute values (<code>input[type="text"]</code>)</li>
+</ol>
+<p>Recommended: install Prettier (<code>npm i -g prettier</code> or <a href="https://prettier.io/docs/en/editors.html">install for your editor</a>) and use it to automatically reformat your CSS or Sass code.</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-css">body {
+  font-size: 0.8rem;
+}
+
+.selector,
+.other[type="text"] {
+  font-weight: bold;
+  color: black;
+}
+
+@media (min-width: 768px) {
+  .something {
+    display: block;
+    background-image: url("/assets/img/pattern.png");
+  }
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="comments">
+  <div class="Section-col">
+    <h2>Comments</h2>    <h3>Prefer Sass comments</h3>
+<pre><code class="language-scss">/* A CSS comment (standard syntax) */
+// A Sass comment (always removed from CSS output)</code></pre>
+<p>In Sass (SCSS) source files, prefer the Sass comment syntax, except for the top comment that describes each file.</p>
+<h3>CSS/SCSS file header</h3>
+<p>Start each CSS file (especially a component file) with a header comment using the following format: <code>/*! Title */</code>.</p>
+<p>When minifying the CSS, these comments will be kept in the final CSS, which doesn’t add much to the file’s weight but makes it easier to break the minified CSS into several lines.</p>
+<h3>Don’t repeat obvious information</h3>
+<pre><code class="language-scss">// The teaser’s title
+.Teaser-title {
+  <span class="ellipsis">…</span>
+}</code></pre>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-scss">/*! Header Component */
+// More information about this component
+
+.Header {
+  <span class="ellipsis">…</span>
+}
+
+// Use simple comments surrounded by blank lines
+// to introduce a group of selectors
+
+.Header-top {
+  <span class="ellipsis">…</span>
+}
+
+.Header-social {
+  <span class="ellipsis">…</span>
+}
+
+// Use a comment just before the selector if you need to
+// explain something particular about this selector
+.Header-navItem {
+  display: table-cell;
+  // Use a comment just before the line(s) you want to
+  // explain; avoid comments after or on the right.
+  vertical-align: bottom;
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="units">
+  <div class="Section-col">
+    <h2>Units: pixels, ems, etc.</h2>    <p>It’s not always obvious which CSS units are best for what use cases. Here are some points of reference:</p>
+<ul>
+<li>Avoid physical units such as <code>cm</code> and <code>pt</code></li>
+<li>Media queries: prefer <code>px</code> (over using <code>em</code>)</li>
+<li><code>font-size</code>: use <code>rem</code>, <code>em</code> or <code>px</code></li>
+<li><code>line-height</code>: use a unitless ratio, e.g. <code>1.2</code></li>
+</ul>
+<h3>Viewport-relative units</h3>
+<ul>
+<li><code>1vw</code> is equal to 1% of the viewport width (<code>100vw</code>)</li>
+<li><code>1vh</code> is equal to 1% of the viewport height (<code>100vh</code>), but it can be unreliable in mobile browsers</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-scss">html {
+  // should be 16 * 1.25 = 20px
+  font-size: 125%;
+}
+
+body {
+  font-size: .8rem;
+  line-height: 1.4;
+}
+
+h1 {
+  font-size: 1.6rem;
+  line-height: 1.2;
+}
+
+@media (min-width: 1100px) {
+  h1 {
+    font-size: 2.4rem;
+    line-height: 1.1;
+  }
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="important">
+  <div class="Section-col">
+    <h2>Avoid <code>!important</code></h2>    <p>Adding <code>!important</code> to your declarations helps fixing <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity">specificity issues</a>, but only in the very short term! Avoid it.</p>
+<p>If you do use <code>!important</code> in your code, always write a comment explaining why.</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-scss">.MyComponent-inner {
+  // The JS library we use forces a width in JavaScript,
+  // but we really need a fluid width here!
+  width: auto !important;
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="order">
+  <div class="Section-col">
+    <h2>Property order</h2>    <p>Ordering CSS properties in a way that makes sense is not easy. :)</p>
+<p>We try to order things from “general” to “particular”, following this order:</p>
+<ol>
+<li>Position</li>
+<li>Display &amp; Box Model</li>
+<li>Text</li>
+<li>Colors &amp; Backgrounds</li>
+<li>Effects and Everything Else</li>
+</ol>
+<p>It’s okay if you don’t use the exact same order. Try to follow this guideline but don’t worry too much about it.</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-css">.orderExample {
+  /* Positioning */
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  float: none;
+
+  /* Display &amp; Box Model */
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  box-sizing: border-box;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  margin: 10px;
+  border: 10px solid #333;
+  padding: 10px;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  /* Text */
+  font-family: sans-serif;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: bold;
+  line-height: 1.4;
+  text-align: right;
+  text-indent: 2em;
+  text-overflow: ellipsis;
+  text-shadow: <span class="ellipsis">…</span>;
+  text-transform: uppercase;
+
+  /* Colors &amp; Backgrounds */
+  color: #fff;
+  background-color: #000;
+  background-image: url(<span class="ellipsis">…</span>);
+
+  /* Effects and Everything Else */
+  opacity: .8;
+  transform: translateX(100%);
+  transition: all .5s;
+  cursor: pointer;
+  box-shadow: <span class="ellipsis">…</span>;
+  filter: <span class="ellipsis">…</span>;
+  mask: <span class="ellipsis">…</span>;
+  will-change: transform;
+  -webkit-backface-visibility: <span class="ellipsis">…</span>;
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="fonts">
+  <div class="Section-col">
+    <h2>(Web) Fonts</h2>    <h3>Declare fallbacks</h3>
+<p>Always declare a generic family name at the end of a <code>font-family</code> declaration: <code>serif</code>, <code>sans-serif</code> or <code>monospace</code>. If possible, also declare system fonts that are close in style to the web font you’re using.</p>
+<pre><code class="language-css">body {
+  font-family: Fira Sans, Arial, sans-serif;
+}</code></pre>
+<h3>Using web fonts</h3>
+<ul>
+<li>Fonts are copyrighted; make sure you can use each one.</li>
+<li>Host font files locally (<a href="https://google-webfonts-helper.herokuapp.com/">download from Google Fonts</a>).</li>
+<li>Format: use WOFF and WOFF2, ignore older formats.</li>
+<li>Declare fonts weights using the same family name, e.g. <code>"Lato"</code> (not <code>"Lato Bold"</code>, <code>"Lato Heavy"</code>, etc.).</li>
+</ul>
+<h3>Web fonts make websites slow!</h3>
+<p>In typical scenarios, browsers will first request your CSS, then discover that they need web fonts, then request those font files. Only then (after two round-trips) will they start to show text on the screen!</p>
+<p>What can you do?</p>
+<ul>
+<li>Limit the number of variants (weight and style) you use as much as possible.</li>
+<li>Can preload the one or two most important WOFF2 files?</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-css">@font-face {
+  font-family: "My Cool Typeface";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/mycooltyp.woff2") format("woff2"),
+    url("/fonts/mycooltyp.woff") format("woff");
+}
+
+@font-face {
+  font-family: "My Cool Typeface";
+  font-style: normal;
+  font-weight: 800;
+  src: url("/fonts/mycooltyp-heavy.woff2") format("woff2"),
+    url("/fonts/mycooltyp-heavy.woff") format("woff");
+}
+
+body {
+  font-family: My Cool Typeface, Georgia, serif;
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="selectors">
+  <div class="Section-col">
+    <h2>Selectors</h2>    <p>We use classes for selectors. We try to keep selectors short (ideally, just one class).</p>
+<p><strong>Do not</strong> use the <code>#some-id</code> selector (<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity">because of high specificity</a>). If you really need to target an id, and cannot add a class, use the attribute selector: <code>[id="some-id"]</code>.</p>
+<p>In addition to classes, you can use:</p>
+<ul>
+<li>Element selectors (<code>h2</code>, <code>.MainNav-item a</code>, etc.). But keep in mind that sometimes the element can change, for example a <code>&lt;h2&gt;</code> can be changed to a <code>&lt;h3&gt;</code>, a <code>&lt;a&gt;</code> to a <code>&lt;button&gt;</code>, etc.</li>
+<li>Attribute selectors, especially for dynamic states (<code>.MainNav a[disabled]</code>).</li>
+<li>Pseudo-classes (<code>:empty</code>, <code>:invalid</code>, …)</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-scss">// Bad selector: too specific!
+#stream .tweet_header .author {<span class="ellipsis">…</span>}</code></pre>
+<pre><code class="language-scss">// Better selectors
+.Tweet {<span class="ellipsis">…</span>}
+.Tweet-author {<span class="ellipsis">…</span>}
+.Tweet-author a {<span class="ellipsis">…</span>}
+.Tweet-retweetBtn {<span class="ellipsis">…</span>}
+.Tweet-retweetBtn[disabled] {<span class="ellipsis">…</span>}</code></pre>
+  </div>
+  </div>          <div class="Section" id="utilities">
+  <div class="Section-col">
+    <h2>Utility classes</h2>    <p>Utilities are simple styles that can be used on any element to trigger some basic function (in a few lines of CSS at most).</p>
+<ul>
+<li>Write utility classes in <code>camelCase</code>, without a prefix.</li>
+<li>Avoid using <em>many</em> utility classes. They move a lot of the presentation logic into your HTML, and can hide that a component has dependencies (unlike mixins and variables).</li>
+<li>If you have several utility classes that work together, maybe make a component?</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-scss">// Utility classes
+
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    width: 1em;
+    height: 1em;
+}
+
+.visuallyHidden {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="components">
+  <div class="Section-col">
+    <h2>Components</h2>    <p>A component is a group of styles that represent a block of UI:</p>
+<ul>
+<li>It can be a single element (e.g. a <code>Button</code> component)</li>
+<li>Or a group of elements (e.g. an article teaser with a container, a title, an image, a short excerpt…)</li>
+</ul>
+<p>It can be hard to decide if some part of a design should be a big component, or several smaller components. Use your best judgement, and/or ask coworkers what they think.</p>
+<h3>One file for each component</h3>
+<p>Your component should have a upper camel case name, e.g. <code>Header</code> or <code>MobileNav</code>. And each component should have its own stylesheet (CSS or SCSS).</p>
+<p>You can organize your component styles together:</p>
+<pre><code>components/
+  Footer.scss
+  Header.scss
+  MyAwesomeComponent.scss
+  Teaser.scss</code></pre>
+<p>Or using a folder for each component (so you can have the styles, templates, scripts, etc. in the same place):</p>
+<pre><code>components/
+  Footer/
+    Footer.js
+    Footer.scss
+    Footer.tpl
+  Header/
+    …</code></pre>
+<h3>Component and elements</h3>
+<p>We follow a variant of the <a href="http://getbem.com/">BEM methodology</a>.</p>
+<p>Each component must have a main element which contains the others (if any). Use the component’s name as its class, for example:</p>
+<pre><code class="language-html">&lt;div class="Teaser"&gt;
+  <span class="ellipsis">…</span>
+&lt;/div&gt;</code></pre>
+<p>For component elements, use the component name as a namespace, and add a lower camel case element name:</p>
+<pre><code class="language-html">&lt;div class="Teaser"&gt;
+  &lt;h2 class="Teaser-head"&gt;<span class="ellipsis">…</span>&lt;/h2&gt;
+  &lt;p class="Teaser-intro"&gt;<span class="ellipsis">…</span>&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+<p>Component element classes should not have more than 2 segments. <code>MyComponent-list-item</code> is wrong; use <code>MyComponent-listItem</code> or simply <code>MyComponent-item</code>. If you need to create a lot of element classes with 2 or 3 words, maybe your component is too complex and should be refactored into smaller components?</p>
+<h3>Targetting HTML elements</h3>
+<p>Unlike the stricter BEM methodology, we allow writing selectors that target a HTML element inside a component or component element.</p>
+<pre><code class="language-html">&lt;div class="Teaser"&gt;
+  &lt;h2 class="Teaser-head"&gt;
+    &lt;a href="<span class="ellipsis">…</span>"&gt;Cool title&lt;/a&gt;
+  &lt;/h2&gt;
+  <span class="ellipsis">…</span>
+&lt;/div&gt;</code></pre>
+<p>For example we could style the link inside <code>MyComponent-title</code> here:</p>
+<pre><code class="language-css">.Teaser-head a {
+  display: block;
+  color: inherit;
+}
+.Teaser-head a:hover,
+.Teaser-head a:focus {
+  color: purple;
+}</code></pre>
+<h3>Modifier classes</h3>
+<p>Sometimes the component’s container or a component element can have slightly different styles in different places. In those situations we can create style variants, using classes like: <code>Component--variantName</code> (for the container) or <code>Component-element--variantName</code> (for an element in the component).</p>
+<pre><code class="language-twig">{# Alternative style for the first instance of this component in a list #}
+&lt;article class="Teaser Teaser--highlight"&gt;
+  &lt;h2 class="Teaser-head"&gt;
+    &lt;a href="<span class="ellipsis">…</span>"&gt;<span class="ellipsis">…</span>&lt;/a&gt;
+  &lt;/h2&gt;
+  &lt;p class="Teaser-desc"&gt;<span class="ellipsis">…</span>&lt;/p&gt;
+&lt;/article&gt;
+
+&lt;article class="Teaser"&gt;
+  &lt;h2 class="Teaser-head"&gt;
+    &lt;a href="<span class="ellipsis">…</span>"&gt;<span class="ellipsis">…</span>&lt;/a&gt;
+  &lt;/h2&gt;
+  &lt;p class="Teaser-desc"&gt;<span class="ellipsis">…</span>&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+  </div>
+    </div>          <div class="Section" id="responsive">
+  <div class="Section-col">
+    <h2>Responsive styles</h2>    <h3>Keep all styles for a selector together</h3>
+<p><em>Do not</em> separate desktop and mobile styles into different files. You want to keep them tightly together:</p>
+<pre><code class="language-css">.spaceBefore1 {
+  margin-top: 20px;
+}
+@media (min-width: 750px) {
+  .spaceBefore1 {
+    margin-top: 30px;
+  }
+}</code></pre>
+<h3>Mobile-first</h3>
+<p>We use a mobile-first approach. Here’s how it works:</p>
+<ol>
+<li>First, try to find the simpler “state” of a component or element style. Most of the time, it will look like the mobile layout.</li>
+<li>Then, add styles for larger viewports, in a media query.</li>
+</ol>
+<p>Using Sass, you can use <em>media query nesting</em> to avoid repeating the selector and making the relationship between the styles clearer.</p>
+<pre><code class="language-scss">.MyComponent {
+  border: solid 1px black;
+  padding: 10px;
+
+  @media (min-width: 750px) {
+    border-width: 5px;
+    padding: 25px;
+  }
+}</code></pre>
+<p>Avoid doing things like this, it’s doing extra work for nothing:</p>
+<pre><code class="language-scss">.MyComponent-image {
+  float: left;
+  margin-right: 20px;
+
+  @media (max-width: 749px) {
+    float: none;
+    margin-right: 0;
+  }
+}</code></pre>
+<p>Finally, sometimes the mobile styles are rather specific and not useful for larger screens. In that case, try to separate styles in tree groups: common, small screens, and larger screens.</p>
+<pre><code class="language-scss">.MyComponent-image {
+  display: block;
+  outline: solid 1px rgba(0,0,0,.25);
+  outline-offset: -1px;
+  background-color: #eee;
+
+  @media (max-width: 749px) {
+    width: calc(100% - 40px);
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 750px) {
+    float: right;
+    margin-right: 20px;
+  }
+}</code></pre>
+<h3>Share breakpoints between components</h3>
+<p>Try to use 2–3 main breakpoints and reuse them throughout the site or application. Using Sass, you can store those breakpoints in variables:</p>
+<pre><code class="language-scss">$bp-medium: 750px;
+$bp-large: 1100px;
+$bp-xlarge: 1400px;
+
+// By convention, when using max-width you should
+// remove 1px to avoid conflicts if the viewport
+// width is exactly $bp-medium
+@media (max-width: $bp-medium - 1px) {<span class="ellipsis">…</span>}
+@media (min-width: $bp-medium) {<span class="ellipsis">…</span>}</code></pre>
+<h3>Use named media queries</h3>
+<p>Name media queries allow you to define a media query once, and reuse it every time. In CSS proposals, it looks like this:</p>
+<pre><code class="language-css">@media (--my-media-query) {<span class="ellipsis">…</span>}</code></pre>
+<p>Since this feature is not standardized or supported yet, we can mimick this behavior in Sass to make our Sass code easier to maintain. Use <a href="https://www.npmjs.com/package/sass-mq-build">this mq-build function</a> to store full media queries in variables:</p>
+<pre><code class="language-scss">@import "node_modules/sass-mq-build/mq-build";
+$mq-small: mq-build(null, 750px);
+$mq-medium: mq-build(750px, 1100px);
+$mq-large: mq-build(1100px, null);
+
+.something {
+  @media ($mq-small) {
+    color: green;
+  }
+  @media ($mq-medium) {
+    color: red;
+  }
+}</code></pre>
+  </div>
+    </div>          <div class="Section" id="nesting">
+  <div class="Section-col">
+    <h2>Sass Selector Nesting</h2>    <p>Selector nesting makes your code more difficult to read. Avoid unnecessary nesting.</p>
+<ul>
+<li>Nest once if helpful, and twice at most.</li>
+<li>Keep the resulting CSS selectors as short as possible.</li>
+<li>Do not overuse the <code>&amp;</code> symbol.</li>
+</ul>
+<h3>Avoid composing class names</h3>
+<p>Do not use the <code>&amp;</code> symbol to create a class name that extends the parent class:</p>
+<pre><code class="language-scss">.Header {
+  <span class="ellipsis">…</span>
+  &amp;--dark {<span class="ellipsis">…</span>}
+  &amp;-logo {<span class="ellipsis">…</span>}
+}</code></pre>
+<p>In this example, if a developer looks at the HTML code and wants to find the CSS code for the <code>Header--dark</code> or <code>Header-logo</code> classes, they won’t be able to find it in the codebase!</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-scss">// BAD: unnecessary nesting
+.Header {
+  .Header-top {
+    .Header-logo {<span class="ellipsis">…</span>}
+  }
+}
+.Nav {
+  ul {
+    li {
+      a {<span class="ellipsis">…</span>}
+    }
+  }
+}</code></pre>
+<pre><code class="language-scss">// GOOD: limit nesting
+.Header {
+  <span class="ellipsis">…</span>
+}
+.Header-top {
+  <span class="ellipsis">…</span>
+}
+.Header-logo {
+  <span class="ellipsis">…</span>
+}
+.Nav a {
+  <span class="ellipsis">…</span>
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="variables">
+  <div class="Section-col">
+    <h2>Sass Variables</h2>    <p>We use the <a href="http://sass-lang.com/">Sass preprocessor</a>, with the SCSS syntax.<br />
+Sass files should have a <code>.scss</code> extension.</p>
+<p>Use <code>node-sass</code> to compile <code>.scss</code> files to CSS. Generally, this is integrated in a build config using gulp or webpack. Look for the documentation in the project (in e.g. a <code>README.md</code> or <code>doc/FRONTEND.md</code>).</p>
+<h3>Variables and mixins</h3>
+<p>Use lowercase names with hyphens (not underscores), and follow an general-to-particular progression:</p>
+<ul>
+<li>Global variables and mixins: <code>$type-name</code>, <code>@mixin some-name</code></li>
+<li>If specific to a component: <code>$component-type-name</code>, <code>@mixin component-some-name</code></li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-scss">// base/_variables.scss
+$color-brand:  #e95d1e;
+$color-link:   #08c;
+$breakpoint-small:   500px;
+$breakpoint-medium:  860px;</code></pre>
+<pre><code class="language-scss">// base/_grid.scss
+@mixin grid-container(<span class="ellipsis">…</span>) {<span class="ellipsis">…</span>}
+@mixin grid-item(<span class="ellipsis">…</span>) {<span class="ellipsis">…</span>}</code></pre>
+<pre><code class="language-scss">// component/_header.scss
+@import "../base/variables";
+@import "../base/grid";
+
+$header-color-bg: #555 !default;
+$header-color-link-main: #fff !default;
+$header-color-link-active: #faa !default;
+
+.Header {
+  background-color: $header-color-bg;
+}</code></pre>
+  </div>
+  </div>      </main>
+
+  <script src="https://kaliop.github.io/frontend-style-guide/assets/highlight.pack.js" onload="hljs.initHighlightingOnLoad()"></script>
+
+</body>
+</html>

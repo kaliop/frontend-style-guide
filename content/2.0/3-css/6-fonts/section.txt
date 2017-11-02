@@ -1,0 +1,55 @@
+Title: (Web) Fonts
+
+----
+Text:
+
+### Declare fallbacks
+
+Always declare a generic family name at the end of a `font-family` declaration: `serif`, `sans-serif` or `monospace`. If possible, also declare system fonts that are close in style to the web font you’re using.
+
+```css
+body {
+  font-family: Fira Sans, Arial, sans-serif;
+}
+```
+
+### Using web fonts
+
+- Fonts are copyrighted; make sure you can use each one.
+- Host font files locally ([download from Google Fonts](https://google-webfonts-helper.herokuapp.com/)).
+- Format: use WOFF and WOFF2, ignore older formats.
+- Declare fonts weights using the same family name, e.g. `"Lato"` (not `"Lato Bold"`, `"Lato Heavy"`, etc.).
+
+### Web fonts make websites slow!
+
+In typical scenarios, browsers will first request your CSS, then discover that they need web fonts, then request those font files. Only then (after two round-trips) will they start to show text on the screen!
+
+What can you do?
+
+- Limit the number of variants (weight and style) you use as much as possible.
+- Can preload the one or two most important WOFF2 files?
+
+----
+Example:
+
+```css
+@font-face {
+  font-family: "My Cool Typeface";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/mycooltyp.woff2") format("woff2"),
+    url("/fonts/mycooltyp.woff") format("woff");
+}
+
+@font-face {
+  font-family: "My Cool Typeface";
+  font-style: normal;
+  font-weight: 800;
+  src: url("/fonts/mycooltyp-heavy.woff2") format("woff2"),
+    url("/fonts/mycooltyp-heavy.woff") format("woff");
+}
+
+body {
+  font-family: My Cool Typeface, Georgia, serif;
+}
+``` 

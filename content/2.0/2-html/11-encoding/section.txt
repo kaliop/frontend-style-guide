@@ -1,0 +1,13 @@
+Title: Encoding & characters
+
+----
+Text:
+
+- Always use UTF-8
+- In text content, use typographically correct characters, for example `’` (apostrophe) or `…` (ellipsis)
+- Avoid character references (`Fançais`, not `Fran&#231;ais`), except for invisible characters (`&nbsp;`)
+
+Useful tools:
+
+- [⋃nilist](http://unilist.raphaelbastide.com/)
+- [Unicode Character Search](https://www.fileformat.info/info/unicode/char/search.htm)

@@ -1,0 +1,36 @@
+Title: Indentation
+
+----
+Text:
+
+- Use 2 spaces
+- Indent the contents elements (unless it’s short)
+
+For templating languages, indent the *template’s source code*, not the generated HTML:
+
+- Indent inside control blocks (e.g. `{% if %}` tags)
+- In each template file, start with no indentation
+
+----
+Example:
+
+```twig
+<div class="page-row">
+  <div class="container">
+    {% block content %}{% endblock %}
+  </div>
+</div>
+```
+
+```twig
+{% extends 'parent.twig' %}
+
+{% block content %}
+  <h1>{{ title }}</h1>
+  {% if main_text %}
+    <div class="text">
+      {{ main_text }}
+    </div>
+  {% endif %}
+{% endblock %}
+```

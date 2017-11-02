@@ -1,0 +1,72 @@
+Title: Property order
+
+----
+Text:
+
+Ordering CSS properties in a way that makes sense is not easy. :)
+
+We try to order things from “general” to “particular”, following this order:
+
+1. Position
+2. Display & Box Model
+3. Text
+4. Colors & Backgrounds
+5. Effects and Everything Else
+
+It’s okay if you don’t use the exact same order. Try to follow this guideline but don’t worry too much about it.
+
+----
+Example:
+
+```css
+.orderExample {
+  /* Positioning */
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  float: none;
+
+  /* Display & Box Model */
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  box-sizing: border-box;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  margin: 10px;
+  border: 10px solid #333;
+  padding: 10px;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  /* Text */
+  font-family: sans-serif;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: bold;
+  line-height: 1.4;
+  text-align: right;
+  text-indent: 2em;
+  text-overflow: ellipsis;
+  text-shadow: […];
+  text-transform: uppercase;
+
+  /* Colors & Backgrounds */
+  color: #fff;
+  background-color: #000;
+  background-image: url([…]);
+
+  /* Effects and Everything Else */
+  opacity: .8;
+  transform: translateX(100%);
+  transition: all .5s;
+  cursor: pointer;
+  box-shadow: […];
+  filter: […];
+  mask: […];
+  will-change: transform;
+  -webkit-backface-visibility: […];
+}
+```

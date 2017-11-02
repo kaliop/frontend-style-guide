@@ -1,0 +1,12 @@
+{
+  "name": "kaliop/frontend-style-guide",
+  "license": "proprietary",
+  "description": "Coding rules and best practices used by Kaliop France’s frontend team",
+  "type": "project",
+  "require": {
+    "php": "^5.6 || ^7.0",
+    "getkirby/kirby": "2.5.*",
+    "fvsch/kirby-twig": "3.0.*",
+    "fvsch/kirby-staticbuilder": "2.1.*"
+  }
+}

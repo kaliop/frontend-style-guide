@@ -1,0 +1,41 @@
+Title: Use EditorConfig
+
+----
+Text:
+
+Frontend code files should be:
+
+- encoded as UTF-8,
+- with `LF` end of lines,
+- and spaces for indents.
+
+We use the [EditorConfig format](http://editorconfig.org/) to harmonize indentation and file format in a project. For this to work, we need two things:
+
+1. A `.editorconfig` file at the root of each project.
+2. Your editor or IDE should have an EditorConfig plugin.
+
+Please verify both points now if you’re not sure.
+There are EditorConfig plugins for most code editors:
+
+- [PhpStorm](https://plugins.jetbrains.com/plugin/7294-editorconfig)
+- [VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+- [Atom](https://atom.io/packages/editorconfig)
+
+----
+Example:
+
+Here’s a reference `.editorconfig` file for new projects:
+
+```ini
+# http://EditorConfig.org
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+
+[*.{php,py}]
+indent_size = 4
+```

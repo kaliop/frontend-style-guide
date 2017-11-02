@@ -1,0 +1,14 @@
+
+Title: Frontend Style Guide
+
+----
+
+SubTitle: Kaliop Team Standards 1.0 — June 2015
+
+----
+
+HtmlTitle: Frontend Style Guide by Kaliop
+
+----
+
+Version: 1.0

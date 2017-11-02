@@ -1,0 +1,47 @@
+Title: Sass Variables
+
+----
+Text:
+
+We use the [Sass preprocessor](http://sass-lang.com/), with the SCSS syntax.
+Sass files should have a `.scss` extension.
+
+Use `node-sass` to compile `.scss` files to CSS. Generally, this is integrated in a build config using gulp or webpack. Look for the documentation in the project (in e.g. a `README.md` or `doc/FRONTEND.md`).
+
+### Variables and mixins
+
+Use lowercase names with hyphens (not underscores), and follow an general-to-particular progression:
+
+- Global variables and mixins: `$type-name`, `@mixin some-name`
+- If specific to a component: `$component-type-name`, `@mixin component-some-name`
+
+----
+Example:
+
+```scss
+// base/_variables.scss
+$color-brand:  #e95d1e;
+$color-link:   #08c;
+$breakpoint-small:   500px;
+$breakpoint-medium:  860px;
+```
+
+```scss
+// base/_grid.scss
+@mixin grid-container([…]) {[…]}
+@mixin grid-item([…]) {[…]}
+```
+
+```scss
+// component/_header.scss
+@import "../base/variables";
+@import "../base/grid";
+
+$header-color-bg: #555 !default;
+$header-color-link-main: #fff !default;
+$header-color-link-active: #faa !default;
+
+.Header {
+  background-color: $header-color-bg;
+}
+```

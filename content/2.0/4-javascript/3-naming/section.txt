@@ -1,0 +1,37 @@
+Title: Naming things
+
+----
+Text:
+
+- Use `lowerCamelCase` for names: variables, functions, object keys…
+- Use `UpperCamelCase` for classes, and for UI components (in React, Vue.js, etc.).
+- Use descriptive names rather than generic ones.
+
+----
+Example:
+
+```js
+// Use descriptive names
+<del>const element1 = document.querySelector([…]);</del>
+<del>const element2 = document.querySelector([…]);</del>
+const button = document.querySelector([…]);
+const container = document.querySelector([…]);
+```
+
+```js
+// For names with 2 or 3 words,
+// use lowerCamelCase style
+const userSettings = {
+  limit: 20,
+  showInvisible: false
+};
+
+function validateSettings() {
+  […]
+}
+
+// And UpperCamelCase for classes
+class MobileHeader extends React.Component {
+  […]
+}
+```

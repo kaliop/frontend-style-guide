@@ -1,0 +1,28 @@
+Title: Selectors
+
+----
+Text:
+
+Keep selectors short. A selector should have 3 parts maximum (one or two is best).
+
+-   Use classes (`.something`, `.myClass`)
+-   *Do not* use the `#id` selector (its specificity is too damn high!)
+-   Element selectors (`h2`, `.MainNav a`) are okay, but keep in mind that sometimes elements can change (h2 becomes a h3 or h1, p becomes a div, etc.)
+-   Don’t use underscores in class names (`foo_bar`)
+
+----
+Example:
+
+```css
+/* Bad selector: generic word :( */
+.list { … }
+
+/* Bad selector: too specific! */
+.page-container #stream .stream_item .tweet .tweet_header .username { … }
+```
+
+```css
+/* Better selectors */
+.Tweet-list { … }
+.Tweet-username { … }
+```

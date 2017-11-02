@@ -1,0 +1,84 @@
+Title: Components
+
+----
+Text:
+
+Try to write most of your styles as *components* (also called modules).
+
+A component is a group of styles that logically belong together. A component can represent a complex UI group such as the main navigation of a website, a page footer; or an less complex block such as an article teaser or a comment. Most components have several elements.
+
+Some components can be limited to a single element. For example a `Button` component can be used to style all buttons accross a website (maybe with several style variations).
+
+It can be hard to decide if some part of a design should be a big component, or several smaller components. Use your best judgement, and/or ask coworkers what they think.
+
+### Rules for components
+
+1.  One component = one file (`components/_mycomponent.scss`)
+2.  Classes for components and component elements (see the naming convention)
+3.  Element selectors are okay if they’re scoped (`.MyComponent-element a { … }`); but only use them when it’s impractical or redundant to create an element class (`.MyComponent-something`)
+
+### Naming convention
+
+```css
+/* Main container */
+.ComponentName { … }
+
+/* An element name is a small part of the component, such as a title, an image, a subcontainer, a button, etc. */
+.ComponentName-elementName { … }
+
+/* Both component containers and component elements can have modifiers, which modify some of the styles of their base class */
+.ComponentName--modifierName { … }
+.ComponentName-elementName--modifierName { … }
+```
+
+We follow the [SUIT CSS naming conventions](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md), but only for components. See the next sections for utility classes and JavaScript hooks and states.
+
+----
+Example:
+
+```css
+/* A small component for showing a single tweet. */
+
+.Tweet { … }
+.Tweet-username { … }
+.Tweet-avatar { … }
+.Tweet-content { … }
+```
+
+```css
+/* A bigger component: this footer component has styles for the container, some text content, and a navigation. It would be possible to define the navigation as a different component (say, FooterNav). */
+
+.Footer { … }
+.Footer--compact { … }
+.Footer-nav { … }
+.Footer-nav li { … }
+.Footer-nav a { … }
+.Footer-copyright { … }
+```
+
+```css
+/* A Grid component that can be used to structure many parts of the site */
+
+.Grid-group { … }
+.Grid-item { … }
+.Grid-item--small { … }
+.Grid-item--large { … }
+.Grid-item--full { … }
+```
+
+```html
+<!-- Two article teasers. The first one has a modifyer class so that we can make it bigger, for example. -->
+
+<article class="Teaser Teaser--highlight">
+    <h2 class="Teaser-head">
+        <a href="…">…</a>
+    </h2>
+    <p class="Teaser-desc">…</p>
+</article>
+<article class="Teaser">
+    <h2 class="Teaser-head">
+        <a href="…">…</a>
+    </h2>
+    <p class="Teaser-desc">…</p>
+</article>
+```

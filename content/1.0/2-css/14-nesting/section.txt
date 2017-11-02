@@ -1,0 +1,45 @@
+Title: Selector nesting
+
+----
+Text:
+
+Selector nesting makes your code more difficult to read. Avoid unnecessary nesting.
+
+-   Nest once (1 level deep), twice (2 levels deep) if you must, never more.
+-   Keep the resulting CSS selectors as short as possible.
+-   Do not overuse the `&` symbol.
+
+
+----
+Example:
+
+```scss
+// BAD: unnecessary nesting
+
+.Header {
+    .Header-top {
+        .Header-logo { … }
+    }
+
+.Nav {
+    ul {
+        li {
+            a { … }
+        }
+    }
+}
+```
+
+```scss
+// GOOD: avoid nesting
+
+.Header { … }
+.Header-top { … }
+.Header-logo { … }
+
+.Nav {
+    ul { … }
+    li { … }
+    a { … }
+}
+```

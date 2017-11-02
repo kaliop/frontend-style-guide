@@ -1,0 +1,59 @@
+Title: Functions
+----
+Text:
+
+*   Create functions to organize your code
+*   Prefer function _declarations_ to _anonymous function expressions_
+*   It’s okay and often useful to declare functions inside a function
+
+### A note on scope
+
+A JavaScript function declared inside a function will live in the parent function’s scope (unlike in PHP). It will also have access to all variables and functions defined in the parent function.
+
+```js
+function foo() {
+    var message = 'It works.';
+    function bar() {
+        return 'Awesome! ' + message;
+    }
+    return bar();
+}
+bar(); // ReferenceError: bar is not defined
+foo(); // 'Awesome! It works.'
+```
+
+----
+Example:
+
+```js
+// Bad style
+var myFunction = function() { … }
+
+// Better
+function myFunction() { … }
+```
+
+```js
+/**
+ *  Using functions to organize code.
+ *  such code, much organized, wow
+ */
+function initUIModule() {
+    var KEYDOWN_DELAY = 100;
+
+    function startUp() {
+        …
+    }
+    function toggle(event) {
+        …
+    }
+    function manageKeyEvent(event) {
+        …
+    }
+
+    // Init stuff
+    startUp();
+    element1.on('click', toggle);
+    element2.on('keydown', manageKeyEvent);
+}
+```

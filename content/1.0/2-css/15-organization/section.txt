@@ -1,0 +1,10 @@
+Title: Organization
+
+----
+Text:
+
+Organize your CSS code in multiple files. In particular, each component should be one file (even if it’s only 20 lines of code).
+
+-   Try to keep files under a maximum of 500 lines.
+-   Do not put two components in the same file.
+-   Concatenate before serving to the browser (preprocessors give you “free” concatenation).

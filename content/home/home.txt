@@ -1,0 +1,23 @@
+Title: Frontend Style Guide
+
+----
+Subtitle: Kaliop Team Standards
+
+----
+Text:
+
+## Style guide versions
+
+* [Team standards 2.0 — November 2017](./2.0/)
+* [Team standards 1.0 — June 2015](./1.0/)
+
+----
+Aside:
+
+## What is this guide?
+
+These are the coding rules and best practices used by <a href="https://www.kaliop.fr" class="external">Kaliop France</a>’s frontend team.
+
+## Credits
+
+Original design based on <a href="http://codeguide.co/" class="external">Code Guide by @mdo</a>. Some of the content is inspired by: @mdo’s code guide, style guides from AirBnB and GitHub, BEM and SUIT CSS.

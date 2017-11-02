@@ -1,0 +1,22 @@
+Title: Comments
+
+----
+Text:
+
+- Use single-line comments (`// …`) to comment on the next line or the next few lines of code.
+- Use a [JSDoc](http://usejsdoc.org/)-style comment (`/** … */`) before a complex function or a module.
+
+----
+Example:
+
+```js
+/**
+ * Make a header "sticky"
+ * (Adds/removes a class when scrolling)
+ */
+function stickifyHeader(element, activeClass, offset) {
+  // 250ms not working when scrolling too quicky
+  const latency = 100;
+  […]
+}
+```

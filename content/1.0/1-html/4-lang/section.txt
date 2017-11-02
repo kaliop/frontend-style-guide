@@ -1,0 +1,21 @@
+Title: Language attribute
+
+----
+Text:
+
+From the HTML5 spec:
+
+> Authors are encouraged to specify a lang attribute on the root html element, giving the document’s language. This aids speech synthesis tools to determine what pronunciations to use, translation tools to determine what rules to use, and so forth.
+
+Read more about the `lang` attribute [in the spec](http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes).
+
+Use 2-letter [ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). Only use regional extensions (e.g. `fr-FR`, `en-GB`, `en-US`) if there is a strong reason to do so.
+
+----
+Example:
+
+```html
+<html lang="fr">
+    <!-- … -->
+</html>
+```

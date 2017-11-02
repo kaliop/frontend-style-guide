@@ -1,0 +1,57 @@
+Title: Media queries
+
+----
+Text:
+
+### Where should I put media queries?
+
+*   Put all styles for a website part or component in the same file.
+*   Keep media queries as close as possible to the corresponding general or desktop styles.
+*   Don’t create separate stylesheets for mobile styles, tablet styles, etc.
+
+With pre-processors, it’s also possible to place media queries inside a rule set. Use this if it doesn’t create too much repetition.
+
+### Use variables
+
+*   Define 2-3 major breakpoints for a project and store them in Sass variables. Then reuse them for most components.
+*   It’s okay to use a different breakpoint in a component if you need something more specific.
+*   Always write `$breakpoint-variable - 1px` for `max-width` media queries. This avoids overlapping media queries.
+
+----
+Example:
+
+```css
+/* Standard media queries in CSS */
+.Component { … }
+.Component--selected { … }
+.Component-avatar { … }
+
+@media (min-width: 500px) {
+    .Component { … }
+    .Component--selected { … }
+    .Component-avatar { … }
+}
+```
+
+```css
+/* Bad - at 768px, both would apply! */
+@media (min-width: 768px) { … }
+@media (max-width: 768px) { … }
+
+/* Better */
+@media (min-width: 768px) { … }
+@media (max-width: 767px) { … }
+```
+
+```scss
+// Nested media queries in Sass
+.Component {
+    padding: 20px;
+    @media (min-width: $breakpoint-medium) {
+        padding: 40px;
+    }
+    @media (max-width: $breakpoint-small - 1px) {
+        padding: 12px;
+    }
+}
+```

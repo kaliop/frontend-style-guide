@@ -1,0 +1,15 @@
+Title: Use the DRY principle
+
+----
+
+Text:
+
+Don’t Repeat Yourself: avoid code that is very similar in different places in the project.
+
+In particular, avoid copying and pasting code in different places! Duplicated code is hard to maintain: you have to do the changes in 2, 5 or 10 places, and test each change.
+
+- Templating: use includes, partials, macros…
+- Styles: use components, utility classes, mixins…
+- JavaScript: use functions, modules, components…
+
+**This is not an absolute rule!** For example, if you need to make a variant that can evolve without impacting the first feature, some copy-pasting can be justified.

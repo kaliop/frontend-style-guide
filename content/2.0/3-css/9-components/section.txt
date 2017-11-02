@@ -1,0 +1,107 @@
+Title: Components
+
+----
+Text:
+
+A component is a group of styles that represent a block of UI:
+
+* It can be a single element (e.g. a `Button` component)
+* Or a group of elements (e.g. an article teaser with a container, a title, an image, a short excerpt…)
+
+It can be hard to decide if some part of a design should be a big component, or several smaller components. Use your best judgement, and/or ask coworkers what they think.
+
+### One file for each component
+
+Your component should have a upper camel case name, e.g. `Header` or `MobileNav`. And each component should have its own stylesheet (CSS or SCSS).
+
+You can organize your component styles together:
+
+```
+components/
+  Footer.scss
+  Header.scss
+  MyAwesomeComponent.scss
+  Teaser.scss
+```
+
+Or using a folder for each component (so you can have the styles, templates, scripts, etc. in the same place):
+
+```
+components/
+  Footer/
+    Footer.js
+    Footer.scss
+    Footer.tpl
+  Header/
+    …
+```
+
+### Component and elements
+
+We follow a variant of the [BEM methodology](http://getbem.com/).
+
+Each component must have a main element which contains the others (if any). Use the component’s name as its class, for example:
+
+```html
+<div class="Teaser">
+  […]
+</div>
+```
+
+For component elements, use the component name as a namespace, and add a lower camel case element name:
+
+```html
+<div class="Teaser">
+  <h2 class="Teaser-head">[…]</h2>
+  <p class="Teaser-intro">[…]</p>
+</div>
+```
+
+Component element classes should not have more than 2 segments. `MyComponent-list-item` is wrong; use `MyComponent-listItem` or simply `MyComponent-item`. If you need to create a lot of element classes with 2 or 3 words, maybe your component is too complex and should be refactored into smaller components?
+
+### Targetting HTML elements
+
+Unlike the stricter BEM methodology, we allow writing selectors that target a HTML element inside a component or component element.
+
+```html
+<div class="Teaser">
+  <h2 class="Teaser-head">
+    <a href="[…]">Cool title</a>
+  </h2>
+  […]
+</div>
+```
+
+For example we could style the link inside `MyComponent-title` here:
+
+```css
+.Teaser-head a {
+  display: block;
+  color: inherit;
+}
+.Teaser-head a:hover,
+.Teaser-head a:focus {
+  color: purple;
+}
+```
+
+### Modifier classes
+
+Sometimes the component’s container or a component element can have slightly different styles in different places. In those situations we can create style variants, using classes like: `Component--variantName` (for the container) or `Component-element--variantName` (for an element in the component).
+
+```twig
+{# Alternative style for the first instance of this component in a list #}
+<article class="Teaser Teaser--highlight">
+  <h2 class="Teaser-head">
+    <a href="[…]">[…]</a>
+  </h2>
+  <p class="Teaser-desc">[…]</p>
+</article>
+
+<article class="Teaser">
+  <h2 class="Teaser-head">
+    <a href="[…]">[…]</a>
+  </h2>
+  <p class="Teaser-desc">[…]</p>
+</article>
+```

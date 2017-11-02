@@ -1,0 +1,35 @@
+Title: IE conditional comments
+
+----
+Text:
+
+Avoid using Internet Explorer conditional comments as much as possible. They’re often unnecessary in IE9+, and deprecated in IE11+.
+
+If you need special tricks for IE8 support, see the following example. Note that the recommended option relies on JavaScript for adding an `old-ie` class. This means dropping support for IE8-without-JavaScript (which is already the case if we’re using HTML5 elements such as `<article>`, `<header>`, etc.).
+
+----
+Example:
+
+Use this with caution (for IE8):
+
+```html
+<head>
+    …
+    <!--[if lte IE 8]>
+    <script>document.documentElement.className+=' old-ie';</script>
+    <script src="html5shiv.min.js"></script>
+    <link rel="stylesheet" href="styles-old-ie.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="styles.css">
+    <!--<![endif]-->
+</head>
+```
+
+And avoid this trick:
+
+```html
+<!--[if IE 7]><html class="lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="lt-ie9"><![endif]-->
+<!--[if gt IE 8]><!--><html><!--<![endif]-->
+```

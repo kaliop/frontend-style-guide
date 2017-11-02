@@ -1,0 +1,33 @@
+Title: CSS syntax
+
+----
+Text:
+
+*   One selector per line
+*   Each declaration should appear on its own line
+*   Keep `{` on the last selector line, one space before
+*   Put `}` on a new line, not indented
+*   Double quotes (`"hello"`), not single quotes (`'go away'`)
+*   Quote attribute values in selectors, e.g., `input[type="text"]`
+*   Include one space after `:` for each declaration
+*   _Always_ end declarations with a semi-colon (`;`)
+
+----
+Example:
+
+```css
+/* Bad CSS */
+.selector, .selector-secondary, .selector[type=text]{
+    font-weight: bold; color: black
+    }
+```
+
+```css
+/* Good CSS */
+.selector,
+.selector-secondary,
+.selector[type="text"] {
+    font-weight: bold;
+    color: black;
+}
+```

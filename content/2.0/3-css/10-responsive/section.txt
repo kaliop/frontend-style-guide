@@ -1,0 +1,118 @@
+Title: Responsive styles
+
+----
+Text:
+
+### Keep all styles for a selector together
+
+*Do not* separate desktop and mobile styles into different files. You want to keep them tightly together:
+
+```css
+.spaceBefore1 {
+  margin-top: 20px;
+}
+@media (min-width: 750px) {
+  .spaceBefore1 {
+    margin-top: 30px;
+  }
+}
+```
+
+### Mobile-first
+
+We use a mobile-first approach. Here’s how it works:
+
+1. First, try to find the simpler “state” of a component or element style. Most of the time, it will look like the mobile layout.
+2. Then, add styles for larger viewports, in a media query.
+
+Using Sass, you can use *media query nesting* to avoid repeating the selector and making the relationship between the styles clearer.
+
+```scss
+.MyComponent {
+  border: solid 1px black;
+  padding: 10px;
+
+  @media (min-width: 750px) {
+    border-width: 5px;
+    padding: 25px;
+  }
+}
+```
+
+Avoid doing things like this, it’s doing extra work for nothing:
+
+```scss
+.MyComponent-image {
+  float: left;
+  margin-right: 20px;
+
+  @media (max-width: 749px) {
+    float: none;
+    margin-right: 0;
+  }
+}
+```
+
+Finally, sometimes the mobile styles are rather specific and not useful for larger screens. In that case, try to separate styles in tree groups: common, small screens, and larger screens.
+
+```scss
+.MyComponent-image {
+  display: block;
+  outline: solid 1px rgba(0,0,0,.25);
+  outline-offset: -1px;
+  background-color: #eee;
+
+  @media (max-width: 749px) {
+    width: calc(100% - 40px);
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 750px) {
+    float: right;
+    margin-right: 20px;
+  }
+}
+```
+
+### Share breakpoints between components
+
+Try to use 2–3 main breakpoints and reuse them throughout the site or application. Using Sass, you can store those breakpoints in variables:
+
+```scss
+$bp-medium: 750px;
+$bp-large: 1100px;
+$bp-xlarge: 1400px;
+
+// By convention, when using max-width you should
+// remove 1px to avoid conflicts if the viewport
+// width is exactly $bp-medium
+@media (max-width: $bp-medium - 1px) {[…]}
+@media (min-width: $bp-medium) {[…]}
+```
+
+### Use named media queries
+
+Name media queries allow you to define a media query once, and reuse it every time. In CSS proposals, it looks like this:
+
+```css
+@media (--my-media-query) {[…]}
+```
+
+Since this feature is not standardized or supported yet, we can mimick this behavior in Sass to make our Sass code easier to maintain. Use [this mq-build function](https://www.npmjs.com/package/sass-mq-build) to store full media queries in variables:
+
+```scss
+@import "node_modules/sass-mq-build/mq-build";
+$mq-small: mq-build(null, 750px);
+$mq-medium: mq-build(750px, 1100px);
+$mq-large: mq-build(1100px, null);
+
+.something {
+  @media ($mq-small) {
+    color: green;
+  }
+  @media ($mq-medium) {
+    color: red;
+  }
+}
+```

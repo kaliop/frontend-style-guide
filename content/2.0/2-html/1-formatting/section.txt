@@ -1,0 +1,26 @@
+Title: Formatting
+
+----
+Text:
+
+HTML’s syntax can be very flexible, and browsers will try to deal with errors silently. To make our code more robust and consistent, follow these rules:
+
+1. Valid HTML code ([validator.nu](https://validator.nu/))
+2. Lowercase tag names and attributes
+3. Always quote attribute values, with double quotes
+4. Attribute order: `class` first, `id` second, then everything else.
+
+----
+Example:
+
+```html
+<p class="Form-field">
+  <label class="Form-label" for="f-color">
+    What is your favourite colour?
+  </label>
+  <input class="Form-textbox" id="f-color" name="color" required>
+  <a class="modalLink" href="/help/276b6de1">
+    <img src="question-mark.svg" alt="Help">
+  </a>
+</p>
+```

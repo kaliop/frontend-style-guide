@@ -1,0 +1,27 @@
+Title: Utility classes
+
+----
+Text:
+
+Utilities are simple styles that can be used on any element to trigger some basic function (in a few lines of CSS at most).
+
+-   Write utility classes in `camelCase`, without a prefix.
+-   Avoid using *many* utility classes. They move a lot of the presentation logic into your HTML, and can hide that a component has dependencies (unlike mixins and variables).
+-   If you have several utility classes that work together, maybe make a component?
+
+----
+Example:
+
+```css
+/* Utility classes */
+.visuallyHidden {
+    position: absolute !important;
+    clip: rect(1px,1px,1px,1px);
+}
+.svgIcon {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+}
+```

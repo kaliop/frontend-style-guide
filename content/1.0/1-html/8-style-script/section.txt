@@ -1,0 +1,39 @@
+Title: Styles and scripts
+
+----
+Text:
+
+Reference your stylesheets (ideally just one or two) in the `<head>`, using a `<link>` tag. If you *must* write some styles in the page itself, use a `<style>` element.
+
+Call your scripts (ideally just one or two) with `<script src="…"></script>` tags at the bottom of the page (just before `</body>`). 
+
+Don’t use `type` attributes. The `text/css` and `text/javascript` values the default ones, so they’re optional.
+
+### Danger! Performance killers
+
+*   Calling a bazillion scripts and stylesheets! 😭
+*   Scripts in the `<head>` (except with the [async attribute](http://caniuse.com/#feat=script-async))
+*   Calling a stylesheet with `<style>@import url</style>`
+
+----
+Example:
+
+```html
+<head>
+    …
+    <link rel="stylesheet" href="styles.min.css">
+    <!-- DON'T DO THIS! (Blocks page rendering.)
+        <script src="some-script.js"></script>
+    -->
+    <!-- That’s better, but ignored by IE9, and it
+         doesn’t guarantee execution order if you
+         have more than one async script.
+        <script async src="some-script.js"></script>
+    -->
+</head>
+<body>
+    …
+    <!-- DO THIS INSTEAD \o/ -->
+    <script src="libs-and-scripts.min.js"></script>
+</body>
+```

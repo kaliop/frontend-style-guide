@@ -1,0 +1,35 @@
+Title: Viewport meta
+
+----
+Text:
+
+For responsive websites, use a `viewport` meta in the page’s `head`.
+
+*   Use `width=device-width`
+*   Add `initial-scale=1` so that Safari does not zoom the content in portrait mode
+*   _Do not_ use `maximum-scale`, ever!
+
+More info: [detailed compatibility information](http://www.quirksmode.org/mobile/metaviewport/).
+
+This meta an be placed anywhere in the head, but we recommend putting it near the top with other “compatibility” stuff. So make sure your `<head>` always has, in this order: charset, X-UA-Compatible, viewport; then everything else.
+
+----
+Example:
+
+```html
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>…</title>
+    <!-- Everything else -->
+    …
+</head>
+```
+
+```css
+/* Windows Phone needs this in the CSS, or it understands "device-width" as "320px like the original iPhone" */
+@-ms-viewport {
+    width: device-width;
+}
+```

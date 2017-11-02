@@ -1,0 +1,12 @@
+Title: Clean up your code
+
+----
+
+Text:
+
+Keep the codebase short and avoid unused code.
+
+- Remove unused files, failed experiments, etc.
+- HTML: avoid unnecessary elements and attributes
+- CSS: avoid unused selectors, and useless properties
+- JS, PHP, etc.: look out for unused variables and functions

@@ -1,0 +1,33 @@
+Title: Avoid inline style and scripts
+
+----
+Text:
+
+### Styling
+
+*   Don’t use the `style` attribute, or other presentation attributes.
+*   Avoid setting the `style` attribute with JavaScript or jQuery’s `$(element).css()` method. Add or remove classes instead.
+*   Only use `<style>/* Some CSS */</style>` if you can’t put those styles in (one of the) external stylesheet(s).
+
+### Scripting
+
+*   Do not use `document.write()`, *ever*.
+*   Avoid using inline event handlers, such as the `onclick` or `onload` attribute.
+*   Only use `<script>/* Some JS */</script>` for code that is short enough and must be executed as soon as possible. If it doesn’t hurt perceived performance, put this code in (one of the) external script(s).
+
+----
+Example:
+
+```html
+<!-- ALL OF THIS IS AWFUL :(( -->
+<body onload="start()">
+    <p id="hello" style="margin-top:50px">Hello World</p>
+    <script>
+        document.write('<p>Some HTML code</p>');
+        function start() {
+            var hello = document.querySelector('#hello');
+            hello.style.marginTop = '100px';
+        }
+    </script>
+</body>
+```

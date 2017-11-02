@@ -1,0 +1,23 @@
+Title: IE compatibility mode
+
+----
+Text:
+
+Internet Explorer 9 to 11 support the use of HTTP header, and the corresponding `<meta>` tag, to specify what version of IE the page should be rendered as. Use the meta tag to tell IE to use its latest rendering engine (*edge mode*). Otherwise in some specific situations, IE 9-11 may fall back to Quirks or “Like IE7” or other compatibility modes.
+
+Important:
+
+-   Keep this tag close to the start of the `<head>`.
+-   There must be zero HTML comments in the HTML source before the meta, or it will be ignored.
+
+[More information on Stack Overflow](http://stackoverflow.com/questions/6771258/whats-the-difference-if-meta-http-equiv-x-ua-compatible-content-ie-edge-e).
+
+----
+Example:
+
+```html
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+</head>
+```

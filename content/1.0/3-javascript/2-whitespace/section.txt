@@ -1,0 +1,34 @@
+Title: White space
+
+----
+Text:
+
+*   Use 1 blank line when you want breathing room inside a module or complex function
+*   Keep `{` on the current line, with one space before
+*   Indent the body of functions and the contents of blocks
+*   Do not use arbitrary numbers of spaces to align code
+*   Use spaces before and after operators (`=`, `+`, `%` etc.)
+
+----
+Example:
+
+```js
+// Bad
+function doSomething()
+{
+    var DELAY=60*60*24;
+    var MAGIC_WORDS=['abracadabra',
+                     'hocus pocus'];
+    …
+}
+
+// Better
+function doSomething() {
+    var DELAY = 60 * 60 * 24;
+    var MAGIC_WORDS = [
+        'abracadabra',
+        'hocus pocus'
+    ];
+    …
+}
+```

@@ -1,0 +1,23 @@
+Title: Using ES6
+
+----
+Text:
+
+ECMAScript 2015 (also called ES6 or ES2015) is a major version of the JavaScript standard, with most of its features already implemented by major browsers in 2017. To support older browsers, it might be useful to *transpile* your ES6 code into ES5.
+
+- For new projects, use ES6 syntax and features.
+- Use a transpiler ([Babel](https://babeljs.io/), [Bublé](https://buble.surge.sh/)) to generate ES5 code.
+- *Avoid* ES6 syntax and features for existing projects not using a transpiler.
+
+### Browser support
+
+If you’re not transpiling to ES5 *and* are targetting older browsers, avoid using ES6 syntax and features. Some examples of minimum compatibility:
+
+- Arrow functions (`x => x * 2`): needs Edge 12, Chrome 45, Safari 10
+- Promises: Chrome 32, Firefox 29, Edge 12
+- `const` and `let` statements: needs IE11, Chrome 49
+- `for...of` loops: Edge 12, Chrome 38
+- `async` / `await`: Chrome 55, Firefox 52, Edge 14, Safari 10.1
+- ES6 modules: experimental support in some browsers only
+
+If you *are* transpiling ES6 to ES5, note that some features require adding a polyfill to your JS code, and that can increase the size of your JS bundle a lot!

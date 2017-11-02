@@ -1,0 +1,38 @@
+Title: Indentation
+
+----
+Text:
+
+Use soft tabs with 4 spaces for indentation.
+
+-   Add one indent before each declaration.
+-   Indent the contents of a media query by one tab.
+-   If you wrap long values using line breaks, add one indent to each wrapped line.
+
+Avoid adding unnecessary indentation. *Do not* use indentation to try to reflect the HTML structure or the hierarchy of your styles.
+
+----
+Example:
+
+
+```css
+/* Good indentation */
+.Component {
+    padding: 2em;
+    font-size: 18px;
+}
+.Component-element {
+    color: black;
+    text-shadow: 0 0 4px #FFF,
+        0 -5px 4px #FF3,
+        2px -10px 6px #FD3,
+        -2px -15px 11px #F80,
+        2px -25px 18px #F20;
+}
+@media (max-width: 500px) {
+    .Component {
+        padding: 1em;
+        font-size: 16px;
+    }
+}
+```

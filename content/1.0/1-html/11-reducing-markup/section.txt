@@ -1,0 +1,19 @@
+Title: Reducing markup
+
+----
+Text:
+
+Whenever possible, avoid superfluous parent elements when writing HTML. Add wrapper elements when you actually need them, not “just in case”. Many times this requires iteration and refactoring, but produces less HTML.
+
+----
+Example:
+
+```html
+<!-- Not so great -->
+<span class="avatar">
+    <img src="…" alt="">
+</span>
+
+<!-- Better -->
+<img class="avatar" src="…" alt="">
+```

@@ -1,0 +1,38 @@
+Title: Shorthand notation
+
+----
+Text:
+
+Only use shorthand declarations when you are okay with **setting or resetting all the corresponding values**. For instance, `background: #fff;` will also reset background images and positions, gradients, multiple images, etc.
+
+Try to use individual properties, rather than shortand ones.
+
+Commonly overused shorthand properties include:
+
+-   `padding`
+-   `margin`
+-   `font`
+-   `background`
+-   `border`
+
+----
+Example:
+
+```css
+/* Bad example */
+.element {
+    margin: 0 auto;
+    padding: 0 0 10px;
+    background: red;
+}
+```
+
+```css
+/* Better example */
+.element {
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+    background-color: red;
+}
+```

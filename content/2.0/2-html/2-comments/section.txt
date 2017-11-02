@@ -1,0 +1,28 @@
+Title: Comments
+
+----
+Text:
+
+Write as few HTML comments (`<!-- Comment -->`) as possible:
+
+- They should not contain technical information
+- Or references to client requirements
+
+It’s often better to use the templating language’s comment syntax instead. This helps sending fewer bytes to users, too.
+
+----
+Example:
+
+Avoid:
+
+```twig
+<!-- External SVG sprite support for IE -->
+<script>[…]</script>
+```
+
+Prefer:
+
+```twig
+{# External SVG sprite support for IE #}
+<script>[…]</script>
+```

@@ -1,0 +1,33 @@
+Title: Use a module pattern
+----
+Text:
+
+Module patterns in JavaScript can be used for:
+
+1.  organizing your code;
+2.  making sure that the variables and functions for a given group of code are not declared in the global scope (i.e on the host object, `window`).
+
+The IIFE pattern (for *immediately invoked function expression*) can be used to create an anonymous function scope, so that your variables do not leak into the global namespace. There are different possible syntax. Prefer the one in the next example.
+
+----
+Example:
+
+```js
+/**
+ * IIFE pattern
+ */
+;(function(){
+    // Your code goes here
+})();
+```
+
+```js
+/**
+ * IIFE pattern with global variables passed to
+ * the function. In practice, this means that we
+ * take `window.jQuery`, and use it locally as `$`.
+ */
+;(function($){
+    // Your code goes here
+})(jQuery);
+```

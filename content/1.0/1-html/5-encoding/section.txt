@@ -1,0 +1,18 @@
+Title: Character encoding
+
+----
+Text:
+
+Always use UTF-8. Declare it first thing in the `<head>`, using the HTML5 short syntax. Ideally, the server should *also* declare the charset in the `Content-Type: text/html; charset=utf-8` HTTP header.
+
+Use literal characters if you can. The only characters that require the use of character entities are `<` and `&`. Do not encode text such as “français” (bad: `fran&#231;ais` or `fran&ccedil;ais`).
+
+----
+Example:
+
+```html
+<head>
+    <meta charset="UTF-8">
+    <!-- Everything else goes *after* the charset -->
+</head>
+```

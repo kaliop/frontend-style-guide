@@ -1,0 +1,12 @@
+Title: UI states
+
+----
+Text:
+
+Using script, we often need to change the “state” of an element in the UI. Instead of adding or removing classes, consider using:
+
+- Native HTML attributes such as `disabled` or `hidden`.
+- ARIA attributes such as `aria-expanded="true|false"`.
+- Or, finally, a data attribute: `data-state="my-custom-state"`.
+
+Try to use `id` attribute values to link elements logically. Both HTML (example: `<label for="some-id">`) and ARIA (example: `aria-labelledby="other-id"`) use this technique already. But make sure that the id values you use are unique in the page!

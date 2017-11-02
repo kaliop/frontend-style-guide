@@ -1,0 +1,23 @@
+{% from '@snippets/macros.twig' import fixcontent %}
+{% set section = section|default(page()) %}
+{% set mainHtml, asideHtml, exampleHtml =
+  section.text.markdown(),
+  section.aside.markdown(),
+  section.example.markdown()
+%}
+<div class="Section" id="{{ section.uid }}">
+  <div class="Section-col">
+    {% if title|default('') %}<h2>{{ title | raw }}</h2>{% endif %}
+    {{ fixcontent(mainHtml) }}
+  </div>
+  {% if asideHtml|trim %}
+  <div class="Section-col Section-col--aside">
+    {{ fixcontent(asideHtml) }}
+  </div>
+  {% endif %}
+  {% if exampleHtml|trim %}
+  <div class="Section-col Section-col--example">
+    {{ fixcontent(exampleHtml) }}
+  </div>
+  {% endif %}
+</div>

@@ -1,0 +1,83 @@
+Title: Deprecated syntaxes
+
+----
+Text:
+
+The following HTML syntaxes, elements or metadata are useless or have been deprecated. You should remove them from your HTML. Eliminate distractions like a HTML Jedi.
+
+### Old doctypes, XHTML namespace
+
+```html
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+```
+
+Use this instead:
+
+```html
+<!DOCTYPE html>
+<html lang="fr">
+```
+
+### Default type for styles
+
+It’s not essential, but you can remove the `type` attributes on stylesheet when it uses the default `text/css` value. So, always.
+
+```html
+<link rel="stylesheet" type="text/css" href="url">
+<style type="text/css">/* code */</style>
+
+<!-- Better -->
+<link rel="stylesheet" href="url">
+<style>/* code */</style>
+```
+
+### Default type for scripts
+
+Same for scripts and `text/javascript`. And if you find a non-standard `language` attribute, remove it too.
+
+```html
+<script type="text/javascript" src="url"></script>
+<script type="text/javascript" language="Javascript">[…]</script>
+
+<!-- Better -->
+<script src="url"></script>
+<script>[…]</script>
+```
+
+### IE Conditional Comments
+
+Conditional comments were dropped in IE 10. They can be used if you really need to target IE 8–9, but for most projects they’re probably just useless code from an old boilerplate. For instance, you could see this:
+
+```
+<!--[if IE 8]><html class="ie8" lang="fr"><![endif]-->
+<!--[if IE 9]><html class="ie9" lang="fr"><![endif]-->
+<!--[if gt IE 9]><!--><html lang="fr"><!--<![endif]-->
+```
+
+Same code, cleaned up:
+
+```
+<html lang="fr">
+```
+
+### X-UA-Compatible meta tag
+
+Another deprecated IE feature:
+
+```html
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+```
+
+You will find this in a lot of projects. Why? On local network sites, IE 8–10 would automatically use a “backwards compatible” mode to render the page, trying to mimick IE 7. This tag would tell IE to avoid that, and use its best capabilities. Thankfully, IE 11 and Edge stopped this nonsense.
+
+### Totally useless meta tags
+
+```html
+<!-- Not used in any search engine since 1997! -->
+<meta name="keywords" content="make money, free cash, easy">
+
+<!-- NEVER worked, still exists on many websites! -->
+<META NAME="MSSmartTagsPreventParsing" CONTENT="TRUE">
+```

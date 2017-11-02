@@ -1,0 +1,37 @@
+Title: Formatting
+
+----
+Text:
+
+Follow the formatting style used by [Prettier](https://prettier.io/) (with default settings).
+
+1. Indent with 2 spaces
+2. Use semicolons (`;`) at the end of statements
+3. Use double quotes for strings
+4. Keep opening braces (`{`) on the current line, with one space before, and closing braces (`}`) on a new line
+
+Recommended: install Prettier (`npm i -g prettier` or [install for your editor](https://prettier.io/docs/en/editors.html)) and use it to automatically reformat your JS code.
+
+----
+Example:
+
+```js
+const settings = {
+  indentSize: 2,
+  semicolons: true
+};
+
+console.log(opinion(settings.semicolons));
+
+function opinion(pref) {
+  let opinion = "Semicolons are ";
+  if (pref === true) {
+    opinion += "alright, mate.";
+  } else if (pref === false) {
+    opinion += "superfluous.";
+  } else {
+    opinion = "What is a semicolon?";
+  }
+  return opinion;
+}
+```

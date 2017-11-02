@@ -1,0 +1,18 @@
+<nav class="SideToc">
+  {% if outdated|default(false) %}
+    {% include '@snippets/outdated.twig' %}
+  {% endif %}
+  <div class="SideToc-inner">
+    <p class="SideToc-back">
+      <a href="{{ page.parents.last.url }}/">◀ Style Guide {{ page.parents.last.version }}</a>
+    </p>
+    <h2 class="SideToc-head" data-chapter="{{ source.title }}">
+      <span>Table of contents</span>
+    </h2>
+    <ul class="SideToc-list">
+      {% for item in source.children.visible %}
+        <li><a href="#{{ item.uid }}">{{ item.title | raw }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</nav>

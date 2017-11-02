@@ -1,0 +1,89 @@
+Title: Accessible HTML
+
+----
+
+Text:
+
+We strive to create accessible user interfaces, whether the HTML is generated server-side or client-side in JavaScript. Here are a few guidelines to get you started on this topic.
+
+### Use titles for structure
+
+- Use H1, H2, H3 elements (lower levels are often unnecessary)
+- If this conflicts with SEO needs, see if you can find a compromise (keep the main titles, maybe change a useful H1/H2 to a H3 so that it does not clash with SEO needs but is still listed in screen readers)
+
+```html
+<main>
+  <h1>Page title</h1>
+  […]
+  <h2>A sub-section</h2>
+  […]
+  <h2>Another section</h2>
+  […]
+</main>
+```
+
+### Use text labels
+
+Outside of content managed in a CMS, we need accessible text for:
+
+- Logos (use the brand’s name, not `"logo"`) and other significant images
+- Buttons or links with icons and no visible text
+
+For links and buttons, this can look like:
+
+```html
+<a href="[…]">
+  <img src="[…]" alt="Subscribe Now">
+</a>
+
+<button>
+  <svg class="icon">
+    <title>Subscribe Now</title>
+    <path d="[…]"></path>
+  </svg>
+</button>
+```
+
+If you can’t add alt text to the image or icon itself, you can use `aria-label` on the link or button:
+
+```html
+<a href="[…]" aria-label="Subscribe Now">
+  <i data-icon="letter"></i>
+</a>
+```
+
+Finally, if the text is already present in context, it’s often better to have *empty* alt text:
+
+```html
+<a href="[…]">
+  <img src="[…]" alt="">
+  Subscribe Now
+</a>
+
+<button>
+  <svg class="icon" aria-hidden="true"><path d="[…]"></path></svg>
+  Subscribe Now
+</button>
+```
+
+### Make sure that form elements have labels
+
+Link a form element and the relevant label using `<label for="some-id">` and the `id` attribute.
+
+```html
+<p>
+  <label for="user-name">My Name</label>
+  <input type="text" id="user-name">
+</p>
+
+<p>
+  <input type="checkbox" id="user-subscribe">
+  <label for="user-subscribe">Subscribe me to the newsletter</label>
+</p>
+```
+
+If done properly, clicking the label should focus the text input (or `<select>` or any other form control). Note that each `id` attribute must be unique in the page.
+
+### Learn more
+
+Beyond this section, see [this accessibility cheatsheet](https://bitsofco.de/the-accessibility-cheatsheet/) for an introduction to accessibility.

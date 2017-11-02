@@ -1,0 +1,21 @@
+Title: Type coercion
+
+----
+Text:
+
+JavaScript may automatically convert a value from one type to another (for example, from a string to a number):
+
+1. When writing `if (myVar)` (or using operators like `?`, `!`, `||` and `&&`), JS will convert the value to a boolean (`true` or `false`)
+2. When comparing two values with `x == y`, `x != y`, `x < y` and `x > y`, some type conversion can happen if the values have different types
+
+### Conversion to boolean
+
+The following values convert to `false`: `0` and `NaN`, the empty string `""`, `undefined`, `null` and `false`. Everything else converts to `true`, including objects and empty arrays!
+
+- Be careful with `if (myVar)`; try to write a more precise check if possible
+- For arrays and some object types, you may need to check `myVar.length`
+
+### Comparing values
+
+- Prefer the strict equality and inequality operators (`x === y`, `x !== y`)
+- Avoid `==` and `!=` (although sometimes it can be useful, for example `myVar != null` checks if the value is different from `null` *and* `undefined`)

@@ -1,0 +1,33 @@
+Title: Variable values
+----
+Text:
+
+*   One `var` keyword for each variable (avoid `var x, y`)
+*   Literal syntax for object and array creation
+*   Prefer single quotes for strings
+*   Use the `+` operator for multiline strings
+*   Don’t use reserved words (`class`, `default`, [and more](http://es5.github.io/#x7.6.1)) as variable or property names
+
+----
+Example:
+
+```js
+// Good
+var myArray = [];
+var defaults = {
+    className: 'MyComponent'
+}
+var multiLine = 'Through the coppice and ' +
+    'the chaparral, the thickets thick with ' +
+    'mold, the bracken and the brier… ' +
+    'catchweed into the fold.';
+
+// Baaaaaaad
+var myArray = new Array(),
+    default = new Object();
+default.class = "MyComponent";
+var multiLine = "Through the coppice and \
+the chaparral, the thickets thick with \
+mold, the bracken and the brier… \
+catchweed into the fold.";
+```

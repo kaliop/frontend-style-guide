@@ -1,0 +1,60 @@
+Title: Comments
+
+----
+Text:
+
+### Prefer Sass comments
+
+```scss
+/* A CSS comment (standard syntax) */
+// A Sass comment (always removed from CSS output)
+```
+
+In Sass (SCSS) source files, prefer the Sass comment syntax, except for the top comment that describes each file.
+
+### CSS/SCSS file header
+
+Start each CSS file (especially a component file) with a header comment using the following format: `/*! Title */`.
+
+When minifying the CSS, these comments will be kept in the final CSS, which doesn’t add much to the file’s weight but makes it easier to break the minified CSS into several lines.
+
+### Don’t repeat obvious information
+
+```scss
+// The teaser’s title
+.Teaser-title {
+  […]
+}
+```
+
+----
+Example:
+
+```scss
+/*! Header Component */
+// More information about this component
+
+.Header {
+  […]
+}
+
+// Use simple comments surrounded by blank lines
+// to introduce a group of selectors
+
+.Header-top {
+  […]
+}
+
+.Header-social {
+  […]
+}
+
+// Use a comment just before the selector if you need to
+// explain something particular about this selector
+.Header-navItem {
+  display: table-cell;
+  // Use a comment just before the line(s) you want to
+  // explain; avoid comments after or on the right.
+  vertical-align: bottom;
+}
+``` 

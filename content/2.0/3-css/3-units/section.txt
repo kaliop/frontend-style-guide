@@ -1,0 +1,43 @@
+Title: Units: pixels, ems, etc.
+
+----
+Text:
+
+It’s not always obvious which CSS units are best for what use cases. Here are some points of reference:
+
+* Avoid physical units such as `cm` and `pt`
+* Media queries: prefer `px` (over using `em`)
+* `font-size`: use `rem`, `em` or `px`
+* `line-height`: use a unitless ratio, e.g. `1.2`
+
+### Viewport-relative units
+
+* `1vw` is equal to 1% of the viewport width (`100vw`)
+* `1vh` is equal to 1% of the viewport height (`100vh`), but it can be unreliable in mobile browsers
+
+----
+Example:
+
+```scss
+html {
+  // should be 16 * 1.25 = 20px
+  font-size: 125%;
+}
+
+body {
+  font-size: .8rem;
+  line-height: 1.4;
+}
+
+h1 {
+  font-size: 1.6rem;
+  line-height: 1.2;
+}
+
+@media (min-width: 1100px) {
+  h1 {
+    font-size: 2.4rem;
+    line-height: 1.1;
+  }
+}
+```

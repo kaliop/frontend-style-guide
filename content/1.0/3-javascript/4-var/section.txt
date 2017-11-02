@@ -1,0 +1,32 @@
+Title: Always use var
+
+----
+Text:
+
+*   _Always_ use `var` to declare a variable.
+
+Variables declared with the `var` keyword are scoped to the function where they are declared.
+
+Variables declared _without any keyword_ are added to the global object (`window`) in web browsers. **This can create bugs in your scripts, or collisions with other scripts!**
+
+----
+Example:
+
+```js
+function doSomething() {
+    var test1 = 'Good.';
+    test2 = 'OH NO!'; // test2 is global!
+    console.log(window.test1); // undefined
+    console.log(window.test2); // 'OH NO!'
+}
+```
+
+```js
+// Variables in a block (for loop, if/else, etc.)
+// live in the parent scope
+for (var i=0; i<10; i++) {
+    var test3 = 'Can you see me?';
+}
+console.log(i); // 10
+console.log(test3); // 'Can you see me?'
+```

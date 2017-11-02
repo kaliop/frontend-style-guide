@@ -1,0 +1,48 @@
+Title: Modules
+----
+Text:
+
+- Create one JS file for each major feature or UI part.
+- Wrap the contents of each file in an IIFE manually, or use a bundler such as Browserify, Rollup or webpack.
+
+### Writing IIFEs by hand
+
+The immediately-invoked function expression (IIFE) pattern prevents us from creating global variables. The `()` after the function executes it (that’s the “immediately-invoked” part), otherwise our code would not run.
+
+```js
+// my-module.js
+!function() {
+  // only exists in the scope of the parent function
+  var local = "Hot variables in you area";
+  // we can still make some values or methods global if we want to
+  window.myModule = function() {[…]}
+}();
+```
+
+When you concatenate several modules, you should end up with a bundled JS file that looks like this:
+
+```js
+// my-module.js
+!function(){[…]}();
+// other-module.js
+!function(){[…]}();
+```
+
+### Using a script bundler
+
+With a JS code bundler such as [Browserify](http://browserify.org/), [Rollup](https://rollupjs.org/) or [webpack](https://webpack.js.org/), you don’t need to wrap each module in a function: the bundler will take care of it.
+
+For example with webpack and ES6 syntax:
+
+```js
+// app.js
+import "some-dependency";
+import "./scripts/my-module.js";
+import "./scripts/other-module.js";
+```
+
+```js
+// my-module.js
+const local = "Hot variables in you area";
+export function myModule() {[…]}
+```

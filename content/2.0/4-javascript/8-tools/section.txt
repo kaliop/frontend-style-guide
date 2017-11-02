@@ -1,0 +1,47 @@
+Title: Tooling up
+
+----
+Text:
+
+A lot of JavaScript development uses Node.js and associated packages, even if we’re not using Node.js to run JS on the server.
+
+### Minimum requirements
+
+- Install [Node.js](https://nodejs.org/en/) version 8 or higher
+- Learn the basics of [how `package.json` is structured](https://nodesource.com/blog/the-basics-of-package-json-in-node-js-and-npm/)
+- Use `npm` to manage dependencies and scripts
+- Use a JS code bundler (such as webpack) to create one or several JS bundles for the frontend
+
+### Recommended tools
+
+- Use [nvm](https://github.com/creationix/nvm) to install several Node.js versions and switch between them.
+- Use [Prettier](https://prettier.io/) to format your JS and CSS code. You can install a Prettier plugin for your code editor of choice.
+- Consider using [eslint](https://eslint.org/) to check your JS code, and [stylelint](https://stylelint.io/) to check your CSS or SCSS code.
+- We have ready-to-use configs [for webpack](#) and [for gulp](https://github.com/kaliop/gulp-assets-builder). <mark>TODO: publish webpack config</mark>
+
+----
+Example:
+
+In this example `package.json` we installed user-facing code as dependencies (`npm install --save`), and all the tools used to build or test code as development dependencies (`npm install --save-dev`).
+
+```json
+{
+  "name": "my-project",
+  "scripts": {
+    "build": "webpack --env=prod",
+    "dev": "webpack-dev-server --env=dev"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "some-other-lib": "^1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    […]
+    "eslint": "^4.7.1",
+    […]
+    "webpack": "^3.4.1",
+    "webpack-dev-server": "^2.6.1"
+  }
+}
+```

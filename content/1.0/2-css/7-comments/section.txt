@@ -1,0 +1,67 @@
+Title: Comments
+
+----
+Text:
+
+Use comments to **organize** and **document** your CSS code.
+
+Comments must not be in the production CSS. If you use a pre-processor, prefer the `// comment` syntax. Or use a minifier that removes comments.
+
+### Comments before selectors
+
+*   When documenting _why_ you’re using one or several lines of code, put the comment text _before_ the selector, and put a numbered reference after each line of code the comment applies to. (See the next example.)
+
+### Identify sections of code
+
+*   Use Markdown-like comments (e.g. `/* # Level 1 heading */`) to identify sections of code.
+*   Always leave 2 lines before a level 1 or level 2 heading (except at the top of the page).
+
+Sublime Text users: the [Table of comments](https://packagecontrol.io/packages/Table%20of%20comments) plugin can be used to list all headings in a file, and jump between headings.
+
+----
+Example:
+
+```scss
+//  ======================
+//  # Components => Header
+//  ======================
+
+//  This is an example, using Sass comments.
+//  The === decorations for level 1 headings,
+//  and the --- decorations for level 2 headings,
+//  are optional.
+ 
+
+//  -----------------
+//  ## Main container
+//  -----------------
+
+.Header {
+    …
+}
+ 
+
+//  -------------
+//  ## First line
+//  -------------
+
+.Header-top {
+    …
+}
+
+// 1: We want content to align to the bottom in case one
+//    is a bit higher than others, because of the "active"
+//    effect that is docked to the bottom.
+.Header-item {
+    display: table-cell;
+    vertical-align: bottom; // [1]
+}
+
+// ### Logo
+
+…
+
+// ### Etc.
+
+…
+``` 

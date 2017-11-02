@@ -1,0 +1,27 @@
+{% extends '@snippets/layout.twig' %}
+{% set bodyClasses = ['isChapter', 'hasSidebar'] %}
+
+{% block content %}
+
+  <header class="Header">
+    <div class="Header-inner">
+      <p class="Header-back"><a href="{{ page.parents.last.url }}/">{{ site.title }}</a></p>
+      <h1>{{ page.title }}</h1>
+      {% if page.subtitle %}<p>{{ page.subtitle }}</p>{% endif %}
+    </div>
+  </header>
+
+  <main>
+    {% include '@snippets/sidetoc.twig' with {
+      source: page,
+      outdated: page.parent.version.float < site.currentversion.float
+    } %}
+    {{ page.text.isNotEmpty ? include('@snippets/section.twig') }}
+    {% for child in page.children.visible %}
+      {% include '@snippets/section.twig' with {section: child, title: child.title} %}
+    {% endfor %}
+  </main>
+
+  <script src="{{site.url}}/assets/highlight.pack.js" onload="hljs.initHighlightingOnLoad()"></script>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+Title: HTML5 doctype
+
+----
+Text:
+
+Enforce standards mode and more consistent rendering in every browser possible with this simple doctype at the beginning of every HTML page.
+
+----
+Example:
+
+```html
+<!DOCTYPE html>
+<html>
+    <!-- … -->
+</html>
+```

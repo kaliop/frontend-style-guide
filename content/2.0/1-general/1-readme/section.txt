@@ -1,0 +1,27 @@
+Title: Maintain a README file
+
+----
+Text:
+
+* Every project should have a `README.md` file (or just `README`).
+* Every developer should read this file, and update it if needed.
+* Use [Markdown syntax](http://commonmark.org/help/) for better readability in Bitbucket, GitHub, etc.
+
+This `README.md` should exist at the root of the repository and give information on:
+
+1. What the project is (client, site/app name)
+2. How to install the project on a developer’s machine
+3. How to run development tasks (e.g. import data, compile frontend assets)
+4. How to deploy the project
+
+If this documentation gets too big, you can break it into several files for specialized topics:
+
+```
+README.md
+doc/
+    INSTALL.md
+    FRONTEND.md
+    DEPLOYMENT.md
+```
+
+Finally, if you set up a project from a boilerplate, and that boilerplate already has its own `README` file, see if you can remove it or rename it. 

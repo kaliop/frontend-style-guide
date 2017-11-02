@@ -1,0 +1,53 @@
+Title: Semantic HTML
+
+----
+Text:
+
+- **Use the appropriate HTML element** to mark up content, not only `<div>` and `<span>`.
+- You can use a reference such as [htmlreference.io](http://htmlreference.io/) for details on available elements and attributes.
+
+### Links vs buttons
+
+The rule is simple:
+
+- If it goes somewhere else, it’s a `<a href="url">[…]</a>` element.
+- If it performs a custom JS action, it’s a `<button>[…]</button>` element.
+
+Avoid `<div onclick="[…]"></div>` or `<li onclick="[…]"></li>`: it can’t be focused with the keyboard, can’t be read by a screen reader, doesn’t work for SEO, etc.
+
+In single-page applications, if there are still multiple “pages” managed in JavaScript (with a router component), use `<a href="/my/route">[…]</a>` et make sure you router can handle it, and that the URL does change when the user clicks (`history.pushState(…)`).
+
+### Semantic groups
+
+In the `<body>` we try to group the page’s visible elements in 4 groups:
+
+```twig
+<body>
+  <header>
+    {# logo, search, etc. #}
+  </header>
+  <nav>
+    {# primary navigation #}
+  </nav>
+  <main>
+    {# page’s main content #}
+  </main>
+  <footer>
+    {# more info about the site, links, etc. #}
+  </footer>
+</body>
+```
+
+It’s also possible to put the `<nav>` inside the `<header>`.
+
+### Use the “search” role for the main search
+
+If the page offers a search form, use the ARIA `search` role on this form:
+
+```html
+<form role="search" action="/site-search">
+  […]
+</form>
+```
+
+Important: `role="search"` must only appear once in the page.

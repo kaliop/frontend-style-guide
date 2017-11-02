@@ -1,0 +1,28 @@
+Title: Single declarations
+
+----
+Text:
+
+A rule set with **a single declaration** *may* be written on a single line like this:
+
+`.selector { property: value; }`
+
+(Space after the opening brace and before the closing brace, semi-colon at the end.)
+
+----
+Example:
+
+```css
+/* Multiple declarations, one per line */
+.sprite {
+    display: inline-block;
+    width: 16px;
+    height: 15px;
+    background-image: url("../img/sprite.png");
+}
+
+/* Single declarations on one line */
+.icon         { background-position: 0 0; }
+.icon-home    { background-position: 0 -20px; }
+.icon-account { background-position: 0 -40px; }
+```

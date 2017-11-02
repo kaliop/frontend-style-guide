@@ -1,0 +1,42 @@
+Title: Property values
+
+----
+Text:
+
+### Dimensions
+
+*   Use `px`, `em` or `rem` dimensions. Do not use `cm`, `pt`, etc.
+*   Avoid specifying units when the value is zero
+
+### Colors
+
+*   Lowercase all hex values (`#30f8c4`)
+*   Use short hex values when possible (write `#fff`, not `#ffffff`).
+
+### Commas
+
+*   Comma-separated values: use a space after each comma
+*   No spaces inside `rgb()`, `rgba()`, `hsl()`, `hsla()`, or `rect()`
+
+----
+Example:
+
+```css
+/* Not ideal */
+.bad-values {
+    margin-top: 0px;
+    margin-bottom: 0.5em;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 1px 2px #CCC,inset 0 1px 0 #FFFFFF
+}
+```
+
+```css
+/* Better */
+.great-values {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    background-color: rgba(0,0,0,0.8);
+    box-shadow: 0 1px 2px #ccc, inset 0 1px 0 #fff;
+}
+```

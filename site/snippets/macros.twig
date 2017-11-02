@@ -1,0 +1,10 @@
+{# Replace specific escaped HTML elements in code samples #}
+{% macro fixcontent(html) %}
+{{- html | replace({
+  '&lt;del&gt;': '<del>',
+  '&lt;/del&gt;': '</del>',
+  '&lt;mark&gt;': '<mark>',
+  '&lt;/mark&gt;': '</mark>',
+  '[…]': '<span class="ellipsis">…</span>'
+}) | raw -}}
+{% endmacro %}

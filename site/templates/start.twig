@@ -1,0 +1,23 @@
+{% extends '@snippets/layout.twig' %}
+{% set bodyClasses = ['isStart'] %}
+
+{% block content %}
+
+  <header class="Header">
+    <div class="Header-inner">
+      <h1>{{ page.title }}</h1>
+      {% if page.subtitle %}<p>{{ page.subtitle }}</p>{% endif %}
+    </div>
+  </header>
+
+  {% if page.version.float < site.currentversion.float %}
+    {% include '@snippets/outdated.twig' %}
+  {% endif %}
+
+  <nav class="HomeGrid">
+    {% for chapter in page.children.visible %}
+      {% include '@snippets/blocktoc.twig' with {source: chapter} %}
+    {% endfor %}
+  </nav>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+Title: Debugging
+
+----
+Text:
+
+- In the browser’s Developer Tools, try to be familiar with both the Console and the JS Debugger (“Sources” in Chrome, “Debugger” in Firefox)
+- Remove `console.log` calls and `debugger` statements from your code before committing
+
+How to set breakpoints in your JS code:
+
+- [Firefox Developer Tools - Debugger](https://developer.mozilla.org/en-US/docs/Tools/Debugger)
+- [Chrome Developer Tools - Breakpoints](https://developers.google.com/web/tools/chrome-devtools/javascript/breakpoints)
+
+----
+Example:
+
+```js
+function potentiallyBuggyCode() {
+  […]
+  // don’t forget to remove this statement
+  <mark>debugger;</mark>
+}
+```

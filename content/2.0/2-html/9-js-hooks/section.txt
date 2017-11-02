@@ -1,0 +1,37 @@
+Title: JavaScript hooks
+
+----
+Text:
+
+When working with a separate HTML and JS codebase (vs working on JS-centric apps with React or Vue.js), we often need to query elements from the DOM to work on.
+
+If you’re working with BEM components (see [CSS – Components](../css#components)), target the component classes. For instance, with jQuery:
+
+```js
+$('.MyComponent').each(function(i, el) {
+  var container = $(el);
+  var items = container.find('.MyComponent-item');
+  […]
+});
+```
+
+Or use data attributes on elements. In the next example, the `MyModal` class is reponsible for styling, and the `data-modal` attribute is responsible for linking the button to show the modal.
+
+```twig
+<button data-modal="#forminfo-12">More info</button>
+<div class="MyModal" id="forminfo-12" hidden>
+  {# Inline modal’s content #}
+</div>
+```
+
+It’s also possible to write a small HTML API for your custom JS code, with options written as data attributes:
+
+```twig
+<div class="MyModal"
+  id="forminfo-12"
+  data-modal-size="medium"
+  data-modal-close="strict"
+  hidden>
+  […]
+</div>
+```

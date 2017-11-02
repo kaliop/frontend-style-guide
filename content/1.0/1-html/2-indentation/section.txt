@@ -1,0 +1,36 @@
+Title: Indentation
+
+----
+Text:
+
+Use soft tabs with four (4) spaces.
+
+As a rule, nested elements should be indented once. (It’s okay to be flexible here. Perfectly indenting HTML code can result in excessive and unmanageable indentation.)
+
+When working with templates:
+
+1.  Readability of your *source code* matters much more than perfect indentation in the HTML output.
+2.  In each template file, start from the leftmost side.
+
+----
+Example:
+
+```twig
+{# parent-template.html #}
+<div class="x">
+    <div class="y">
+        <div class="z">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</div>
+
+{# child-template.html #}
+{% extends 'parent-template.html' %}
+{% block content %}
+    <h1>{{ title }}</h1>
+    <div class="text">
+        {{ main_text }}
+    </div>
+{% endblock %}
+```

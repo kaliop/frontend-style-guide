@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width">
+  <title>JavaScript Guidelines - Frontend Style Guide by Kaliop</title>
+  <link rel="stylesheet" href="https://kaliop.github.io/frontend-style-guide/assets/styleguide.css">
+  <style>a[href^="http"]:not([href^="https://kaliop.github.io/frontend-style-guide/"])::after{content:" [➚]"}</style>
+  <link rel="icon" type="image/x-icon" href="https://kaliop.github.io/frontend-style-guide/assets/favicon.ico">
+</head>
+<body class="isChapter hasSidebar">
+
+  <header class="Header">
+    <div class="Header-inner">
+      <p class="Header-back"><a href="https://kaliop.github.io/frontend-style-guide/1.0/">Frontend Style Guide by Kaliop</a></p>
+      <h1>JavaScript Guidelines</h1>
+      <p></p>    </div>
+  </header>
+
+  <main>
+    <nav class="SideToc">
+      <div class="Outdated">
+  <p>
+    These guidelines are outdated.
+    Please use <a href="https://kaliop.github.io/frontend-style-guide/2.0/">Version 2.0</a> for new projects.
+  </p>
+</div>    <div class="SideToc-inner">
+    <p class="SideToc-back">
+      <a href="https://kaliop.github.io/frontend-style-guide/1.0/">◀ Style Guide 1.0</a>
+    </p>
+    <h2 class="SideToc-head" data-chapter="JavaScript Guidelines">
+      <span>Table of contents</span>
+    </h2>
+    <ul class="SideToc-list">
+              <li><a href="#syntax">JavaScript syntax</a></li>
+              <li><a href="#whitespace">White space</a></li>
+              <li><a href="#values">Variable values</a></li>
+              <li><a href="#var">Always use var</a></li>
+              <li><a href="#comments">Comments</a></li>
+              <li><a href="#functions">Functions</a></li>
+              <li><a href="#module">Use a module pattern</a></li>
+              <li><a href="#equality">Prefer strict equality</a></li>
+              <li><a href="#this">Avoid the `this` keyword if possible</a></li>
+              <li><a href="#console">Beyond console.log()</a></li>
+          </ul>
+  </div>
+</nav>    
+          <div class="Section" id="syntax">
+  <div class="Section-col">
+    <h2>JavaScript syntax</h2>    <ul>
+<li>Soft tabs, 4 spaces</li>
+<li>Semicolon at the end of statement</li>
+<li>Use <code>camelCase</code> for variables and functions,</li>
+<li><code>UPPERCASE_WITH_UNDERSCORES</code> for constants</li>
+<li>(and <code>TitleCase</code> for constructor functions or ES6 classes)</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-js">var MAX_ITEMS = 10;
+var data = getInitialData();
+
+function updateData(element, options) {
+    …
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="whitespace">
+  <div class="Section-col">
+    <h2>White space</h2>    <ul>
+<li>Use 1 blank line when you want breathing room inside a module or complex function</li>
+<li>Keep <code>{</code> on the current line, with one space before</li>
+<li>Indent the body of functions and the contents of blocks</li>
+<li>Do not use arbitrary numbers of spaces to align code</li>
+<li>Use spaces before and after operators (<code>=</code>, <code>+</code>, <code>%</code> etc.)</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-js">// Bad
+function doSomething()
+{
+    var DELAY=60*60*24;
+    var MAGIC_WORDS=['abracadabra',
+                     'hocus pocus'];
+    …
+}
+
+// Better
+function doSomething() {
+    var DELAY = 60 * 60 * 24;
+    var MAGIC_WORDS = [
+        'abracadabra',
+        'hocus pocus'
+    ];
+    …
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="values">
+  <div class="Section-col">
+    <h2>Variable values</h2>    <ul>
+<li>One <code>var</code> keyword for each variable (avoid <code>var x, y</code>)</li>
+<li>Literal syntax for object and array creation</li>
+<li>Prefer single quotes for strings</li>
+<li>Use the <code>+</code> operator for multiline strings</li>
+<li>Don’t use reserved words (<code>class</code>, <code>default</code>, <a href="http://es5.github.io/#x7.6.1">and more</a>) as variable or property names</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-js">// Good
+var myArray = [];
+var defaults = {
+    className: 'MyComponent'
+}
+var multiLine = 'Through the coppice and ' +
+    'the chaparral, the thickets thick with ' +
+    'mold, the bracken and the brier… ' +
+    'catchweed into the fold.';
+
+// Baaaaaaad
+var myArray = new Array(),
+    default = new Object();
+default.class = "MyComponent";
+var multiLine = "Through the coppice and \
+the chaparral, the thickets thick with \
+mold, the bracken and the brier… \
+catchweed into the fold.";</code></pre>
+  </div>
+  </div>          <div class="Section" id="var">
+  <div class="Section-col">
+    <h2>Always use var</h2>    <ul>
+<li><em>Always</em> use <code>var</code> to declare a variable.</li>
+</ul>
+<p>Variables declared with the <code>var</code> keyword are scoped to the function where they are declared.</p>
+<p>Variables declared <em>without any keyword</em> are added to the global object (<code>window</code>) in web browsers. <strong>This can create bugs in your scripts, or collisions with other scripts!</strong></p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-js">function doSomething() {
+    var test1 = 'Good.';
+    test2 = 'OH NO!'; // test2 is global!
+    console.log(window.test1); // undefined
+    console.log(window.test2); // 'OH NO!'
+}</code></pre>
+<pre><code class="language-js">// Variables in a block (for loop, if/else, etc.)
+// live in the parent scope
+for (var i=0; i&lt;10; i++) {
+    var test3 = 'Can you see me?';
+}
+console.log(i); // 10
+console.log(test3); // 'Can you see me?'</code></pre>
+  </div>
+  </div>          <div class="Section" id="comments">
+  <div class="Section-col">
+    <h2>Comments</h2>    <ul>
+<li>Use single-line comments (<code>// …</code>) to comment on the next line or the next few lines of code.</li>
+<li>Use a JSDoc-style comment (<code>/** … */</code>) before a complex function or a module.</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-js">/**
+ *  Make a header "sticky"
+ *  (Adds/removes a class when scrolling)
+ */
+function stickifyHeader(element, activeClass, offset) {
+
+    // We had a latency of 250ms but we had too many
+    // times when quick scrolling didn't update the
+    // header's state.
+    var LATENCY = 100;
+
+    …
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="functions">
+  <div class="Section-col">
+    <h2>Functions</h2>    <ul>
+<li>Create functions to organize your code</li>
+<li>Prefer function <em>declarations</em> to <em>anonymous function expressions</em></li>
+<li>It’s okay and often useful to declare functions inside a function</li>
+</ul>
+<h3>A note on scope</h3>
+<p>A JavaScript function declared inside a function will live in the parent function’s scope (unlike in PHP). It will also have access to all variables and functions defined in the parent function.</p>
+<pre><code class="language-js">function foo() {
+    var message = 'It works.';
+    function bar() {
+        return 'Awesome! ' + message;
+    }
+    return bar();
+}
+bar(); // ReferenceError: bar is not defined
+foo(); // 'Awesome! It works.'</code></pre>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-js">// Bad style
+var myFunction = function() { … }
+
+// Better
+function myFunction() { … }</code></pre>
+<pre><code class="language-js">/**
+ *  Using functions to organize code.
+ *  such code, much organized, wow
+ */
+function initUIModule() {
+    var KEYDOWN_DELAY = 100;
+
+    function startUp() {
+        …
+    }
+    function toggle(event) {
+        …
+    }
+    function manageKeyEvent(event) {
+        …
+    }
+
+    // Init stuff
+    startUp();
+    element1.on('click', toggle);
+    element2.on('keydown', manageKeyEvent);
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="module">
+  <div class="Section-col">
+    <h2>Use a module pattern</h2>    <p>Module patterns in JavaScript can be used for:</p>
+<ol>
+<li>organizing your code;</li>
+<li>making sure that the variables and functions for a given group of code are not declared in the global scope (i.e on the host object, <code>window</code>).</li>
+</ol>
+<p>The IIFE pattern (for <em>immediately invoked function expression</em>) can be used to create an anonymous function scope, so that your variables do not leak into the global namespace. There are different possible syntax. Prefer the one in the next example.</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-js">/**
+ * IIFE pattern
+ */
+;(function(){
+    // Your code goes here
+})();</code></pre>
+<pre><code class="language-js">/**
+ * IIFE pattern with global variables passed to
+ * the function. In practice, this means that we
+ * take `window.jQuery`, and use it locally as `$`.
+ */
+;(function($){
+    // Your code goes here
+})(jQuery);</code></pre>
+  </div>
+  </div>          <div class="Section" id="equality">
+  <div class="Section-col">
+    <h2>Prefer strict equality</h2>    <ul>
+<li>Prefer the <em>strict equals operator</em> (<code>===</code>)</li>
+<li>Avoid the <em>equals operator</em> (<code>==</code>)</li>
+<li>Be careful when using <code>if (x)</code>, <code>if (!x)</code>, <code>&amp;&amp;</code> or <code>||</code></li>
+</ul>
+<h3>Why prefer strict equals?</h3>
+<ul>
+<li><code>x === y</code> means “are <code>x</code> and <code>y</code> exactly the same?”</li>
+<li><code>x == y</code> means “compare <code>x</code> to <code>y</code>… are they equal after perhaps converting one or both of them to a different type according to very specific rules which few JavaScript developers know by heart?”</li>
+</ul>
+<p>Using <code>==</code> works alright when both terms of the comparison have the same type (two strings, two numbers, etc.). But if the types are different, JavaScript will do <a href="http://webreflection.blogspot.fr/2010/10/javascript-coercion-demystified.html">some funky conversions</a> that can be hard to predict if you don’t know all the rules.</p>
+<h3>Same thing for difference</h3>
+<p>Use <code>x !== y</code>, and avoid <code>x != y</code>.</p>
+<h3>Conversion to boolean</h3>
+<p>JavaScript will convert a value to a boolean type (same as using <code>Boolean(x)</code>) when you use <code>if (x)</code>, <code>if (!x)</code>, <code>x &amp;&amp; …</code>, <code>x || …</code>, or <code>x ? …</code>. Here’s how conversion to boolean works:</p>
+<ul>
+<li>Only a few values will convert to <code>false</code>: the number <code>0</code>, the empty string <code>''</code>, <code>false</code>, <code>undefined</code> and <code>null</code>.</li>
+<li>Everything else will convert to <code>true</code>. This includes negative numbers, empty objects and empty arrays.</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-js">// Working with an element like this:
+// &lt;div aria-hidden="false"&gt;&lt;/div&gt;
+var isHidden = div.getAttribute('aria-hidden');
+
+console.log(isHidden); // 'false'
+console.log(Boolean(isHidden)); // true
+
+// Now, guess which is better?
+if (isHidden) { … }
+if (isHidden === 'true') { … }</code></pre>
+<pre><code class="language-js">// Broken check for default values!
+function doSomething(limit, recursive) {
+    limit = limit || 10; // Can’t do limit=0
+    recursive = recursive || true; // BROKEN
+    …
+}
+// Fixed!
+function doSomething(limit, recursive) {
+    if (typeof limit !== 'number') { limit = 10 }
+    if (typeof recursive !== 'boolean') { recursive = true }
+    …
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="this">
+  <div class="Section-col">
+    <h2>Avoid the `this` keyword if possible</h2>    <p>The <code>this</code> keyword can be <a href="http://unschooled.org/2012/03/understanding-javascript-this/">different things, depending on context</a>. Knowing what <code>this</code> refers to in different contexts is not so hard, but it can confuse beginners.</p>
+<ul>
+<li>Don’t use <code>this</code> if you can use something else.</li>
+<li>Use <code>event.target</code> and <code>event.currentTarget</code> in event handlers.</li>
+<li>If you need to use <code>this</code> and are not sure what it refers to in the context where you’re writing your code, use <code>console.log(this)</code> to get a better idea. (Or add a breakpoint in the JS debugger.)</li>
+</ul>
+<h3>jQuery</h3>
+<p>Some jQuery methods, such as <code>$(x).each()</code>, change the value of <code>this</code> in the callback function to the current HTML element in the loop. </p>
+<pre><code class="language-js">$('p').each(function() {
+    // this is a DOM element (a paragraph)
+    this.setAttribute('title', 'Hello!');
+    // And $(this) creates a jQuery object
+    // wrapping the paragraph
+    $(this).attr('title', 'Hello!');
+});</code></pre>
+<p>You could rely on this, but if you want your code to be more explicit (and more JavaScript-like, rather than jQuery-like), use named arguments and don’t use <code>this</code>.</p>
+<pre><code class="language-js">$('p').each(function(index, element) {
+    $(element).attr('title', 'Hello!');
+});</code></pre>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-js">// Event handler: use `event.currentTarget`
+$('button').on('click', function(event) {
+    console.log(event.currentTarget === this); // true
+    // You could write:
+    $(this).addClass('clicked');
+    // But please be explicit instead:
+    $(event.currentTarget).addClass('clicked');
+});</code></pre>
+<pre><code class="language-js">// Use explicit arguments with jQuery.each (and other methods)
+someElements.each(function(index, element) {
+    // Let’s look at what we’re working with
+    console.log(index, element);
+    // Do something now with element or $(element)
+    …
+});</code></pre>
+  </div>
+  </div>          <div class="Section" id="console">
+  <div class="Section-col">
+    <h2>Beyond console.log()</h2>    <ul>
+<li>Make sure to remove all <code>console.log()</code> calls from your code before committing.</li>
+<li>Browsers have more advanced JS debugging tools for inspecting and debugging JS code (e.g. “Sources” tab in Chrome Devtools, “Debugger” in Firefox Devtools). They’re really cool, so you should learn to use them.</li>
+</ul>
+  </div>
+    </div>      </main>
+
+  <script src="https://kaliop.github.io/frontend-style-guide/assets/highlight.pack.js" onload="hljs.initHighlightingOnLoad()"></script>
+
+</body>
+</html>
