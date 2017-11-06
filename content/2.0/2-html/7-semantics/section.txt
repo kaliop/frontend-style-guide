@@ -15,7 +15,7 @@ The rule is simple:
 
 Avoid `<div onclick="[…]"></div>` or `<li onclick="[…]"></li>`: it can’t be focused with the keyboard, can’t be read by a screen reader, doesn’t work for SEO, etc.
 
-In single-page applications, if there are still multiple “pages” managed in JavaScript (with a router component), use `<a href="/my/route">[…]</a>` et make sure you router can handle it, and that the URL does change when the user clicks (`history.pushState(…)`).
+Always use real links (`<a href="url">…</a>`) to navigate between pages, including for navigating between views in “single-page” applications. It’s better for accessibility, SEO, bookmarking and sharing.
 
 ### Semantic groups
 

@@ -222,7 +222,7 @@
 <li>If it performs a custom JS action, it’s a <code>&lt;button&gt;<span class="ellipsis">…</span>&lt;/button&gt;</code> element.</li>
 </ul>
 <p>Avoid <code>&lt;div onclick="<span class="ellipsis">…</span>"&gt;&lt;/div&gt;</code> or <code>&lt;li onclick="<span class="ellipsis">…</span>"&gt;&lt;/li&gt;</code>: it can’t be focused with the keyboard, can’t be read by a screen reader, doesn’t work for SEO, etc.</p>
-<p>In single-page applications, if there are still multiple “pages” managed in JavaScript (with a router component), use <code>&lt;a href="/my/route"&gt;<span class="ellipsis">…</span>&lt;/a&gt;</code> et make sure you router can handle it, and that the URL does change when the user clicks (<code>history.pushState(…)</code>).</p>
+<p>Always use real links (<code>&lt;a href="url"&gt;…&lt;/a&gt;</code>) to navigate between pages, including for navigating between views in “single-page” applications. It’s better for accessibility, SEO, bookmarking and sharing.</p>
 <h3>Semantic groups</h3>
 <p>In the <code>&lt;body&gt;</code> we try to group the page’s visible elements in 4 groups:</p>
 <pre><code class="language-twig">&lt;body&gt;
