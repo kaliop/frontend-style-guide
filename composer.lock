@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5ec1f3b5d408358481b7527d3152beac",
+    "content-hash": "c6d979387a6cb7dba63ad7869807d948",
     "packages": [
         {
             "name": "erusev/parsedown",
@@ -155,16 +155,16 @@
         },
         {
             "name": "fvsch/kirby-staticbuilder",
-            "version": "v2.1.0",
+            "version": "v3.0.0-beta.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fvsch/kirby-staticbuilder.git",
-                "reference": "fac33e556a4c960fbf08bb4fc24cd1ca9fab0a50"
+                "reference": "d4754eaa038e12aa4d0eda8c90b56e58e8d99b64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fvsch/kirby-staticbuilder/zipball/fac33e556a4c960fbf08bb4fc24cd1ca9fab0a50",
-                "reference": "fac33e556a4c960fbf08bb4fc24cd1ca9fab0a50",
+                "url": "https://api.github.com/repos/fvsch/kirby-staticbuilder/zipball/d4754eaa038e12aa4d0eda8c90b56e58e8d99b64",
+                "reference": "d4754eaa038e12aa4d0eda8c90b56e58e8d99b64",
                 "shasum": ""
             },
             "require": {
@@ -173,7 +173,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Kirby\\StaticBuilder\\": "src/"
+                    "KirbyStaticBuilder\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -188,7 +188,7 @@
             ],
             "description": "Static HTML exporter for Kirby CMS",
             "homepage": "https://github.com/fvsch/kirby-staticbuilder/",
-            "time": "2016-12-16T19:00:12+00:00"
+            "time": "2017-11-12T14:45:31+00:00"
         },
         {
             "name": "fvsch/kirby-twig",
@@ -484,7 +484,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "fvsch/kirby-staticbuilder": 10
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

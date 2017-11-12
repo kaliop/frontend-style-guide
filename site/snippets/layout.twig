@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default('en') }}">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width">
   <title>{{ page.htmltitle | default(page.title ~ ' - ' ~ site.titlesuffix) }}</title>
-  <link rel="stylesheet" href="{{ site.url }}/assets/styleguide.css">
-  <style>a[href^="http"]:not([href^="{{ site.url }}"])::after{content:" [➚]"}</style>
-  <link rel="icon" type="image/x-icon" href="{{ site.url }}/assets/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="{{ url('/assets/favicon.ico') }}">
+  <link rel="stylesheet" href="{{ url('assets/styleguide.css') }}">
 </head>
 <body{% if bodyClasses|default([]) %} class="{{ bodyClasses|join(' ') }}"{% endif %}>
 {% block content %}{% endblock %}
