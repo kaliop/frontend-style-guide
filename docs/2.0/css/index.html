@@ -2,18 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width">
   <title>CSS &amp; Sass - Frontend Style Guide by Kaliop</title>
-  <link rel="stylesheet" href="https://kaliop.github.io/frontend-style-guide/assets/styleguide.css">
-  <style>a[href^="http"]:not([href^="https://kaliop.github.io/frontend-style-guide/"])::after{content:" [➚]"}</style>
-  <link rel="icon" type="image/x-icon" href="https://kaliop.github.io/frontend-style-guide/assets/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="./../../assets/favicon.ico">
+  <link rel="stylesheet" href="./../../assets/styleguide.css">
 </head>
 <body class="isChapter hasSidebar">
 
   <header class="Header">
     <div class="Header-inner">
-      <p class="Header-back"><a href="https://kaliop.github.io/frontend-style-guide/2.0/">Frontend Style Guide by Kaliop</a></p>
+      <p class="Header-back"><a href="./../">Frontend Style Guide by Kaliop</a></p>
       <h1>CSS &amp; Sass</h1>
       <p></p>    </div>
   </header>
@@ -22,7 +20,7 @@
     <nav class="SideToc">
     <div class="SideToc-inner">
     <p class="SideToc-back">
-      <a href="https://kaliop.github.io/frontend-style-guide/2.0/">◀ Style Guide 2.0</a>
+      <a href="./../">◀ Style Guide 2.0</a>
     </p>
     <h2 class="SideToc-head" data-chapter="CSS &amp; Sass">
       <span>Table of contents</span>
@@ -33,7 +31,7 @@
               <li><a href="#units">Units: pixels, ems, etc.</a></li>
               <li><a href="#important">Avoid <code>!important</code></a></li>
               <li><a href="#order">Property order</a></li>
-              <li><a href="#fonts">(Web) Fonts</a></li>
+              <li><a href="#fonts">Fonts</a></li>
               <li><a href="#selectors">Selectors</a></li>
               <li><a href="#utilities">Utility classes</a></li>
               <li><a href="#components">Components</a></li>
@@ -233,24 +231,26 @@ h1 {
   </div>
   </div>          <div class="Section" id="fonts">
   <div class="Section-col">
-    <h2>(Web) Fonts</h2>    <h3>Declare fallbacks</h3>
-<p>Always declare a generic family name at the end of a <code>font-family</code> declaration: <code>serif</code>, <code>sans-serif</code> or <code>monospace</code>. If possible, also declare system fonts that are close in style to the web font you’re using.</p>
+    <h2>Fonts</h2>    <h3>Declare fallbacks</h3>
+<p>Always declare a generic family name at the end of a <code>font-family</code> declaration: <code>serif</code>, <code>sans-serif</code> or <code>monospace</code>.</p>
+<p>If possible, also declare system fonts that are close in style to the web font you’re using:</p>
 <pre><code class="language-css">body {
   font-family: Fira Sans, Arial, sans-serif;
 }</code></pre>
 <h3>Using web fonts</h3>
 <ul>
-<li>Fonts are copyrighted; make sure you can use each one.</li>
-<li>Host font files locally (<a href="https://google-webfonts-helper.herokuapp.com/">download from Google Fonts</a>).</li>
-<li>Format: use WOFF and WOFF2, ignore older formats.</li>
-<li>Declare fonts weights using the same family name, e.g. <code>"Lato"</code> (not <code>"Lato Bold"</code>, <code>"Lato Heavy"</code>, etc.).</li>
+<li>Always get licenses for commercial fonts.</li>
+<li>Host fonts locally (see: <a href="https://google-webfonts-helper.herokuapp.com/">Google Fonts Helper</a>).</li>
+<li>Use WOFF2 and WOFF, ignore older formats.</li>
+<li>Use a single family name for all the <code>@font-face</code> blocks describing a font family.</li>
 </ul>
 <h3>Web fonts make websites slow!</h3>
-<p>In typical scenarios, browsers will first request your CSS, then discover that they need web fonts, then request those font files. Only then (after two round-trips) will they start to show text on the screen!</p>
-<p>What can you do?</p>
+<p>Typically, font files are loaded <em>after</em> stylesheets, and browsers can render invisible text until fonts are loaded. A few options for speeding things up:</p>
 <ul>
-<li>Limit the number of variants (weight and style) you use as much as possible.</li>
-<li>Can preload the one or two most important WOFF2 files?</li>
+<li>Use system fonts instead.</li>
+<li>Use only a few weights and styles.</li>
+<li>Tell the browser to render the text even if fonts are not loaded yet, using the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display">font-display property</a>.</li>
+<li>Preload the most important WOFF2 file(s).</li>
 </ul>
   </div>
       <div class="Section-col Section-col--example">
@@ -258,6 +258,7 @@ h1 {
   font-family: "My Cool Typeface";
   font-style: normal;
   font-weight: 400;
+  font-display: auto;
   src: url("/fonts/mycooltyp.woff2") format("woff2"),
     url("/fonts/mycooltyp.woff") format("woff");
 }
@@ -266,6 +267,8 @@ h1 {
   font-family: "My Cool Typeface";
   font-style: normal;
   font-weight: 800;
+  /* show the fallback font while the font file is loading */
+  font-display: fallback;
   src: url("/fonts/mycooltyp-heavy.woff2") format("woff2"),
     url("/fonts/mycooltyp-heavy.woff") format("woff");
 }
@@ -273,6 +276,10 @@ h1 {
 body {
   font-family: My Cool Typeface, Georgia, serif;
 }</code></pre>
+<pre><code class="language-html">&lt;head&gt;
+  &lt;link rel="preload" as="font" type="font/woff2"
+    src="/fonts/mycooltyp.woff2"&gt;
+&lt;/head&gt;</code></pre>
   </div>
   </div>          <div class="Section" id="selectors">
   <div class="Section-col">
@@ -554,7 +561,7 @@ $header-color-link-active: #faa !default;
   </div>
   </div>      </main>
 
-  <script src="https://kaliop.github.io/frontend-style-guide/assets/highlight.pack.js" onload="hljs.initHighlightingOnLoad()"></script>
+  <script src="./../../assets/highlight.pack.js" onload="hljs.initHighlightingOnLoad()"></script>
 
 </body>
 </html>

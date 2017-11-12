@@ -135,7 +135,7 @@ a:focus {
 }
 
 /* Mark external links; all internal links are relative */
-a.external::after {
+a[href^="http"]::after {
   content:" [➚]";
 }
 
@@ -215,6 +215,7 @@ blockquote {
   font-size: 1.3rem;
   color: #fff;
   background-color: #002f3c;
+  background-image: linear-gradient(to top, #002f3c, #00242f);
 }
 
 /* And full height on error pages */
