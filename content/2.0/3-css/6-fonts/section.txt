@@ -1,11 +1,13 @@
-Title: (Web) Fonts
+Title: Fonts
 
 ----
 Text:
 
 ### Declare fallbacks
 
-Always declare a generic family name at the end of a `font-family` declaration: `serif`, `sans-serif` or `monospace`. If possible, also declare system fonts that are close in style to the web font you’re using.
+Always declare a generic family name at the end of a `font-family` declaration: `serif`, `sans-serif` or `monospace`.
+
+If possible, also declare system fonts that are close in style to the web font you’re using:
 
 ```css
 body {
@@ -15,19 +17,19 @@ body {
 
 ### Using web fonts
 
-- Fonts are copyrighted; make sure you can use each one.
-- Host font files locally ([download from Google Fonts](https://google-webfonts-helper.herokuapp.com/)).
-- Format: use WOFF and WOFF2, ignore older formats.
-- Declare fonts weights using the same family name, e.g. `"Lato"` (not `"Lato Bold"`, `"Lato Heavy"`, etc.).
+- Always get licenses for commercial fonts.
+- Host fonts locally (see: [Google Fonts Helper](https://google-webfonts-helper.herokuapp.com/)).
+- Use WOFF2 and WOFF, ignore older formats.
+- Use a single family name for all the `@font-face` blocks describing a font family.
 
 ### Web fonts make websites slow!
 
-In typical scenarios, browsers will first request your CSS, then discover that they need web fonts, then request those font files. Only then (after two round-trips) will they start to show text on the screen!
+Typically, font files are loaded *after* stylesheets, and browsers can render invisible text until fonts are loaded. A few options for speeding things up:
 
-What can you do?
-
-- Limit the number of variants (weight and style) you use as much as possible.
-- Can preload the one or two most important WOFF2 files?
+- Use system fonts instead.
+- Use only a few weights and styles.
+- Tell the browser to render the text even if fonts are not loaded yet, using the [font-display property](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display).
+- Preload the most important WOFF2 file(s).
 
 ----
 Example:
@@ -37,6 +39,7 @@ Example:
   font-family: "My Cool Typeface";
   font-style: normal;
   font-weight: 400;
+  font-display: auto;
   src: url("/fonts/mycooltyp.woff2") format("woff2"),
     url("/fonts/mycooltyp.woff") format("woff");
 }
@@ -45,6 +48,8 @@ Example:
   font-family: "My Cool Typeface";
   font-style: normal;
   font-weight: 800;
+  /* show the fallback font while the font file is loading */
+  font-display: fallback;
   src: url("/fonts/mycooltyp-heavy.woff2") format("woff2"),
     url("/fonts/mycooltyp-heavy.woff") format("woff");
 }
@@ -52,4 +57,11 @@ Example:
 body {
   font-family: My Cool Typeface, Georgia, serif;
 }
-``` 
+```
+
+```html
+<head>
+  <link rel="preload" as="font" type="font/woff2"
+    src="/fonts/mycooltyp.woff2">
+</head>
+```
