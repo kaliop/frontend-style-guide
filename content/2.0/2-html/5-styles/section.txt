@@ -3,26 +3,6 @@ Title: Adding styles
 ----
 Text:
 
-### Request an external stylesheet
-
-To add styles to a page, we generally write one (or sometimes a few) stylesheet(s) and link to it from the HTML.
-
-Use `<link rel="stylesheet" href="/url/to/styles.css">` in the page’s `<head>` to request an external stylesheet.
-
-Notes:
-
-- We want to load only one stylesheet (or 2–3 max).
-- For each stylesheet, the browser will make a HTTP request, and block rendering the page until *all* the CSS arrives!
-
-### Inline stylesheets
-
-More rarely, we can write some of the styles directly in the HTML page, using `<style>/* My styles */</style>`
-
-This can be useful for:
- 
-- Some web performance techniques (“critical CSS”).
-- Styles generated depending on user preferences.
-
 ### Viewport meta tag
 
 For responsive sites, make sure you have this tag in your `<head>`:
@@ -36,6 +16,26 @@ Some sites add more parameters to the `content` value:
 - `initial-scale=1`: this should not be necessary anymore.
 - `maximum-scale=1`: this breaks accessibility! Avoid it.
 
+### External stylesheets
+
+To add styles to a page, we generally write one (or sometimes a few) stylesheet(s) and link to it from the HTML.
+
+Use `<link rel="stylesheet" href="/url/to/styles.css">` in the page’s `<head>` to request an external stylesheet.
+
+Notes:
+
+- We want to load only one stylesheet (or 2–3 at most).
+- Browsers will make a request for each stylesheet, and block rendering the page until *all* the CSS arrives!
+
+### Inline stylesheets
+
+More rarely, we can write some of the styles directly in the HTML page, using `<style>/* My styles */</style>`
+
+This can be useful for:
+ 
+- Some web performance techniques (“critical CSS”).
+- Styles generated depending on user preferences.
+
 ----
 Example:
 
@@ -43,7 +43,7 @@ Example:
 <head>
   […]
   <meta name="viewport" content="width=device-width">
-  <style>.icon{width:1em;height:1em}</style>
   <link rel="stylesheet" href="/dist/main.css">
+  <style>/* Inline styles */</style>
 </head>
 ```

@@ -27,6 +27,7 @@ Example:
 <head>
   <meta charset="UTF-8">
   <title>Page title</title>
+  <meta name="viewport" content="width=device-width">
 </head>
 <body>
   <!-- Visible content -->

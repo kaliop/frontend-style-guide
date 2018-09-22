@@ -37,10 +37,8 @@ For links and buttons, this can look like:
 </a>
 
 <button>
-  <svg class="icon">
-    <title>Subscribe Now</title>
-    <path d="[…]"></path>
-  </svg>
+  <svg class="icon" aria-hidden="true" focusable="false">[…]</svg>
+  <span class="sr-only">Subscribe Now</span>
 </button>
 ```
 
@@ -48,8 +46,12 @@ If you can’t add alt text to the image or icon itself, you can use `aria-label
 
 ```html
 <a href="[…]" aria-label="Subscribe Now">
-  <i data-icon="letter"></i>
+  <i data-icon="letter" aria-hidden="true"></i>
 </a>
+
+<button aria-label="Subscribe Now">
+  <svg class="icon" aria-hidden="true" focusable="false">[…]</svg>
+</button>
 ```
 
 Finally, if the text is already present in context, it’s often better to have *empty* alt text:
@@ -61,7 +63,7 @@ Finally, if the text is already present in context, it’s often better to have 
 </a>
 
 <button>
-  <svg class="icon" aria-hidden="true"><path d="[…]"></path></svg>
+  <svg class="icon" aria-hidden="true" focusable="false">[…]</svg>
   Subscribe Now
 </button>
 ```

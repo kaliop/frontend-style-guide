@@ -61,7 +61,8 @@ body {
 
 ```html
 <head>
-  <link rel="preload" as="font" type="font/woff2"
-    src="/fonts/mycooltyp.woff2">
+  <link rel="preload" as="font"
+    type="font/woff2"
+    href="/fonts/mycooltyp.woff2">
 </head>
 ```

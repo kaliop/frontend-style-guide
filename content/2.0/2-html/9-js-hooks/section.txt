@@ -26,7 +26,7 @@ Or use data attributes on elements. In the next example, the `MyModal` class is 
 
 It’s also possible to write a small HTML API for your custom JS code, with options written as data attributes:
 
-```twig
+```html
 <div class="MyModal"
   id="forminfo-12"
   data-modal-size="medium"
