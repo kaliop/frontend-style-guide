@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>General Rules - Frontend Style Guide by Kaliop</title>
+  <link rel="icon" type="image/x-icon" href="./../../assets/favicon.ico">
+  <link rel="stylesheet" href="./../../assets/styleguide.css">
+</head>
+<body class="isChapter hasSidebar">
+
+  <header class="Header">
+    <div class="Header-inner">
+      <p class="Header-back"><a href="./../">Frontend Style Guide by Kaliop</a></p>
+      <h1>General Rules</h1>
+      <p></p>    </div>
+  </header>
+
+  <main>
+    <nav class="SideToc">
+    <div class="SideToc-inner">
+    <p class="SideToc-back">
+      <a href="./../">◀ Style Guide 2.0</a>
+    </p>
+    <h2 class="SideToc-head" data-chapter="General Rules">
+      <span>Table of contents</span>
+    </h2>
+    <ul class="SideToc-list">
+              <li><a href="#readme">Maintain a README file</a></li>
+              <li><a href="#editorconfig">Use EditorConfig</a></li>
+              <li><a href="#dry">Use the DRY principle</a></li>
+              <li><a href="#clean">Clean up your code</a></li>
+          </ul>
+  </div>
+</nav>    
+          <div class="Section" id="readme">
+  <div class="Section-col">
+    <h2>Maintain a README file</h2>    <ul>
+<li>Every project should have a <code>README.md</code> file (or just <code>README</code>).</li>
+<li>Every developer should read this file, and update it if needed.</li>
+<li>Use <a href="http://commonmark.org/help/">Markdown syntax</a> for better readability in Bitbucket, GitHub, etc.</li>
+</ul>
+<p>This <code>README.md</code> should exist at the root of the repository and give information on:</p>
+<ol>
+<li>What the project is (client, site/app name)</li>
+<li>How to install the project on a developer’s machine</li>
+<li>How to run development tasks (e.g. import data, compile frontend assets)</li>
+<li>How to deploy the project</li>
+</ol>
+<p>If this documentation gets too big, you can break it into several files for specialized topics:</p>
+<pre><code>README.md
+doc/
+    INSTALL.md
+    FRONTEND.md
+    DEPLOYMENT.md</code></pre>
+<p>Finally, if you set up a project from a boilerplate, and that boilerplate already has its own <code>README</code> file, see if you can remove it or rename it.</p>
+  </div>
+    </div>          <div class="Section" id="editorconfig">
+  <div class="Section-col">
+    <h2>Use EditorConfig</h2>    <p>Frontend code files should be:</p>
+<ul>
+<li>encoded as UTF-8,</li>
+<li>with <code>LF</code> end of lines,</li>
+<li>and spaces for indents.</li>
+</ul>
+<p>We use the <a href="http://editorconfig.org/">EditorConfig format</a> to harmonize indentation and file format in a project. For this to work, we need two things:</p>
+<ol>
+<li>A <code>.editorconfig</code> file at the root of each project.</li>
+<li>Your editor or IDE should have an EditorConfig plugin.</li>
+</ol>
+<p>Please verify both points now if you’re not sure.<br />
+There are EditorConfig plugins for most code editors:</p>
+<ul>
+<li><a href="https://plugins.jetbrains.com/plugin/7294-editorconfig">PhpStorm</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig">VS Code</a></li>
+<li><a href="https://atom.io/packages/editorconfig">Atom</a></li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <p>Here’s a reference <code>.editorconfig</code> file for new projects:</p>
+<pre><code class="language-ini"># http://EditorConfig.org
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+
+[*.{php,py}]
+indent_size = 4</code></pre>
+  </div>
+  </div>          <div class="Section" id="dry">
+  <div class="Section-col">
+    <h2>Use the DRY principle</h2>    <p>Don’t Repeat Yourself: avoid code that is very similar in different places in the project.</p>
+<p>In particular, avoid copying and pasting code in different places! Duplicated code is hard to maintain: you have to do the changes in 2, 5 or 10 places, and test each change.</p>
+<ul>
+<li>Templating: use includes, partials, macros…</li>
+<li>Styles: use components, utility classes, mixins…</li>
+<li>JavaScript: use functions, modules, components…</li>
+</ul>
+<p><strong>This is not an absolute rule!</strong> For example, if you need to make a variant that can evolve without impacting the first feature, some copy-pasting can be justified.</p>
+  </div>
+    </div>          <div class="Section" id="clean">
+  <div class="Section-col">
+    <h2>Clean up your code</h2>    <p>Keep the codebase short and avoid unused code.</p>
+<ul>
+<li>Remove unused files, failed experiments, etc.</li>
+<li>HTML: avoid unnecessary elements and attributes</li>
+<li>CSS: avoid unused selectors, and useless properties</li>
+<li>JS, PHP, etc.: look out for unused variables and functions</li>
+</ul>
+  </div>
+    </div>      </main>
+
+  <script src="./../../assets/highlight.pack.js" onload="hljs.initHighlightingOnLoad()"></script>
+
+</body>
+</html>

@@ -1,0 +1,633 @@
+/*! Kaliop Frontend Style Guide */
+
+/*! system-font.css v1.1.0 | CC0-1.0 License | github.com/jonathantneal/system-font-face */
+
+@font-face {
+  font-family: system-ui;
+  font-style: normal;
+  font-weight: 300;
+  src: local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"),
+    local(".LucidaGrandeUI"), local("Segoe UI Light"), local("Ubuntu Light"),
+    local("Roboto-Light"), local("DroidSans"), local("Tahoma");
+}
+
+@font-face {
+  font-family: system-ui;
+  font-style: italic;
+  font-weight: 300;
+  src: local(".SFNSText-LightItalic"),
+    local(".HelveticaNeueDeskInterface-Italic"), local(".LucidaGrandeUI"),
+    local("Segoe UI Light Italic"), local("Ubuntu Light Italic"),
+    local("Roboto-LightItalic"), local("DroidSans"), local("Tahoma");
+}
+
+@font-face {
+  font-family: system-ui;
+  font-style: normal;
+  font-weight: 400;
+  src: local(".SFNSText-Regular"), local(".HelveticaNeueDeskInterface-Regular"),
+    local(".LucidaGrandeUI"), local("Segoe UI"), local("Ubuntu"),
+    local("Roboto-Regular"), local("DroidSans"), local("Tahoma");
+}
+
+@font-face {
+  font-family: system-ui;
+  font-style: italic;
+  font-weight: 400;
+  src: local(".SFNSText-Italic"), local(".HelveticaNeueDeskInterface-Italic"),
+    local(".LucidaGrandeUI"), local("Segoe UI Italic"), local("Ubuntu Italic"),
+    local("Roboto-Italic"), local("DroidSans"), local("Tahoma");
+}
+
+@font-face {
+  font-family: system-ui;
+  font-style: normal;
+  font-weight: 500;
+  src: local(".SFNSText-Medium"), local(".HelveticaNeueDeskInterface-MediumP4"),
+    local(".LucidaGrandeUI"), local("Segoe UI Semibold"), local("Ubuntu Medium"),
+    local("Roboto-Medium"), local("DroidSans-Bold"), local("Tahoma Bold");
+}
+
+@font-face {
+  font-family: system-ui;
+  font-style: italic;
+  font-weight: 500;
+  src: local(".SFNSText-MediumItalic"),
+    local(".HelveticaNeueDeskInterface-MediumItalicP4"),
+    local(".LucidaGrandeUI"), local("Segoe UI Semibold Italic"),
+    local("Ubuntu Medium Italic"), local("Roboto-MediumItalic"),
+    local("DroidSans-Bold"), local("Tahoma Bold");
+}
+
+@font-face {
+  font-family: system-ui;
+  font-style: normal;
+  font-weight: 700;
+  src: local(".SFNSText-Bold"), local(".HelveticaNeueDeskInterface-Bold"),
+    local(".LucidaGrandeUI"), local("Segoe UI Bold"), local("Ubuntu Bold"),
+    local("Roboto-Bold"), local("DroidSans-Bold"), local("Tahoma Bold");
+}
+
+@font-face {
+  font-family: system-ui;
+  font-style: italic;
+  font-weight: 700;
+  src: local(".SFNSText-BoldItalic"),
+    local(".HelveticaNeueDeskInterface-BoldItalic"), local(".LucidaGrandeUI"),
+    local("Segoe UI Bold Italic"), local("Ubuntu Bold Italic"),
+    local("Roboto-BoldItalic"), local("DroidSans-Bold"), local("Tahoma Bold");
+}
+
+/*! Scaffolding and type */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  --block-h-padding: 1.4rem;
+  --block-v-padding: 2rem;
+  font-size: 100%;
+  overflow-x: hidden;
+}
+
+@media (min-width: 700px) {
+  html {
+    --block-h-padding: 1.8rem;
+    --block-v-padding: 2.4rem;
+  }
+}
+
+@media (min-width: 1360px) {
+  html {
+    font-size: 106.25%;
+  }
+}
+
+@media (min-width: 1600px) {
+  html {
+    font-size: 112.5%;
+    --block-h-padding: 2.2rem;
+    --block-v-padding: 2.8rem;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, arial, sans-serif;
+  line-height: 1.5;
+  color: #2c2a29;
+  background-color: #efefef;
+}
+
+a {
+  color: #08c;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: solid 4px rgba(50, 180, 180, 0.75);
+  outline-offset: -1px;
+}
+
+/* Mark external links; all internal links are relative */
+a[href^="http"]::after {
+  content:" [➚]";
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: normal;
+  color: #2a2a2a;
+}
+
+* + h2,
+* + h3,
+* + h4 {
+  margin-top: 2rem;
+}
+
+h1 {
+  font-size: 2.2rem;
+  letter-spacing: -.025em;
+  line-height: 1.1;
+}
+
+h2 {
+  margin-bottom: 1em;
+  font-size: 1.6rem;
+  letter-spacing: -.025em;
+  line-height: 1.2;
+}
+
+h3 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+@media (min-width: 700px) {
+  h1 {
+    font-size: 2.4rem;
+  }
+  h2 {
+    font-size: 1.7rem;
+  }
+}
+
+p,
+ul,
+ol,
+blockquote {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+blockquote {
+  position: relative;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  font-style: italic;
+  color: #7a7a7a;
+}
+
+/*! Block utility class */
+
+.block {
+  padding: var(--block-v-padding) var(--block-h-padding);
+}
+
+/*! Header component */
+
+.Header {
+  display: table;
+  width: 100%;
+  height: 50vh;
+  font-size: 1.3rem;
+  color: #fff;
+  background-color: #002f3c;
+  background-image: linear-gradient(to top, #002f3c, #00242f);
+}
+
+/* And full height on error pages */
+.Header--error {
+  height: 100vh;
+  background-color: #D60D43;
+}
+
+.Header-inner {
+  display: table-cell;
+  padding: 3rem var(--block-h-padding);
+  vertical-align: middle;
+  text-align: center;
+}
+
+@media (min-width: 38em) {
+  .Header-inner {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+.Header p {
+  margin-top: 0;
+}
+
+.Header h1 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.Header a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Link back to home page */
+
+.Header-back {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.Header-back a {
+  display: inline-block;
+  padding: 0.5em 1em;
+  border: solid 1px #fff;
+  border-radius: 0.1em;
+  text-decoration: none;
+}
+
+.Header-back a:hover,
+.Header-back a:focus,
+.Header-back a:active {
+  color: #e95d1e;
+  background-color: #fff;
+  text-decoration: none;
+}
+
+/*! Table of contents: as blocks */
+
+.BlockToc {
+  padding: var(--block-v-padding) var(--block-h-padding);
+  background-color: #efefef;
+}
+
+.BlockToc h2 {
+  margin-left: -0.5rem;
+}
+
+.BlockToc h2 a {
+  display: block;
+  padding: 0.2rem 0.5rem;
+  color: inherit;
+}
+
+.BlockToc-list {
+  margin-left: -0.5rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.BlockToc-list a {
+  display: block;
+  padding: 0.4rem 0.5rem;
+  line-height: 1.4;
+  color: inherit;
+}
+
+/*! Table of contents: as sidebar */
+
+.SideToc {
+  color: #fff;
+  background-color: #002f3c;
+}
+
+.SideToc-inner {
+  padding: var(--block-v-padding) var(--block-h-padding);
+}
+
+.SideToc-back {
+  display: none;
+}
+
+.SideToc-head {
+  margin: 0;
+  font-size: 90%;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: inherit;
+  opacity: 0.6;
+}
+
+.SideToc-inner a {
+  display: block;
+  padding: 0.4rem 0.5rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+}
+
+.SideToc-inner a:hover,
+.SideToc-inner a:focus {
+  color: #fff;
+}
+
+.SideToc-list {
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+@media (min-width: 800px) {
+  body.hasSidebar {
+    --sidebar-padding: 20px;
+    --sidebar-width: calc(13rem + var(--sidebar-padding) * 2);
+    padding-left: 240px;
+    padding-left: var(--sidebar-width);
+  }
+  .SideToc {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 240px;
+    width: var(--sidebar-width);
+    overflow-y: auto;
+    font-size: 0.9rem;
+  }
+  .SideToc-inner,
+  .SideToc .Outdated {
+    text-align: left;
+    padding: var(--sidebar-padding);
+  }
+  .SideToc-back {
+    display: block;
+    margin: 0.5rem -0.5rem 2rem;
+  }
+  .SideToc-head span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .SideToc-head::after {
+    content: attr(data-chapter);
+  }
+}
+
+@media (min-width: 1600px) {
+  body.hasSidebar {
+    --sidebar-padding: 30px;
+  }
+}
+
+/*! Automatic columns */
+/* 1-2-3-4 columns depending on the number of children */
+
+.HomeGrid > * {
+  border-bottom: solid 1px #dfe1e8;
+}
+
+@media (min-width: 700px) {
+  .HomeGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 50vh;
+  }
+  .HomeGrid > * {
+    border-right: solid 1px #dfe1e8;
+  }
+}
+
+@media (min-width: 1600px) {
+  .HomeGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/*! Section component */
+
+.Section {
+  border-bottom: 1px solid #dfe1e8;
+  background-color: #fff;
+}
+
+.Section p,
+.Section li {
+  max-width: 40rem;
+}
+
+.Section-col {
+  padding: var(--block-v-padding) var(--block-h-padding);
+}
+
+.Section-col--example {
+  background-color: #f7f7f9;
+}
+
+@media (max-width: 1199px) {
+  .Section-col--aside {
+    padding-top: 1rem;
+  }
+  .Section-col--example {
+    border-top: 1px solid #dfe1e8;
+  }
+}
+
+@media (min-width: 1200px) {
+  .Section {
+    display: flex;
+    max-width: 1400px;
+    min-height: 33vh;
+    margin: 0 auto;
+  }
+  .Section-col {
+    flex: 1 0 50%;
+  }
+  /* Align with left col h2 */
+  .Section-col--example > h3:first-child {
+    padding-top: 0.55rem;
+    margin-bottom: 2rem;
+  }
+  .Section-col--example > pre:first-child,
+  .Section-col--example > p:first-child,
+  .Section-col--example > ul:first-child,
+  .Section-col--example > ol:first-child {
+    margin-top: 3.75rem;
+  }
+}
+
+/*! Notice */
+
+.Outdated {
+  padding: 1rem var(--block-h-padding);
+  text-align: center;
+  color: #494c64;
+
+  padding-top: var(--block-v-padding);
+  padding-bottom: var(--block-v-padding);
+  color: #fff;
+  background-color: #d60d43;
+}
+
+.Outdated p {
+  margin: 0;
+}
+
+.Outdated a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/*! Code examples styles */
+
+pre {
+  display: block;
+  margin: 1.2rem 0;
+  line-height: 1.5;
+  font-family: Menlo, Source Sans Pro, Consolas, Courier New, monospace;
+  font-size: 87.5%;
+  white-space: pre-wrap;
+}
+
+code {
+  font-family: Menlo, Source Sans Pro, Consolas, Courier New, monospace;
+}
+
+pre > code {
+  display: block;
+  font-size: inherit;
+}
+
+:not(pre):not(a):not(h2):not(h3) > code {
+  padding: 2px 4px;
+  border-radius: 0.2rem;
+  font-size: 87.5%;
+  color: #c35;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.Section-col--example pre + pre {
+  padding-top: 1.2rem;
+  border-top: dotted 1px rgba(0, 0, 0, 0.1);
+}
+
+pre del {
+  color: #222 !important;
+  text-decoration: line-through;
+}
+
+pre mark {
+  color: #222;
+  background-color: rgba(255, 255, 0, 0.5);
+}
+
+.ellipsis {
+  position: relative;
+  top: -1px;
+  padding: 0 0.5ch;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.hljs .ellipsis {
+  margin: 0 0.2ch;
+  padding: 0 0.8ch 2px;
+  border-radius: 4px;
+  background-color: rgba(0, 100, 100, 0.07);
+}
+
+pre del *,
+pre mark *,
+.ellipsis span {
+  color: inherit !important;
+}
+
+/*! Highlight.js theme: GitHub Gist */
+/*
+  https://unpkg.com/highlight.js@9.12.0/styles/github-gist.css
+  Tweaked for better constrast
+*/
+
+.hljs-comment,
+.hljs-meta {
+  color: #607080;
+}
+
+.hljs-comment {
+  font-style: italic;
+}
+
+.hljs-string,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-strong,
+.hljs-emphasis,
+.hljs-quote {
+  color: #df5000;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-type {
+  color: #a71d5d;
+}
+
+.hljs-literal,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-attribute {
+  color: #0086b3;
+}
+
+.hljs-section,
+.hljs-name {
+  color: #305485;
+}
+
+.hljs-tag {
+  color: #808080;
+}
+
+.hljs-built_in {
+  color: #183;
+}
+
+.hljs-title,
+.hljs-attr,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+  color: #795da3;
+}
+
+.hljs-addition {
+  color: #55a532;
+  background-color: #eaffea;
+}
+
+.hljs-deletion {
+  color: #bd2c00;
+  background-color: #ffecec;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}

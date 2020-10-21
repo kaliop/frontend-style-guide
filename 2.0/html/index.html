@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>HTML and Templating - Frontend Style Guide by Kaliop</title>
+  <link rel="icon" type="image/x-icon" href="./../../assets/favicon.ico">
+  <link rel="stylesheet" href="./../../assets/styleguide.css">
+</head>
+<body class="isChapter hasSidebar">
+
+  <header class="Header">
+    <div class="Header-inner">
+      <p class="Header-back"><a href="./../">Frontend Style Guide by Kaliop</a></p>
+      <h1>HTML and Templating</h1>
+      <p></p>    </div>
+  </header>
+
+  <main>
+    <nav class="SideToc">
+    <div class="SideToc-inner">
+    <p class="SideToc-back">
+      <a href="./../">◀ Style Guide 2.0</a>
+    </p>
+    <h2 class="SideToc-head" data-chapter="HTML and Templating">
+      <span>Table of contents</span>
+    </h2>
+    <ul class="SideToc-list">
+              <li><a href="#formatting">Formatting</a></li>
+              <li><a href="#comments">Comments</a></li>
+              <li><a href="#indentation">Indentation</a></li>
+              <li><a href="#structure">Document structure</a></li>
+              <li><a href="#styles">Adding styles</a></li>
+              <li><a href="#scripts">Adding scripts</a></li>
+              <li><a href="#semantics">Semantic HTML</a></li>
+              <li><a href="#a11y">Accessible HTML</a></li>
+              <li><a href="#js-hooks">JavaScript hooks</a></li>
+              <li><a href="#ui-states">UI states</a></li>
+              <li><a href="#encoding">Encoding & characters</a></li>
+              <li><a href="#deprecated">Deprecated syntaxes</a></li>
+          </ul>
+  </div>
+</nav>    
+          <div class="Section" id="formatting">
+  <div class="Section-col">
+    <h2>Formatting</h2>    <p>HTML’s syntax can be very flexible, and browsers will try to deal with errors silently. To make our code more robust and consistent, follow these rules:</p>
+<ol>
+<li>Valid HTML code (<a href="https://validator.nu/">validator.nu</a>)</li>
+<li>Lowercase tag names and attributes</li>
+<li>Always quote attribute values, with double quotes</li>
+<li>Attribute order: <code>class</code> first, <code>id</code> second, then everything else.</li>
+</ol>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-html">&lt;p class="Form-field"&gt;
+  &lt;label class="Form-label" for="f-color"&gt;
+    What is your favourite colour?
+  &lt;/label&gt;
+  &lt;input class="Form-textbox" id="f-color" name="color" required&gt;
+  &lt;a class="modalLink" href="/help/276b6de1"&gt;
+    &lt;img src="question-mark.svg" alt="Help"&gt;
+  &lt;/a&gt;
+&lt;/p&gt;</code></pre>
+  </div>
+  </div>          <div class="Section" id="comments">
+  <div class="Section-col">
+    <h2>Comments</h2>    <p>Write as few HTML comments (<code>&lt;!-- Comment --&gt;</code>) as possible:</p>
+<ul>
+<li>They should not contain technical information</li>
+<li>Or references to client requirements</li>
+</ul>
+<p>It’s often better to use the templating language’s comment syntax instead. This helps sending fewer bytes to users, too.</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <p>Avoid:</p>
+<pre><code class="language-twig">&lt;!-- External SVG sprite support for IE --&gt;
+&lt;script&gt;<span class="ellipsis">…</span>&lt;/script&gt;</code></pre>
+<p>Prefer:</p>
+<pre><code class="language-twig">{# External SVG sprite support for IE #}
+&lt;script&gt;<span class="ellipsis">…</span>&lt;/script&gt;</code></pre>
+  </div>
+  </div>          <div class="Section" id="indentation">
+  <div class="Section-col">
+    <h2>Indentation</h2>    <ul>
+<li>Use 2 spaces</li>
+<li>Indent the contents elements (unless it’s short)</li>
+</ul>
+<p>For templating languages, indent the <em>template’s source code</em>, not the generated HTML:</p>
+<ul>
+<li>Indent inside control blocks (e.g. <code>{% if %}</code> tags)</li>
+<li>In each template file, start with no indentation</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-twig">&lt;div class="page-row"&gt;
+  &lt;div class="container"&gt;
+    {% block content %}{% endblock %}
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<pre><code class="language-twig">{% extends 'parent.twig' %}
+
+{% block content %}
+  &lt;h1&gt;{{ title }}&lt;/h1&gt;
+  {% if main_text %}
+    &lt;div class="text"&gt;
+      {{ main_text }}
+    &lt;/div&gt;
+  {% endif %}
+{% endblock %}</code></pre>
+  </div>
+  </div>          <div class="Section" id="structure">
+  <div class="Section-col">
+    <h2>Document structure</h2>    <p>The basic structure of a HTML page should have:</p>
+<ul>
+<li>The HTML5 doctype: <code>&lt;!DOCTYPE html&gt;</code></li>
+<li>A single root element: <code>&lt;html&gt;</code></li>
+<li>With two child elements: <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code></li>
+</ul>
+<h3>Declaring languages</h3>
+<p>Always provide a <code>lang</code> attribute on the root element; make sure it shows the correct language for each page, especially on multilingual sites! For more information, see this <a href="https://www.w3.org/International/questions/qa-html-language-declarations">W3C tutorial</a>.</p>
+<h3>Essential metadata</h3>
+<ul>
+<li>Add a <code>&lt;meta charset="UTF-8"&gt;</code> encoding declaration, in case it’s not already declared in the HTTP <code>Content-Type</code> header.</li>
+<li>Always have a <code>&lt;title&gt;</code> element, <em>with a specific content for each page</em>.</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Page title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- Visible content --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+  </div>          <div class="Section" id="styles">
+  <div class="Section-col">
+    <h2>Adding styles</h2>    <h3>Request an external stylesheet</h3>
+<p>To add styles to a page, we generally write one (or sometimes a few) stylesheet(s) and link to it from the HTML.</p>
+<p>Use <code>&lt;link rel="stylesheet" href="/url/to/styles.css"&gt;</code> in the page’s <code>&lt;head&gt;</code> to request an external stylesheet.</p>
+<p>Notes:</p>
+<ul>
+<li>We want to load only one stylesheet (or 2–3 max).</li>
+<li>For each stylesheet, the browser will make a HTTP request, and block rendering the page until <em>all</em> the CSS arrives!</li>
+</ul>
+<h3>Inline stylesheets</h3>
+<p>More rarely, we can write some of the styles directly in the HTML page, using <code>&lt;style&gt;/* My styles */&lt;/style&gt;</code></p>
+<p>This can be useful for:</p>
+<ul>
+<li>Some web performance techniques (“critical CSS”).</li>
+<li>Styles generated depending on user preferences.</li>
+</ul>
+<h3>Viewport meta tag</h3>
+<p>For responsive sites, make sure you have this tag in your <code>&lt;head&gt;</code>:</p>
+<pre><code class="language-html">&lt;meta name="viewport" content="width=device-width"&gt;</code></pre>
+<p>Some sites add more parameters to the <code>content</code> value:</p>
+<ul>
+<li><code>initial-scale=1</code>: this should not be necessary anymore.</li>
+<li><code>maximum-scale=1</code>: this breaks accessibility! Avoid it.</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-html">&lt;head&gt;
+  <span class="ellipsis">…</span>
+  &lt;meta name="viewport" content="width=device-width"&gt;
+  &lt;style&gt;.icon{width:1em;height:1em}&lt;/style&gt;
+  &lt;link rel="stylesheet" href="/dist/main.css"&gt;
+&lt;/head&gt;</code></pre>
+  </div>
+  </div>          <div class="Section" id="scripts">
+  <div class="Section-col">
+    <h2>Adding scripts</h2>    <p>Like CSS, JS code can live in separate files or in the HTML document. For most uses, we recommend using an external JS file.</p>
+<h3>Request an external script</h3>
+<p>Use <code>&lt;script src="/url/to/script.js"&gt;&lt;/script&gt;</code> <em>after the page’s content</em>. Generally, that means putting this script tag just before the end of the body (<code>&lt;/body&gt;</code> tag).</p>
+<h3>Inline scripts</h3>
+<p>The syntax for inline scripts is similar:<br />
+<code>&lt;script&gt;/* JS code */&lt;/script&gt;</code></p>
+<p>This can be useful for some critical — and short! — JS code that we want to execute as soon as possible, without making a HTTP request.</p>
+<h3>Performance guidelines</h3>
+<ol>
+<li>Load as few scripts as possible; concatenate code to make 1 (or 2–3 max) HTTP requests.</li>
+<li>Script tags block rendering. Add the <code>async</code> attribute or call them just before <code>&lt;/body&gt;</code>.</li>
+<li>Third party scripts are often huge; load on pages that need them only.</li>
+</ol>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-twig">&lt;head&gt;
+  <span class="ellipsis">…</span>
+  {# In HEAD: only short scripts that declare variables! #}
+  &lt;script&gt;
+    window.modules = {};
+    window._gaq = [];
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  <span class="ellipsis">…</span>
+  {# ALL SCRIPTS AFTER PAGE CONTENT #}
+  {# Short inline scripts (executed earlier) #}
+  &lt;script&gt;!function(){<span class="ellipsis">…</span>}();&lt;/script&gt;
+  {# Call the main scripts after the page’s content #}
+  &lt;script src="/dist/vendor.js"&gt;&lt;/script&gt;
+  &lt;script src="/dist/main.js"&gt;&lt;/script&gt;
+  {# Scripts that don’t depend on vendor/libs can use the async attribute #}
+  &lt;script async src="/dist/something.js"&gt;&lt;/script&gt;
+&lt;/body&gt;</code></pre>
+  </div>
+  </div>          <div class="Section" id="semantics">
+  <div class="Section-col">
+    <h2>Semantic HTML</h2>    <ul>
+<li><strong>Use the appropriate HTML element</strong> to mark up content, not only <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code>.</li>
+<li>You can use a reference such as <a href="http://htmlreference.io/">htmlreference.io</a> for details on available elements and attributes.</li>
+</ul>
+<h3>Links vs buttons</h3>
+<p>The rule is simple:</p>
+<ul>
+<li>If it goes somewhere else, it’s a <code>&lt;a href="url"&gt;<span class="ellipsis">…</span>&lt;/a&gt;</code> element.</li>
+<li>If it performs a custom JS action, it’s a <code>&lt;button&gt;<span class="ellipsis">…</span>&lt;/button&gt;</code> element.</li>
+</ul>
+<p>Avoid <code>&lt;div onclick="<span class="ellipsis">…</span>"&gt;&lt;/div&gt;</code> or <code>&lt;li onclick="<span class="ellipsis">…</span>"&gt;&lt;/li&gt;</code>: it can’t be focused with the keyboard, can’t be read by a screen reader, doesn’t work for SEO, etc.</p>
+<p>Always use real links (<code>&lt;a href="url"&gt;…&lt;/a&gt;</code>) to navigate between pages, including for navigating between views in “single-page” applications. It’s better for accessibility, SEO, bookmarking and sharing.</p>
+<h3>Semantic groups</h3>
+<p>In the <code>&lt;body&gt;</code> we try to group the page’s visible elements in 4 groups:</p>
+<pre><code class="language-twig">&lt;body&gt;
+  &lt;header&gt;
+    {# logo, search, etc. #}
+  &lt;/header&gt;
+  &lt;nav&gt;
+    {# primary navigation #}
+  &lt;/nav&gt;
+  &lt;main&gt;
+    {# page’s main content #}
+  &lt;/main&gt;
+  &lt;footer&gt;
+    {# more info about the site, links, etc. #}
+  &lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+<p>It’s also possible to put the <code>&lt;nav&gt;</code> inside the <code>&lt;header&gt;</code>.</p>
+<h3>Use the “search” role for the main search</h3>
+<p>If the page offers a search form, use the ARIA <code>search</code> role on this form:</p>
+<pre><code class="language-html">&lt;form role="search" action="/site-search"&gt;
+  <span class="ellipsis">…</span>
+&lt;/form&gt;</code></pre>
+<p>Important: <code>role="search"</code> must only appear once in the page.</p>
+  </div>
+    </div>          <div class="Section" id="a11y">
+  <div class="Section-col">
+    <h2>Accessible HTML</h2>    <p>We strive to create accessible user interfaces, whether the HTML is generated server-side or client-side in JavaScript. Here are a few guidelines to get you started on this topic.</p>
+<h3>Use titles for structure</h3>
+<ul>
+<li>Use H1, H2, H3 elements (lower levels are often unnecessary)</li>
+<li>If this conflicts with SEO needs, see if you can find a compromise (keep the main titles, maybe change a useful H1/H2 to a H3 so that it does not clash with SEO needs but is still listed in screen readers)</li>
+</ul>
+<pre><code class="language-html">&lt;main&gt;
+  &lt;h1&gt;Page title&lt;/h1&gt;
+  <span class="ellipsis">…</span>
+  &lt;h2&gt;A sub-section&lt;/h2&gt;
+  <span class="ellipsis">…</span>
+  &lt;h2&gt;Another section&lt;/h2&gt;
+  <span class="ellipsis">…</span>
+&lt;/main&gt;</code></pre>
+<h3>Use text labels</h3>
+<p>Outside of content managed in a CMS, we need accessible text for:</p>
+<ul>
+<li>Logos (use the brand’s name, not <code>"logo"</code>) and other significant images</li>
+<li>Buttons or links with icons and no visible text</li>
+</ul>
+<p>For links and buttons, this can look like:</p>
+<pre><code class="language-html">&lt;a href="<span class="ellipsis">…</span>"&gt;
+  &lt;img src="<span class="ellipsis">…</span>" alt="Subscribe Now"&gt;
+&lt;/a&gt;
+
+&lt;button&gt;
+  &lt;svg class="icon"&gt;
+    &lt;title&gt;Subscribe Now&lt;/title&gt;
+    &lt;path d="<span class="ellipsis">…</span>"&gt;&lt;/path&gt;
+  &lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+<p>If you can’t add alt text to the image or icon itself, you can use <code>aria-label</code> on the link or button:</p>
+<pre><code class="language-html">&lt;a href="<span class="ellipsis">…</span>" aria-label="Subscribe Now"&gt;
+  &lt;i data-icon="letter"&gt;&lt;/i&gt;
+&lt;/a&gt;</code></pre>
+<p>Finally, if the text is already present in context, it’s often better to have <em>empty</em> alt text:</p>
+<pre><code class="language-html">&lt;a href="<span class="ellipsis">…</span>"&gt;
+  &lt;img src="<span class="ellipsis">…</span>" alt=""&gt;
+  Subscribe Now
+&lt;/a&gt;
+
+&lt;button&gt;
+  &lt;svg class="icon" aria-hidden="true"&gt;&lt;path d="<span class="ellipsis">…</span>"&gt;&lt;/path&gt;&lt;/svg&gt;
+  Subscribe Now
+&lt;/button&gt;</code></pre>
+<h3>Make sure that form elements have labels</h3>
+<p>Link a form element and the relevant label using <code>&lt;label for="some-id"&gt;</code> and the <code>id</code> attribute.</p>
+<pre><code class="language-html">&lt;p&gt;
+  &lt;label for="user-name"&gt;My Name&lt;/label&gt;
+  &lt;input type="text" id="user-name"&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+  &lt;input type="checkbox" id="user-subscribe"&gt;
+  &lt;label for="user-subscribe"&gt;Subscribe me to the newsletter&lt;/label&gt;
+&lt;/p&gt;</code></pre>
+<p>If done properly, clicking the label should focus the text input (or <code>&lt;select&gt;</code> or any other form control). Note that each <code>id</code> attribute must be unique in the page.</p>
+<h3>Learn more</h3>
+<p>Beyond this section, see <a href="https://bitsofco.de/the-accessibility-cheatsheet/">this accessibility cheatsheet</a> for an introduction to accessibility.</p>
+  </div>
+    </div>          <div class="Section" id="js-hooks">
+  <div class="Section-col">
+    <h2>JavaScript hooks</h2>    <p>When working with a separate HTML and JS codebase (vs working on JS-centric apps with React or Vue.js), we often need to query elements from the DOM to work on.</p>
+<p>If you’re working with BEM components (see <a href="../css#components">CSS – Components</a>), target the component classes. For instance, with jQuery:</p>
+<pre><code class="language-js">$('.MyComponent').each(function(i, el) {
+  var container = $(el);
+  var items = container.find('.MyComponent-item');
+  <span class="ellipsis">…</span>
+});</code></pre>
+<p>Or use data attributes on elements. In the next example, the <code>MyModal</code> class is reponsible for styling, and the <code>data-modal</code> attribute is responsible for linking the button to show the modal.</p>
+<pre><code class="language-twig">&lt;button data-modal="#forminfo-12"&gt;More info&lt;/button&gt;
+&lt;div class="MyModal" id="forminfo-12" hidden&gt;
+  {# Inline modal’s content #}
+&lt;/div&gt;</code></pre>
+<p>It’s also possible to write a small HTML API for your custom JS code, with options written as data attributes:</p>
+<pre><code class="language-twig">&lt;div class="MyModal"
+  id="forminfo-12"
+  data-modal-size="medium"
+  data-modal-close="strict"
+  hidden&gt;
+  <span class="ellipsis">…</span>
+&lt;/div&gt;</code></pre>
+  </div>
+    </div>          <div class="Section" id="ui-states">
+  <div class="Section-col">
+    <h2>UI states</h2>    <p>Using script, we often need to change the “state” of an element in the UI. Instead of adding or removing classes, consider using:</p>
+<ul>
+<li>Native HTML attributes such as <code>disabled</code> or <code>hidden</code>.</li>
+<li>ARIA attributes such as <code>aria-expanded="true|false"</code>.</li>
+<li>Or, finally, a data attribute: <code>data-state="my-custom-state"</code>.</li>
+</ul>
+<p>Try to use <code>id</code> attribute values to link elements logically. Both HTML (example: <code>&lt;label for="some-id"&gt;</code>) and ARIA (example: <code>aria-labelledby="other-id"</code>) use this technique already. But make sure that the id values you use are unique in the page!</p>
+  </div>
+    </div>          <div class="Section" id="encoding">
+  <div class="Section-col">
+    <h2>Encoding & characters</h2>    <ul>
+<li>Always use UTF-8</li>
+<li>In text content, use typographically correct characters, for example <code>’</code> (apostrophe) or <code>…</code> (ellipsis)</li>
+<li>Avoid character references (<code>Fançais</code>, not <code>Fran&amp;#231;ais</code>), except for invisible characters (<code>&amp;nbsp;</code>)</li>
+</ul>
+<p>Useful tools:</p>
+<ul>
+<li><a href="http://unilist.raphaelbastide.com/">⋃nilist</a></li>
+<li><a href="https://www.fileformat.info/info/unicode/char/search.htm">Unicode Character Search</a></li>
+</ul>
+  </div>
+    </div>          <div class="Section" id="deprecated">
+  <div class="Section-col">
+    <h2>Deprecated syntaxes</h2>    <p>The following HTML syntaxes, elements or metadata are useless or have been deprecated. You should remove them from your HTML. Eliminate distractions like a HTML Jedi.</p>
+<h3>Old doctypes, XHTML namespace</h3>
+<pre><code class="language-html">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"&gt;</code></pre>
+<p>Use this instead:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;</code></pre>
+<h3>Default type for styles</h3>
+<p>It’s not essential, but you can remove the <code>type</code> attributes on stylesheet when it uses the default <code>text/css</code> value. So, always.</p>
+<pre><code class="language-html">&lt;link rel="stylesheet" type="text/css" href="url"&gt;
+&lt;style type="text/css"&gt;/* code */&lt;/style&gt;
+
+&lt;!-- Better --&gt;
+&lt;link rel="stylesheet" href="url"&gt;
+&lt;style&gt;/* code */&lt;/style&gt;</code></pre>
+<h3>Default type for scripts</h3>
+<p>Same for scripts and <code>text/javascript</code>. And if you find a non-standard <code>language</code> attribute, remove it too.</p>
+<pre><code class="language-html">&lt;script type="text/javascript" src="url"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" language="Javascript"&gt;<span class="ellipsis">…</span>&lt;/script&gt;
+
+&lt;!-- Better --&gt;
+&lt;script src="url"&gt;&lt;/script&gt;
+&lt;script&gt;<span class="ellipsis">…</span>&lt;/script&gt;</code></pre>
+<h3>IE Conditional Comments</h3>
+<p>Conditional comments were dropped in IE 10. They can be used if you really need to target IE 8–9, but for most projects they’re probably just useless code from an old boilerplate. For instance, you could see this:</p>
+<pre><code>&lt;!--[if IE 8]&gt;&lt;html class="ie8" lang="fr"&gt;&lt;![endif]--&gt;
+&lt;!--[if IE 9]&gt;&lt;html class="ie9" lang="fr"&gt;&lt;![endif]--&gt;
+&lt;!--[if gt IE 9]&gt;&lt;!--&gt;&lt;html lang="fr"&gt;&lt;!--&lt;![endif]--&gt;</code></pre>
+<p>Same code, cleaned up:</p>
+<pre><code>&lt;html lang="fr"&gt;</code></pre>
+<h3>X-UA-Compatible meta tag</h3>
+<p>Another deprecated IE feature:</p>
+<pre><code class="language-html">&lt;meta http-equiv="X-UA-Compatible" content="IE=Edge"&gt;</code></pre>
+<p>You will find this in a lot of projects. Why? On local network sites, IE 8–10 would automatically use a “backwards compatible” mode to render the page, trying to mimick IE 7. This tag would tell IE to avoid that, and use its best capabilities. Thankfully, IE 11 and Edge stopped this nonsense.</p>
+<h3>Totally useless meta tags</h3>
+<pre><code class="language-html">&lt;!-- Not used in any search engine since 1997! --&gt;
+&lt;meta name="keywords" content="make money, free cash, easy"&gt;
+
+&lt;!-- NEVER worked, still exists on many websites! --&gt;
+&lt;META NAME="MSSmartTagsPreventParsing" CONTENT="TRUE"&gt;</code></pre>
+  </div>
+    </div>      </main>
+
+  <script src="./../../assets/highlight.pack.js" onload="hljs.initHighlightingOnLoad()"></script>
+
+</body>
+</html>

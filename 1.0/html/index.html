@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>HTML Guidelines - Frontend Style Guide by Kaliop</title>
+  <link rel="icon" type="image/x-icon" href="./../../assets/favicon.ico">
+  <link rel="stylesheet" href="./../../assets/styleguide.css">
+</head>
+<body class="isChapter hasSidebar">
+
+  <header class="Header">
+    <div class="Header-inner">
+      <p class="Header-back"><a href="./../">Frontend Style Guide by Kaliop</a></p>
+      <h1>HTML Guidelines</h1>
+      <p></p>    </div>
+  </header>
+
+  <main>
+    <nav class="SideToc">
+      <div class="Outdated">
+  <p>
+    These guidelines are outdated.
+    Please use <a href="./../../2.0/">Version 2.0</a> for new projects.
+  </p>
+</div>    <div class="SideToc-inner">
+    <p class="SideToc-back">
+      <a href="./../">◀ Style Guide 1.0</a>
+    </p>
+    <h2 class="SideToc-head" data-chapter="HTML Guidelines">
+      <span>Table of contents</span>
+    </h2>
+    <ul class="SideToc-list">
+              <li><a href="#syntax">HTML syntax</a></li>
+              <li><a href="#indentation">Indentation</a></li>
+              <li><a href="#doctype">HTML5 doctype</a></li>
+              <li><a href="#lang">Language attribute</a></li>
+              <li><a href="#encoding">Character encoding</a></li>
+              <li><a href="#x-ua-compatible">IE compatibility mode</a></li>
+              <li><a href="#viewport">Viewport meta</a></li>
+              <li><a href="#style-script">Styles and scripts</a></li>
+              <li><a href="#attribute-order">Attribute order</a></li>
+              <li><a href="#boolean-attributes">Boolean attributes</a></li>
+              <li><a href="#reducing-markup">Reducing markup</a></li>
+              <li><a href="#inline-style-script">Avoid inline style and scripts</a></li>
+              <li><a href="#javascript-markup">JavaScript generated markup</a></li>
+              <li><a href="#conditional-comments">IE conditional comments</a></li>
+          </ul>
+  </div>
+</nav>    
+          <div class="Section" id="syntax">
+  <div class="Section-col">
+    <h2>HTML syntax</h2>    <ul>
+<li>Lowercase tags and attributes</li>
+<li>Double quotes for attributes values</li>
+<li>No trailing slashes for self-closing tags</li>
+<li>Don’t omit optional closing tags (e.g. <code>&lt;/li&gt;</code> or <code>&lt;/body&gt;</code>).</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;title&gt;Page title&lt;/title&gt;
+        &lt;link rel="stylesheet" href="styles.css"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Hello, world!&lt;/h1&gt;
+        &lt;script src="hello.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+  </div>          <div class="Section" id="indentation">
+  <div class="Section-col">
+    <h2>Indentation</h2>    <p>Use soft tabs with four (4) spaces.</p>
+<p>As a rule, nested elements should be indented once. (It’s okay to be flexible here. Perfectly indenting HTML code can result in excessive and unmanageable indentation.)</p>
+<p>When working with templates:</p>
+<ol>
+<li>Readability of your <em>source code</em> matters much more than perfect indentation in the HTML output.</li>
+<li>In each template file, start from the leftmost side.</li>
+</ol>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-twig">{# parent-template.html #}
+&lt;div class="x"&gt;
+    &lt;div class="y"&gt;
+        &lt;div class="z"&gt;
+            {% block content %}{% endblock %}
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+{# child-template.html #}
+{% extends 'parent-template.html' %}
+{% block content %}
+    &lt;h1&gt;{{ title }}&lt;/h1&gt;
+    &lt;div class="text"&gt;
+        {{ main_text }}
+    &lt;/div&gt;
+{% endblock %}</code></pre>
+  </div>
+  </div>          <div class="Section" id="doctype">
+  <div class="Section-col">
+    <h2>HTML5 doctype</h2>    <p>Enforce standards mode and more consistent rendering in every browser possible with this simple doctype at the beginning of every HTML page.</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;!-- … --&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+  </div>          <div class="Section" id="lang">
+  <div class="Section-col">
+    <h2>Language attribute</h2>    <p>From the HTML5 spec:</p>
+<blockquote>
+<p>Authors are encouraged to specify a lang attribute on the root html element, giving the document’s language. This aids speech synthesis tools to determine what pronunciations to use, translation tools to determine what rules to use, and so forth.</p>
+</blockquote>
+<p>Read more about the <code>lang</code> attribute <a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">in the spec</a>.</p>
+<p>Use 2-letter <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1 language codes</a>. Only use regional extensions (e.g. <code>fr-FR</code>, <code>en-GB</code>, <code>en-US</code>) if there is a strong reason to do so.</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-html">&lt;html lang="fr"&gt;
+    &lt;!-- … --&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+  </div>          <div class="Section" id="encoding">
+  <div class="Section-col">
+    <h2>Character encoding</h2>    <p>Always use UTF-8. Declare it first thing in the <code>&lt;head&gt;</code>, using the HTML5 short syntax. Ideally, the server should <em>also</em> declare the charset in the <code>Content-Type: text/html; charset=utf-8</code> HTTP header.</p>
+<p>Use literal characters if you can. The only characters that require the use of character entities are <code>&lt;</code> and <code>&amp;</code>. Do not encode text such as “français” (bad: <code>fran&amp;#231;ais</code> or <code>fran&amp;ccedil;ais</code>).</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-html">&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;!-- Everything else goes *after* the charset --&gt;
+&lt;/head&gt;</code></pre>
+  </div>
+  </div>          <div class="Section" id="x-ua-compatible">
+  <div class="Section-col">
+    <h2>IE compatibility mode</h2>    <p>Internet Explorer 9 to 11 support the use of HTTP header, and the corresponding <code>&lt;meta&gt;</code> tag, to specify what version of IE the page should be rendered as. Use the meta tag to tell IE to use its latest rendering engine (<em>edge mode</em>). Otherwise in some specific situations, IE 9-11 may fall back to Quirks or “Like IE7” or other compatibility modes.</p>
+<p>Important:</p>
+<ul>
+<li>Keep this tag close to the start of the <code>&lt;head&gt;</code>.</li>
+<li>There must be zero HTML comments in the HTML source before the meta, or it will be ignored.</li>
+</ul>
+<p><a href="http://stackoverflow.com/questions/6771258/whats-the-difference-if-meta-http-equiv-x-ua-compatible-content-ie-edge-e">More information on Stack Overflow</a>.</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-html">&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=Edge"&gt;
+&lt;/head&gt;</code></pre>
+  </div>
+  </div>          <div class="Section" id="viewport">
+  <div class="Section-col">
+    <h2>Viewport meta</h2>    <p>For responsive websites, use a <code>viewport</code> meta in the page’s <code>head</code>.</p>
+<ul>
+<li>Use <code>width=device-width</code></li>
+<li>Add <code>initial-scale=1</code> so that Safari does not zoom the content in portrait mode</li>
+<li><em>Do not</em> use <code>maximum-scale</code>, ever!</li>
+</ul>
+<p>More info: <a href="http://www.quirksmode.org/mobile/metaviewport/">detailed compatibility information</a>.</p>
+<p>This meta an be placed anywhere in the head, but we recommend putting it near the top with other “compatibility” stuff. So make sure your <code>&lt;head&gt;</code> always has, in this order: charset, X-UA-Compatible, viewport; then everything else.</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-html">&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=Edge"&gt;
+    &lt;meta name="viewport" content="width=device-width,initial-scale=1"&gt;
+    &lt;title&gt;…&lt;/title&gt;
+    &lt;!-- Everything else --&gt;
+    …
+&lt;/head&gt;</code></pre>
+<pre><code class="language-css">/* Windows Phone needs this in the CSS, or it understands "device-width" as "320px like the original iPhone" */
+@-ms-viewport {
+    width: device-width;
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="style-script">
+  <div class="Section-col">
+    <h2>Styles and scripts</h2>    <p>Reference your stylesheets (ideally just one or two) in the <code>&lt;head&gt;</code>, using a <code>&lt;link&gt;</code> tag. If you <em>must</em> write some styles in the page itself, use a <code>&lt;style&gt;</code> element.</p>
+<p>Call your scripts (ideally just one or two) with <code>&lt;script src="…"&gt;&lt;/script&gt;</code> tags at the bottom of the page (just before <code>&lt;/body&gt;</code>). </p>
+<p>Don’t use <code>type</code> attributes. The <code>text/css</code> and <code>text/javascript</code> values the default ones, so they’re optional.</p>
+<h3>Danger! Performance killers</h3>
+<ul>
+<li>Calling a bazillion scripts and stylesheets! 😭</li>
+<li>Scripts in the <code>&lt;head&gt;</code> (except with the <a href="http://caniuse.com/#feat=script-async">async attribute</a>)</li>
+<li>Calling a stylesheet with <code>&lt;style&gt;@import url&lt;/style&gt;</code></li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-html">&lt;head&gt;
+    …
+    &lt;link rel="stylesheet" href="styles.min.css"&gt;
+    &lt;!-- DON'T DO THIS! (Blocks page rendering.)
+        &lt;script src="some-script.js"&gt;&lt;/script&gt;
+    --&gt;
+    &lt;!-- That’s better, but ignored by IE9, and it
+         doesn’t guarantee execution order if you
+         have more than one async script.
+        &lt;script async src="some-script.js"&gt;&lt;/script&gt;
+    --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    …
+    &lt;!-- DO THIS INSTEAD \o/ --&gt;
+    &lt;script src="libs-and-scripts.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;</code></pre>
+  </div>
+  </div>          <div class="Section" id="attribute-order">
+  <div class="Section-col">
+    <h2>Attribute order</h2>    <p>HTML attributes should come in this particular order for easier reading of code.</p>
+<ol>
+<li><code>class</code></li>
+<li><code>id</code>, <code>name</code></li>
+<li><code>data-*</code></li>
+<li><code>src</code>, <code>for</code>, <code>type</code>, <code>href</code>, <code>value</code></li>
+<li><code>title</code>, <code>alt</code></li>
+<li><code>aria-*</code>, <code>role</code></li>
+</ol>
+<p>Classes make for great reusable components, so they come first. Ids are more specific and should be used sparingly (e.g., for in-page bookmarks), so they come second.</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-html">&lt;a class="ModalLink" data-modal-type="info" href="/help/item/276b6de1"&gt;
+    More information
+&lt;/a&gt;
+
+&lt;input class="form-control" id="some-thing" name="something" type="text"&gt;
+
+&lt;!--
+    Reminder: alt attribute is mandatory,
+    should be empty for purely decorative images
+--&gt;
+&lt;img src="icon-contact.svg" alt="Contact us"&gt;</code></pre>
+  </div>
+  </div>          <div class="Section" id="boolean-attributes">
+  <div class="Section-col">
+    <h2>Boolean attributes</h2>    <p>A boolean attribute is one that needs no declared value. XHTML required you to declare a value, but HTML5 has no such requirement.</p>
+<p>For further reading, consult the <a href="http://www.w3.org/TR/html5/infrastructure.html#boolean-attributes">HTML5 section on boolean attributes</a>:</p>
+<blockquote>
+<p>The presence of a boolean attribute on an element represents the true value, and the absence of the attribute represents the false value.</p>
+</blockquote>
+<p>If you <em>must</em> include the attribute’s value, and <strong>you don’t need to</strong>, follow this guideline:</p>
+<blockquote>
+<p>If the attribute is present, its value must either be the empty string or <span class="ellipsis">…</span> the attribute’s canonical name, with no leading or trailing whitespace.</p>
+</blockquote>
+<p><strong>In short, don’t add a value.</strong></p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-html">&lt;input type="text" disabled&gt;
+
+&lt;input type="checkbox" value="1" checked&gt;
+
+&lt;select&gt;
+    &lt;option value="1" selected&gt;1&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+  </div>
+  </div>          <div class="Section" id="reducing-markup">
+  <div class="Section-col">
+    <h2>Reducing markup</h2>    <p>Whenever possible, avoid superfluous parent elements when writing HTML. Add wrapper elements when you actually need them, not “just in case”. Many times this requires iteration and refactoring, but produces less HTML.</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-html">&lt;!-- Not so great --&gt;
+&lt;span class="avatar"&gt;
+    &lt;img src="…" alt=""&gt;
+&lt;/span&gt;
+
+&lt;!-- Better --&gt;
+&lt;img class="avatar" src="…" alt=""&gt;</code></pre>
+  </div>
+  </div>          <div class="Section" id="inline-style-script">
+  <div class="Section-col">
+    <h2>Avoid inline style and scripts</h2>    <h3>Styling</h3>
+<ul>
+<li>Don’t use the <code>style</code> attribute, or other presentation attributes.</li>
+<li>Avoid setting the <code>style</code> attribute with JavaScript or jQuery’s <code>$(element).css()</code> method. Add or remove classes instead.</li>
+<li>Only use <code>&lt;style&gt;/* Some CSS */&lt;/style&gt;</code> if you can’t put those styles in (one of the) external stylesheet(s).</li>
+</ul>
+<h3>Scripting</h3>
+<ul>
+<li>Do not use <code>document.write()</code>, <em>ever</em>.</li>
+<li>Avoid using inline event handlers, such as the <code>onclick</code> or <code>onload</code> attribute.</li>
+<li>Only use <code>&lt;script&gt;/* Some JS */&lt;/script&gt;</code> for code that is short enough and must be executed as soon as possible. If it doesn’t hurt perceived performance, put this code in (one of the) external script(s).</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-html">&lt;!-- ALL OF THIS IS AWFUL :(( --&gt;
+&lt;body onload="start()"&gt;
+    &lt;p id="hello" style="margin-top:50px"&gt;Hello World&lt;/p&gt;
+    &lt;script&gt;
+        document.write('&lt;p&gt;Some HTML code&lt;/p&gt;');
+        function start() {
+            var hello = document.querySelector('#hello');
+            hello.style.marginTop = '100px';
+        }
+    &lt;/script&gt;
+&lt;/body&gt;</code></pre>
+  </div>
+  </div>          <div class="Section" id="javascript-markup">
+  <div class="Section-col">
+    <h2>JavaScript generated markup</h2>    <p>Writing markup in a JavaScript file makes the content harder to find, harder to edit, and less performant. Avoid it whenever possible.</p>
+  </div>
+    </div>          <div class="Section" id="conditional-comments">
+  <div class="Section-col">
+    <h2>IE conditional comments</h2>    <p>Avoid using Internet Explorer conditional comments as much as possible. They’re often unnecessary in IE9+, and deprecated in IE11+.</p>
+<p>If you need special tricks for IE8 support, see the following example. Note that the recommended option relies on JavaScript for adding an <code>old-ie</code> class. This means dropping support for IE8-without-JavaScript (which is already the case if we’re using HTML5 elements such as <code>&lt;article&gt;</code>, <code>&lt;header&gt;</code>, etc.).</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <p>Use this with caution (for IE8):</p>
+<pre><code class="language-html">&lt;head&gt;
+    …
+    &lt;!--[if lte IE 8]&gt;
+    &lt;script&gt;document.documentElement.className+=' old-ie';&lt;/script&gt;
+    &lt;script src="html5shiv.min.js"&gt;&lt;/script&gt;
+    &lt;link rel="stylesheet" href="styles-old-ie.css"&gt;
+    &lt;![endif]--&gt;
+    &lt;!--[if gt IE 8]&gt;&lt;!--&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+    &lt;!--&lt;![endif]--&gt;
+&lt;/head&gt;</code></pre>
+<p>And avoid this trick:</p>
+<pre><code class="language-html">&lt;!--[if IE 7]&gt;&lt;html class="lt-ie9 lt-ie8"&gt;&lt;![endif]--&gt;
+&lt;!--[if IE 8]&gt;&lt;html class="lt-ie9"&gt;&lt;![endif]--&gt;
+&lt;!--[if gt IE 8]&gt;&lt;!--&gt;&lt;html&gt;&lt;!--&lt;![endif]--&gt;</code></pre>
+  </div>
+  </div>      </main>
+
+  <script src="./../../assets/highlight.pack.js" onload="hljs.initHighlightingOnLoad()"></script>
+
+</body>
+</html>

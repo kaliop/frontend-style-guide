@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JavaScript - Frontend Style Guide by Kaliop</title>
+  <link rel="icon" type="image/x-icon" href="./../../assets/favicon.ico">
+  <link rel="stylesheet" href="./../../assets/styleguide.css">
+</head>
+<body class="isChapter hasSidebar">
+
+  <header class="Header">
+    <div class="Header-inner">
+      <p class="Header-back"><a href="./../">Frontend Style Guide by Kaliop</a></p>
+      <h1>JavaScript</h1>
+      <p></p>    </div>
+  </header>
+
+  <main>
+    <nav class="SideToc">
+    <div class="SideToc-inner">
+    <p class="SideToc-back">
+      <a href="./../">◀ Style Guide 2.0</a>
+    </p>
+    <h2 class="SideToc-head" data-chapter="JavaScript">
+      <span>Table of contents</span>
+    </h2>
+    <ul class="SideToc-list">
+              <li><a href="#formatting">Formatting</a></li>
+              <li><a href="#comments">Comments</a></li>
+              <li><a href="#naming">Naming things</a></li>
+              <li><a href="#global">Global variables</a></li>
+              <li><a href="#modules">Modules</a></li>
+              <li><a href="#es6">Using ES6</a></li>
+              <li><a href="#debug">Debugging</a></li>
+              <li><a href="#tools">Tooling up</a></li>
+              <li><a href="#coercion">Type coercion</a></li>
+              <li><a href="#this">The <code>this</code> keyword</a></li>
+          </ul>
+  </div>
+</nav>    
+          <div class="Section" id="formatting">
+  <div class="Section-col">
+    <h2>Formatting</h2>    <p>Follow the formatting style used by <a href="https://prettier.io/">Prettier</a> (with default settings).</p>
+<ol>
+<li>Indent with 2 spaces</li>
+<li>Use semicolons (<code>;</code>) at the end of statements</li>
+<li>Use double quotes for strings</li>
+<li>Keep opening braces (<code>{</code>) on the current line, with one space before, and closing braces (<code>}</code>) on a new line</li>
+</ol>
+<p>Recommended: install Prettier (<code>npm i -g prettier</code> or <a href="https://prettier.io/docs/en/editors.html">install for your editor</a>) and use it to automatically reformat your JS code.</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-js">const settings = {
+  indentSize: 2,
+  semicolons: true
+};
+
+console.log(opinion(settings.semicolons));
+
+function opinion(pref) {
+  let opinion = "Semicolons are ";
+  if (pref === true) {
+    opinion += "alright, mate.";
+  } else if (pref === false) {
+    opinion += "superfluous.";
+  } else {
+    opinion = "What is a semicolon?";
+  }
+  return opinion;
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="comments">
+  <div class="Section-col">
+    <h2>Comments</h2>    <ul>
+<li>Use single-line comments (<code>// …</code>) to comment on the next line or the next few lines of code.</li>
+<li>Use a <a href="http://usejsdoc.org/">JSDoc</a>-style comment (<code>/** … */</code>) before a complex function or a module.</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-js">/**
+ * Make a header "sticky"
+ * (Adds/removes a class when scrolling)
+ */
+function stickifyHeader(element, activeClass, offset) {
+  // 250ms not working when scrolling too quicky
+  const latency = 100;
+  <span class="ellipsis">…</span>
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="naming">
+  <div class="Section-col">
+    <h2>Naming things</h2>    <ul>
+<li>Use <code>lowerCamelCase</code> for names: variables, functions, object keys…</li>
+<li>Use <code>UpperCamelCase</code> for classes, and for UI components (in React, Vue.js, etc.).</li>
+<li>Use descriptive names rather than generic ones.</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-js">// Use descriptive names
+<del>const element1 = document.querySelector(<span class="ellipsis">…</span>);</del>
+<del>const element2 = document.querySelector(<span class="ellipsis">…</span>);</del>
+const button = document.querySelector(<span class="ellipsis">…</span>);
+const container = document.querySelector(<span class="ellipsis">…</span>);</code></pre>
+<pre><code class="language-js">// For names with 2 or 3 words,
+// use lowerCamelCase style
+const userSettings = {
+  limit: 20,
+  showInvisible: false
+};
+
+function validateSettings() {
+  <span class="ellipsis">…</span>
+}
+
+// And UpperCamelCase for classes
+class MobileHeader extends React.Component {
+  <span class="ellipsis">…</span>
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="global">
+  <div class="Section-col">
+    <h2>Global variables</h2>    <p>Global variables from a script can clash with other scripts in the page, creating subtle bugs.</p>
+<ul>
+<li>Avoid creating global variables; use <a href="#modules">the IIFE pattern or ES6 modules</a> to isolate variables</li>
+<li>If you need to set a parameter for a script in your HTML code, use data attributes</li>
+</ul>
+<h3>Variables and the <code>window</code> object</h3>
+<p>In web pages, global variables are “hosted” by the <code>window</code> object. This means that a global variable <code>myVar</code> can also be accessed at <code>window.myVar</code>.</p>
+<p>Variables become global when:</p>
+<ol>
+<li>Assigning explicitely: <code>window.myVar = "hello";</code></li>
+<li>Declaring a variable at the top level of a script</li>
+<li>Forgetting the <code>var</code> / <code>const</code> / <code>let</code> keyword</li>
+</ol>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-js">// top level variables are global
+<mark>var count = 50</mark>;
+console.log(count); // 50
+console.log(window.count); // 50
+
+// variables in functions are not,
+// UNLESS you forget the var keyword
+function showCookieBanner() {
+  var banner = document.querySelector(<span class="ellipsis">…</span>);
+  <mark>visible</mark> = !banner.hidden;
+}</code></pre>
+<pre><code class="language-html">&lt;!-- using data attributes for settings --&gt;
+<del>&lt;script&gt;var sliderItems = 2;&lt;/script&gt;</del>
+&lt;div class="Slider" data-items="2"&gt;
+  <span class="ellipsis">…</span>
+&lt;/div&gt;</code></pre>
+  </div>
+  </div>          <div class="Section" id="modules">
+  <div class="Section-col">
+    <h2>Modules</h2>    <ul>
+<li>Create one JS file for each major feature or UI part.</li>
+<li>Wrap the contents of each file in an IIFE manually, or use a bundler such as Browserify, Rollup or webpack.</li>
+</ul>
+<h3>Writing IIFEs by hand</h3>
+<p>The immediately-invoked function expression (IIFE) pattern prevents us from creating global variables. The <code>()</code> after the function executes it (that’s the “immediately-invoked” part), otherwise our code would not run.</p>
+<pre><code class="language-js">// my-module.js
+!function() {
+  // only exists in the scope of the parent function
+  var local = "Hot variables in you area";
+  // we can still make some values or methods global if we want to
+  window.myModule = function() {<span class="ellipsis">…</span>}
+}();</code></pre>
+<p>When you concatenate several modules, you should end up with a bundled JS file that looks like this:</p>
+<pre><code class="language-js">// my-module.js
+!function(){<span class="ellipsis">…</span>}();
+// other-module.js
+!function(){<span class="ellipsis">…</span>}();</code></pre>
+<h3>Using a script bundler</h3>
+<p>With a JS code bundler such as <a href="http://browserify.org/">Browserify</a>, <a href="https://rollupjs.org/">Rollup</a> or <a href="https://webpack.js.org/">webpack</a>, you don’t need to wrap each module in a function: the bundler will take care of it.</p>
+<p>For example with webpack and ES6 syntax:</p>
+<pre><code class="language-js">// app.js
+import "some-dependency";
+import "./scripts/my-module.js";
+import "./scripts/other-module.js";</code></pre>
+<pre><code class="language-js">// my-module.js
+const local = "Hot variables in you area";
+export function myModule() {<span class="ellipsis">…</span>}</code></pre>
+  </div>
+    </div>          <div class="Section" id="es6">
+  <div class="Section-col">
+    <h2>Using ES6</h2>    <p>ECMAScript 2015 (also called ES6 or ES2015) is a major version of the JavaScript standard, with most of its features already implemented by major browsers in 2017. To support older browsers, it might be useful to <em>transpile</em> your ES6 code into ES5.</p>
+<ul>
+<li>For new projects, use ES6 syntax and features.</li>
+<li>Use a transpiler (<a href="https://babeljs.io/">Babel</a>, <a href="https://buble.surge.sh/">Bublé</a>) to generate ES5 code.</li>
+<li><em>Avoid</em> ES6 syntax and features for existing projects not using a transpiler.</li>
+</ul>
+<h3>Browser support</h3>
+<p>If you’re not transpiling to ES5 <em>and</em> are targetting older browsers, avoid using ES6 syntax and features. Some examples of minimum compatibility:</p>
+<ul>
+<li>Arrow functions (<code>x =&gt; x * 2</code>): needs Edge 12, Chrome 45, Safari 10</li>
+<li>Promises: Chrome 32, Firefox 29, Edge 12</li>
+<li><code>const</code> and <code>let</code> statements: needs IE11, Chrome 49</li>
+<li><code>for...of</code> loops: Edge 12, Chrome 38</li>
+<li><code>async</code> / <code>await</code>: Chrome 55, Firefox 52, Edge 14, Safari 10.1</li>
+<li>ES6 modules: experimental support in some browsers only</li>
+</ul>
+<p>If you <em>are</em> transpiling ES6 to ES5, note that some features require adding a polyfill to your JS code, and that can increase the size of your JS bundle a lot!</p>
+  </div>
+    </div>          <div class="Section" id="debug">
+  <div class="Section-col">
+    <h2>Debugging</h2>    <ul>
+<li>In the browser’s Developer Tools, try to be familiar with both the Console and the JS Debugger (“Sources” in Chrome, “Debugger” in Firefox)</li>
+<li>Remove <code>console.log</code> calls and <code>debugger</code> statements from your code before committing</li>
+</ul>
+<p>How to set breakpoints in your JS code:</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Tools/Debugger">Firefox Developer Tools - Debugger</a></li>
+<li><a href="https://developers.google.com/web/tools/chrome-devtools/javascript/breakpoints">Chrome Developer Tools - Breakpoints</a></li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-js">function potentiallyBuggyCode() {
+  <span class="ellipsis">…</span>
+  // don’t forget to remove this statement
+  <mark>debugger;</mark>
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="tools">
+  <div class="Section-col">
+    <h2>Tooling up</h2>    <p>A lot of JavaScript development uses Node.js and associated packages, even if we’re not using Node.js to run JS on the server.</p>
+<h3>Minimum requirements</h3>
+<ul>
+<li>Install <a href="https://nodejs.org/en/">Node.js</a> version 8 or higher</li>
+<li>Learn the basics of <a href="https://nodesource.com/blog/the-basics-of-package-json-in-node-js-and-npm/">how <code>package.json</code> is structured</a></li>
+<li>Use <code>npm</code> to manage dependencies and scripts</li>
+<li>Use a JS code bundler (such as webpack) to create one or several JS bundles for the frontend</li>
+</ul>
+<h3>Recommended tools</h3>
+<ul>
+<li>Use <a href="https://github.com/creationix/nvm">nvm</a> to install several Node.js versions and switch between them.</li>
+<li>Use <a href="https://prettier.io/">Prettier</a> to format your JS and CSS code. You can install a Prettier plugin for your code editor of choice.</li>
+<li>Consider using <a href="https://eslint.org/">eslint</a> to check your JS code, and <a href="https://stylelint.io/">stylelint</a> to check your CSS or SCSS code.</li>
+<li>We have ready-to-use configs <a href="#">for webpack</a> and <a href="https://github.com/kaliop/gulp-assets-builder">for gulp</a>. <mark>TODO: publish webpack config</mark></li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <p>In this example <code>package.json</code> we installed user-facing code as dependencies (<code>npm install --save</code>), and all the tools used to build or test code as development dependencies (<code>npm install --save-dev</code>).</p>
+<pre><code class="language-json">{
+  "name": "my-project",
+  "scripts": {
+    "build": "webpack --env=prod",
+    "dev": "webpack-dev-server --env=dev"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "some-other-lib": "^1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    <span class="ellipsis">…</span>
+    "eslint": "^4.7.1",
+    <span class="ellipsis">…</span>
+    "webpack": "^3.4.1",
+    "webpack-dev-server": "^2.6.1"
+  }
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="coercion">
+  <div class="Section-col">
+    <h2>Type coercion</h2>    <p>JavaScript may automatically convert a value from one type to another (for example, from a string to a number):</p>
+<ol>
+<li>When writing <code>if (myVar)</code> (or using operators like <code>?</code>, <code>!</code>, <code>||</code> and <code>&amp;&amp;</code>), JS will convert the value to a boolean (<code>true</code> or <code>false</code>)</li>
+<li>When comparing two values with <code>x == y</code>, <code>x != y</code>, <code>x &lt; y</code> and <code>x &gt; y</code>, some type conversion can happen if the values have different types</li>
+</ol>
+<h3>Conversion to boolean</h3>
+<p>The following values convert to <code>false</code>: <code>0</code> and <code>NaN</code>, the empty string <code>""</code>, <code>undefined</code>, <code>null</code> and <code>false</code>. Everything else converts to <code>true</code>, including objects and empty arrays!</p>
+<ul>
+<li>Be careful with <code>if (myVar)</code>; try to write a more precise check if possible</li>
+<li>For arrays and some object types, you may need to check <code>myVar.length</code></li>
+</ul>
+<h3>Comparing values</h3>
+<ul>
+<li>Prefer the strict equality and inequality operators (<code>x === y</code>, <code>x !== y</code>)</li>
+<li>Avoid <code>==</code> and <code>!=</code> (although sometimes it can be useful, for example <code>myVar != null</code> checks if the value is different from <code>null</code> <em>and</em> <code>undefined</code>)</li>
+</ul>
+  </div>
+    </div>          <div class="Section" id="this">
+  <div class="Section-col">
+    <h2>The <code>this</code> keyword</h2>    <p>In a function, the <code>this</code> keyword <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this">can refer to different things depending on how the function is called</a>. This can be confusing for beginners, and it’s often preferable to explicitly pass parameters to a function.</p>
+<ul>
+<li>When working with classes (for example with libraries that make heavy use of classes and <code>this</code> such as React or Vue.js), do use the <code>this</code> keyword.</li>
+<li>Otherwise, try to avoid it.</li>
+</ul>
+<h3>With jQuery</h3>
+<p>Some jQuery methods, such as <code>$(x).each(<span class="ellipsis">…</span>)</code> and <code>$(x).on(<span class="ellipsis">…</span>)</code>, change the value of <code>this</code> in the callback function to the current HTML element in the loop. Try to use the function’s arguments instead.</p>
+<pre><code class="language-js">$('p').each(function(index, element) {
+  // avoid 'this', prefer the 'element' argument
+  console.log(this === element);
+});
+
+$('a').on('click', function(event) {
+  // avoid 'this', prefer 'event.currentTarget'
+  console.log(this === event.currentTarget);
+});</code></pre>
+  </div>
+    </div>      </main>
+
+  <script src="./../../assets/highlight.pack.js" onload="hljs.initHighlightingOnLoad()"></script>
+
+</body>
+</html>

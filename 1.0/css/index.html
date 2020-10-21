@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>CSS Guidelines - Frontend Style Guide by Kaliop</title>
+  <link rel="icon" type="image/x-icon" href="./../../assets/favicon.ico">
+  <link rel="stylesheet" href="./../../assets/styleguide.css">
+</head>
+<body class="isChapter hasSidebar">
+
+  <header class="Header">
+    <div class="Header-inner">
+      <p class="Header-back"><a href="./../">Frontend Style Guide by Kaliop</a></p>
+      <h1>CSS Guidelines</h1>
+      <p></p>    </div>
+  </header>
+
+  <main>
+    <nav class="SideToc">
+      <div class="Outdated">
+  <p>
+    These guidelines are outdated.
+    Please use <a href="./../../2.0/">Version 2.0</a> for new projects.
+  </p>
+</div>    <div class="SideToc-inner">
+    <p class="SideToc-back">
+      <a href="./../">◀ Style Guide 1.0</a>
+    </p>
+    <h2 class="SideToc-head" data-chapter="CSS Guidelines">
+      <span>Table of contents</span>
+    </h2>
+    <ul class="SideToc-list">
+              <li><a href="#syntax">CSS syntax</a></li>
+              <li><a href="#single">Single declarations</a></li>
+              <li><a href="#indentation">Indentation</a></li>
+              <li><a href="#values">Property values</a></li>
+              <li><a href="#declaration-order">Declaration order</a></li>
+              <li><a href="#shorthand">Shorthand notation</a></li>
+              <li><a href="#comments">Comments</a></li>
+              <li><a href="#media-queries">Media queries</a></li>
+              <li><a href="#selectors">Selectors</a></li>
+              <li><a href="#components">Components</a></li>
+              <li><a href="#utilities">Utility classes</a></li>
+              <li><a href="#js-hooks">JavaScript hooks and states</a></li>
+              <li><a href="#preprocessors">Preprocessors</a></li>
+              <li><a href="#nesting">Selector nesting</a></li>
+              <li><a href="#organization">Organization</a></li>
+          </ul>
+  </div>
+</nav>    
+          <div class="Section" id="syntax">
+  <div class="Section-col">
+    <h2>CSS syntax</h2>    <ul>
+<li>One selector per line</li>
+<li>Each declaration should appear on its own line</li>
+<li>Keep <code>{</code> on the last selector line, one space before</li>
+<li>Put <code>}</code> on a new line, not indented</li>
+<li>Double quotes (<code>"hello"</code>), not single quotes (<code>'go away'</code>)</li>
+<li>Quote attribute values in selectors, e.g., <code>input[type="text"]</code></li>
+<li>Include one space after <code>:</code> for each declaration</li>
+<li><em>Always</em> end declarations with a semi-colon (<code>;</code>)</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-css">/* Bad CSS */
+.selector, .selector-secondary, .selector[type=text]{
+    font-weight: bold; color: black
+    }</code></pre>
+<pre><code class="language-css">/* Good CSS */
+.selector,
+.selector-secondary,
+.selector[type="text"] {
+    font-weight: bold;
+    color: black;
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="single">
+  <div class="Section-col">
+    <h2>Single declarations</h2>    <p>A rule set with <strong>a single declaration</strong> <em>may</em> be written on a single line like this:</p>
+<p><code>.selector { property: value; }</code></p>
+<p>(Space after the opening brace and before the closing brace, semi-colon at the end.)</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-css">/* Multiple declarations, one per line */
+.sprite {
+    display: inline-block;
+    width: 16px;
+    height: 15px;
+    background-image: url("../img/sprite.png");
+}
+
+/* Single declarations on one line */
+.icon         { background-position: 0 0; }
+.icon-home    { background-position: 0 -20px; }
+.icon-account { background-position: 0 -40px; }</code></pre>
+  </div>
+  </div>          <div class="Section" id="indentation">
+  <div class="Section-col">
+    <h2>Indentation</h2>    <p>Use soft tabs with 4 spaces for indentation.</p>
+<ul>
+<li>Add one indent before each declaration.</li>
+<li>Indent the contents of a media query by one tab.</li>
+<li>If you wrap long values using line breaks, add one indent to each wrapped line.</li>
+</ul>
+<p>Avoid adding unnecessary indentation. <em>Do not</em> use indentation to try to reflect the HTML structure or the hierarchy of your styles.</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-css">/* Good indentation */
+.Component {
+    padding: 2em;
+    font-size: 18px;
+}
+.Component-element {
+    color: black;
+    text-shadow: 0 0 4px #FFF,
+        0 -5px 4px #FF3,
+        2px -10px 6px #FD3,
+        -2px -15px 11px #F80,
+        2px -25px 18px #F20;
+}
+@media (max-width: 500px) {
+    .Component {
+        padding: 1em;
+        font-size: 16px;
+    }
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="values">
+  <div class="Section-col">
+    <h2>Property values</h2>    <h3>Dimensions</h3>
+<ul>
+<li>Use <code>px</code>, <code>em</code> or <code>rem</code> dimensions. Do not use <code>cm</code>, <code>pt</code>, etc.</li>
+<li>Avoid specifying units when the value is zero</li>
+</ul>
+<h3>Colors</h3>
+<ul>
+<li>Lowercase all hex values (<code>#30f8c4</code>)</li>
+<li>Use short hex values when possible (write <code>#fff</code>, not <code>#ffffff</code>).</li>
+</ul>
+<h3> Commas</h3>
+<ul>
+<li>Comma-separated values: use a space after each comma</li>
+<li>No spaces inside <code>rgb()</code>, <code>rgba()</code>, <code>hsl()</code>, <code>hsla()</code>, or <code>rect()</code></li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-css">/* Not ideal */
+.bad-values {
+    margin-top: 0px;
+    margin-bottom: 0.5em;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 1px 2px #CCC,inset 0 1px 0 #FFFFFF
+}</code></pre>
+<pre><code class="language-css">/* Better */
+.great-values {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    background-color: rgba(0,0,0,0.8);
+    box-shadow: 0 1px 2px #ccc, inset 0 1px 0 #fff;
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="declaration-order">
+  <div class="Section-col">
+    <h2>Declaration order</h2>    <p>Group related declarations together, following this order:</p>
+<ol>
+<li>Positioning</li>
+<li>(Display &amp;) Box Model</li>
+<li>Text</li>
+<li>Colors, Backgrounds &amp; Effects</li>
+<li>Other</li>
+</ol>
+<p>Main idea: go from the general to the particular, from properties that have the biggest effect to properties that affect smaller details.</p>
+<p>You don’t have to apply the exact same order for each property inside a group. Try to follow this guideline but don’t waste time trying to achieve <em>perfect</em> order.</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-css">.declaration-order {
+    /* Positioning */
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    float: none;
+    vertical-align: middle;
+    transform: translateX(100%);
+
+    /* (Display &amp;) Box Model */
+    content: "";
+    display: inline-block;
+    visibility: visible;
+    opacity: .8;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    border: 10px solid #333;
+    padding: 10px;
+
+    /* Text */
+    white-space: nowrap;
+    text-align: right;
+    text-indent: 2em;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+    text-shadow: …;
+    font-weight: bold;
+    font-style: italic;
+
+    /* Colors, Backgrounds &amp; Effects */
+    color: #fff;
+    background-color: #000;
+    background-image: url("…");
+    box-shadow: …;
+    filter: …;
+    mask: …;
+
+    /* Other */
+    transition: all .5s;
+    cursor: pointer;
+    will-change: transform;
+    -webkit-backface-visibility: …;
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="shorthand">
+  <div class="Section-col">
+    <h2>Shorthand notation</h2>    <p>Only use shorthand declarations when you are okay with <strong>setting or resetting all the corresponding values</strong>. For instance, <code>background: #fff;</code> will also reset background images and positions, gradients, multiple images, etc.</p>
+<p>Try to use individual properties, rather than shortand ones.</p>
+<p>Commonly overused shorthand properties include:</p>
+<ul>
+<li><code>padding</code></li>
+<li><code>margin</code></li>
+<li><code>font</code></li>
+<li><code>background</code></li>
+<li><code>border</code></li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-css">/* Bad example */
+.element {
+    margin: 0 auto;
+    padding: 0 0 10px;
+    background: red;
+}</code></pre>
+<pre><code class="language-css">/* Better example */
+.element {
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+    background-color: red;
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="comments">
+  <div class="Section-col">
+    <h2>Comments</h2>    <p>Use comments to <strong>organize</strong> and <strong>document</strong> your CSS code.</p>
+<p>Comments must not be in the production CSS. If you use a pre-processor, prefer the <code>// comment</code> syntax. Or use a minifier that removes comments.</p>
+<h3>Comments before selectors</h3>
+<ul>
+<li>When documenting <em>why</em> you’re using one or several lines of code, put the comment text <em>before</em> the selector, and put a numbered reference after each line of code the comment applies to. (See the next example.)</li>
+</ul>
+<h3>Identify sections of code</h3>
+<ul>
+<li>Use Markdown-like comments (e.g. <code>/* # Level 1 heading */</code>) to identify sections of code.</li>
+<li>Always leave 2 lines before a level 1 or level 2 heading (except at the top of the page).</li>
+</ul>
+<p>Sublime Text users: the <a href="https://packagecontrol.io/packages/Table%20of%20comments">Table of comments</a> plugin can be used to list all headings in a file, and jump between headings.</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-scss">//  ======================
+//  # Components =&gt; Header
+//  ======================
+
+//  This is an example, using Sass comments.
+//  The === decorations for level 1 headings,
+//  and the --- decorations for level 2 headings,
+//  are optional.
+ 
+
+//  -----------------
+//  ## Main container
+//  -----------------
+
+.Header {
+    …
+}
+ 
+
+//  -------------
+//  ## First line
+//  -------------
+
+.Header-top {
+    …
+}
+
+// 1: We want content to align to the bottom in case one
+//    is a bit higher than others, because of the "active"
+//    effect that is docked to the bottom.
+.Header-item {
+    display: table-cell;
+    vertical-align: bottom; // [1]
+}
+
+// ### Logo
+
+…
+
+// ### Etc.
+
+…</code></pre>
+  </div>
+  </div>          <div class="Section" id="media-queries">
+  <div class="Section-col">
+    <h2>Media queries</h2>    <h3>Where should I put media queries?</h3>
+<ul>
+<li>Put all styles for a website part or component in the same file.</li>
+<li>Keep media queries as close as possible to the corresponding general or desktop styles.</li>
+<li>Don’t create separate stylesheets for mobile styles, tablet styles, etc.</li>
+</ul>
+<p>With pre-processors, it’s also possible to place media queries inside a rule set. Use this if it doesn’t create too much repetition.</p>
+<h3>Use variables</h3>
+<ul>
+<li>Define 2-3 major breakpoints for a project and store them in Sass variables. Then reuse them for most components.</li>
+<li>It’s okay to use a different breakpoint in a component if you need something more specific.</li>
+<li>Always write <code>$breakpoint-variable - 1px</code> for <code>max-width</code> media queries. This avoids overlapping media queries.</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-css">/* Standard media queries in CSS */
+.Component { … }
+.Component--selected { … }
+.Component-avatar { … }
+
+@media (min-width: 500px) {
+    .Component { … }
+    .Component--selected { … }
+    .Component-avatar { … }
+}</code></pre>
+<pre><code class="language-css">/* Bad - at 768px, both would apply! */
+@media (min-width: 768px) { … }
+@media (max-width: 768px) { … }
+
+/* Better */
+@media (min-width: 768px) { … }
+@media (max-width: 767px) { … }</code></pre>
+<pre><code class="language-scss">// Nested media queries in Sass
+.Component {
+    padding: 20px;
+    @media (min-width: $breakpoint-medium) {
+        padding: 40px;
+    }
+    @media (max-width: $breakpoint-small - 1px) {
+        padding: 12px;
+    }
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="selectors">
+  <div class="Section-col">
+    <h2>Selectors</h2>    <p>Keep selectors short. A selector should have 3 parts maximum (one or two is best).</p>
+<ul>
+<li>Use classes (<code>.something</code>, <code>.myClass</code>)</li>
+<li><em>Do not</em> use the <code>#id</code> selector (its specificity is too damn high!)</li>
+<li>Element selectors (<code>h2</code>, <code>.MainNav a</code>) are okay, but keep in mind that sometimes elements can change (h2 becomes a h3 or h1, p becomes a div, etc.)</li>
+<li>Don’t use underscores in class names (<code>foo_bar</code>)</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-css">/* Bad selector: generic word :( */
+.list { … }
+
+/* Bad selector: too specific! */
+.page-container #stream .stream_item .tweet .tweet_header .username { … }</code></pre>
+<pre><code class="language-css">/* Better selectors */
+.Tweet-list { … }
+.Tweet-username { … }</code></pre>
+  </div>
+  </div>          <div class="Section" id="components">
+  <div class="Section-col">
+    <h2>Components</h2>    <p>Try to write most of your styles as <em>components</em> (also called modules).</p>
+<p>A component is a group of styles that logically belong together. A component can represent a complex UI group such as the main navigation of a website, a page footer; or an less complex block such as an article teaser or a comment. Most components have several elements.</p>
+<p>Some components can be limited to a single element. For example a <code>Button</code> component can be used to style all buttons accross a website (maybe with several style variations).</p>
+<p>It can be hard to decide if some part of a design should be a big component, or several smaller components. Use your best judgement, and/or ask coworkers what they think.</p>
+<h3>Rules for components</h3>
+<ol>
+<li>One component = one file (<code>components/_mycomponent.scss</code>)</li>
+<li>Classes for components and component elements (see the naming convention)</li>
+<li>Element selectors are okay if they’re scoped (<code>.MyComponent-element a { … }</code>); but only use them when it’s impractical or redundant to create an element class (<code>.MyComponent-something</code>)</li>
+</ol>
+<h3>Naming convention</h3>
+<pre><code class="language-css">/* Main container */
+.ComponentName { … }
+
+/* An element name is a small part of the component, such as a title, an image, a subcontainer, a button, etc. */
+.ComponentName-elementName { … }
+
+/* Both component containers and component elements can have modifiers, which modify some of the styles of their base class */
+.ComponentName--modifierName { … }
+.ComponentName-elementName--modifierName { … }</code></pre>
+<p>We follow the <a href="https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md">SUIT CSS naming conventions</a>, but only for components. See the next sections for utility classes and JavaScript hooks and states.</p>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-css">/* A small component for showing a single tweet. */
+
+.Tweet { … }
+.Tweet-username { … }
+.Tweet-avatar { … }
+.Tweet-content { … }</code></pre>
+<pre><code class="language-css">/* A bigger component: this footer component has styles for the container, some text content, and a navigation. It would be possible to define the navigation as a different component (say, FooterNav). */
+
+.Footer { … }
+.Footer--compact { … }
+.Footer-nav { … }
+.Footer-nav li { … }
+.Footer-nav a { … }
+.Footer-copyright { … }</code></pre>
+<pre><code class="language-css">/* A Grid component that can be used to structure many parts of the site */
+
+.Grid-group { … }
+.Grid-item { … }
+.Grid-item--small { … }
+.Grid-item--large { … }
+.Grid-item--full { … }</code></pre>
+<pre><code class="language-html">&lt;!-- Two article teasers. The first one has a modifyer class so that we can make it bigger, for example. --&gt;
+
+&lt;article class="Teaser Teaser--highlight"&gt;
+    &lt;h2 class="Teaser-head"&gt;
+        &lt;a href="…"&gt;…&lt;/a&gt;
+    &lt;/h2&gt;
+    &lt;p class="Teaser-desc"&gt;…&lt;/p&gt;
+&lt;/article&gt;
+&lt;article class="Teaser"&gt;
+    &lt;h2 class="Teaser-head"&gt;
+        &lt;a href="…"&gt;…&lt;/a&gt;
+    &lt;/h2&gt;
+    &lt;p class="Teaser-desc"&gt;…&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+  </div>
+  </div>          <div class="Section" id="utilities">
+  <div class="Section-col">
+    <h2>Utility classes</h2>    <p>Utilities are simple styles that can be used on any element to trigger some basic function (in a few lines of CSS at most).</p>
+<ul>
+<li>Write utility classes in <code>camelCase</code>, without a prefix.</li>
+<li>Avoid using <em>many</em> utility classes. They move a lot of the presentation logic into your HTML, and can hide that a component has dependencies (unlike mixins and variables).</li>
+<li>If you have several utility classes that work together, maybe make a component?</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-css">/* Utility classes */
+.visuallyHidden {
+    position: absolute !important;
+    clip: rect(1px,1px,1px,1px);
+}
+.svgIcon {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="js-hooks">
+  <div class="Section-col">
+    <h2>JavaScript hooks and states</h2>    <p>Use a component’s existing classes for selecting elements with JavaScript. If you can’t use an existing component class, it might be a good idea to target an <code>id</code>, or a data-attribute.</p>
+<p>Avoid writing styles with JavaScript. Instead, change a class name or an attribute:</p>
+<ul>
+<li>Use native attributes, and selectors such as <code>:selected</code>, when possible.</li>
+<li>If you want to hide an element so that it can’t be interacted with or read (until the user clicks a button, for instance), use <code>aria-hidden="true"</code>. Then show elements with <code>aria-hidden="false"</code>. You will need to write your own CSS.</li>
+<li>If using <code>aria-hidden</code> doesn’t make sense, consider using a data-attribute, or add a simple class to the element.</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-js">// Selecting elements using existing component classes
+var container = document.querySelector('.MyComponent');
+var button = container.querySelector('.MyComponent-toggle');
+var dropdown = container.querySelector('.MyComponent-details');
+
+// Set a state using attributes
+container.setAttribute('data-state', 'something');
+dropdown.setAttribute('aria-hidden', 'true');
+
+// Set a state by adding a class
+button.classList.add('selected');</code></pre>
+<pre><code class="language-css">/* Styling different states with CSS */
+.MyComponent-item[aria-hidden="true"] {
+    display: none;
+}
+
+/* Or with a simple class */
+.MyComponent-item.hidden {
+    display: none;
+}
+
+/* Custom attribute/values can be useful */
+.Header[data-state="sticky"] {
+    …
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="preprocessors">
+  <div class="Section-col">
+    <h2>Preprocessors</h2>    <p>Use the <a href="http://sass-lang.com/">Sass preprocessor</a>, with the SCSS syntax. (Previous Kaliop projects used <a href="http://lesscss.org/">LESS</a>.)</p>
+<p>Sass files should have a <code>.scss</code> extension, and “partials” (files that you import in another file) should start with an underscore, e.g. <code>_reset.scss</code>.</p>
+<p>Sass and LESS source files can be compiled to CSS:</p>
+<ol>
+<li>with a desktop client (<a href="http://koala-app.com/">Koala is alright</a>);</li>
+<li>with a node-based frontend build system (e.g. Brunch, Gulp);</li>
+<li>with a build process integrated in the framework (e.g. with Assetic filters).</li>
+</ol>
+<h3>Variables and mixins</h3>
+<p>Use lowercase names, and follow an general-to-particular progression:</p>
+<ul>
+<li>Global variables and mixins: <code>$type-name</code>, <code>@mixin some-name</code></li>
+<li>If specific to a component: <code>$component-type-name</code>, <code>@mixin component-some-name</code></li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-scss">// base/_variables.scss
+$color-brand:       #e95d1e;
+$color-link:        #08c;
+$breakpoint-small:  500px;
+$breakpoint-medium: 860px;</code></pre>
+<pre><code class="language-scss">// base/_grid.scss
+@mixin grid-container(…) { … }
+@mixin grid-item(…) { … }</code></pre>
+<pre><code class="language-scss">// component/_header.scss
+$header-color-bg: #555 !default;
+$header-color-link-main: #fff !default;
+$header-color-link-active: #faa !default;</code></pre>
+  </div>
+  </div>          <div class="Section" id="nesting">
+  <div class="Section-col">
+    <h2>Selector nesting</h2>    <p>Selector nesting makes your code more difficult to read. Avoid unnecessary nesting.</p>
+<ul>
+<li>Nest once (1 level deep), twice (2 levels deep) if you must, never more.</li>
+<li>Keep the resulting CSS selectors as short as possible.</li>
+<li>Do not overuse the <code>&amp;</code> symbol.</li>
+</ul>
+  </div>
+      <div class="Section-col Section-col--example">
+    <pre><code class="language-scss">// BAD: unnecessary nesting
+
+.Header {
+    .Header-top {
+        .Header-logo { … }
+    }
+
+.Nav {
+    ul {
+        li {
+            a { … }
+        }
+    }
+}</code></pre>
+<pre><code class="language-scss">// GOOD: avoid nesting
+
+.Header { … }
+.Header-top { … }
+.Header-logo { … }
+
+.Nav {
+    ul { … }
+    li { … }
+    a { … }
+}</code></pre>
+  </div>
+  </div>          <div class="Section" id="organization">
+  <div class="Section-col">
+    <h2>Organization</h2>    <p>Organize your CSS code in multiple files. In particular, each component should be one file (even if it’s only 20 lines of code).</p>
+<ul>
+<li>Try to keep files under a maximum of 500 lines.</li>
+<li>Do not put two components in the same file.</li>
+<li>Concatenate before serving to the browser (preprocessors give you “free” concatenation).</li>
+</ul>
+  </div>
+    </div>      </main>
+
+  <script src="./../../assets/highlight.pack.js" onload="hljs.initHighlightingOnLoad()"></script>
+
+</body>
+</html>
